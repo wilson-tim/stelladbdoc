@@ -1,0 +1,379 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_APP_STAT_PROCEDURES/report.js" type="text/javascript"></script>
+<link href="P_APP_STAT_PROCEDURES/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_APP_STAT_PROCEDURES</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P> Author  : JDURNFORD</P><HR><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_Booking_Check">App_Stat_Booking_Check</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_DMIS_Check">App_Stat_DMIS_Check</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purpose : Contain the separate procedures called from p_Application_Status_Check</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_DMIS_Run">App_Stat_DMIS_Run</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_FinCalc_Check">App_Stat_FinCalc_Check</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_FullCheck">App_Stat_FullCheck</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_FX_Early">App_Stat_FX_Early</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_FXOrder">App_Stat_FXOrder</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_HFC_Overall">App_Stat_HFC_Overall</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_Midas">App_Stat_Midas</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE App_Stat_Acusend_Engines (p_RunId     IN     application_log.run_id%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_LogMethod IN     VARCHAR2,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_Status    IN OUT application_status.application_status_code%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_Message   IN OUT application_status.application_message%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_ErrorCode IN OUT VARCHAR2);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_Redo1_Check">App_Stat_Redo1_Check</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_Retail_FX">App_Stat_Retail_FX</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_Retail_Profit">App_Stat_Retail_Profit</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_Synergex_Check">App_Stat_Synergex_Check</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_TasETL">App_Stat_TasETL</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_TCat_Load">App_Stat_TCat_Load</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_TccLoad">App_Stat_TccLoad</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_TransportSale">App_Stat_TransportSale</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE App_Stat_Acusend_Morning (p_RunId     IN     application_log.run_id%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_LogMethod IN     VARCHAR2,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_Status    IN OUT application_status.application_status_code%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_Message   IN OUT application_status.application_message%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_ErrorCode IN OUT VARCHAR2);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_Xmis_Check">App_Stat_Xmis_Check</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#App_Stat_Xmis_Overall">App_Stat_Xmis_Overall</A></B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#Get_TAS_ETL_Status">Get_TAS_ETL_Status</A></B>( p_CheckDate IN DATE ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#Set_Dmis_Season">Set_Dmis_Season</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+</TABLE>
+<P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="App_Stat_Booking_Check"></A>
+<H3>App_Stat_Booking_Check</H3><PRE>          <B>App_Stat_Booking_Check</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_DMIS_Check"></A>
+<H3>App_Stat_DMIS_Check</H3><PRE>          <B>App_Stat_DMIS_Check</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purpose : Contain the separate procedures called from p_Application_Status_Check<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_DMIS_Run"></A>
+<H3>App_Stat_DMIS_Run</H3><PRE>          <B>App_Stat_DMIS_Run</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_FinCalc_Check"></A>
+<H3>App_Stat_FinCalc_Check</H3><PRE>          <B>App_Stat_FinCalc_Check</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_FullCheck"></A>
+<H3>App_Stat_FullCheck</H3><PRE>          <B>App_Stat_FullCheck</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_FX_Early"></A>
+<H3>App_Stat_FX_Early</H3><PRE>          <B>App_Stat_FX_Early</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_FXOrder"></A>
+<H3>App_Stat_FXOrder</H3><PRE>          <B>App_Stat_FXOrder</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_HFC_Overall"></A>
+<H3>App_Stat_HFC_Overall</H3><PRE>          <B>App_Stat_HFC_Overall</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_Midas"></A>
+<H3>App_Stat_Midas</H3><PRE>          <B>App_Stat_Midas</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE App_Stat_Acusend_Engines (p_RunId     IN     application_log.run_id%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_LogMethod IN     VARCHAR2,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_Status    IN OUT application_status.application_status_code%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_Message   IN OUT application_status.application_message%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_ErrorCode IN OUT VARCHAR2);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_Redo1_Check"></A>
+<H3>App_Stat_Redo1_Check</H3><PRE>          <B>App_Stat_Redo1_Check</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_Retail_FX"></A>
+<H3>App_Stat_Retail_FX</H3><PRE>          <B>App_Stat_Retail_FX</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_Retail_Profit"></A>
+<H3>App_Stat_Retail_Profit</H3><PRE>          <B>App_Stat_Retail_Profit</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_Synergex_Check"></A>
+<H3>App_Stat_Synergex_Check</H3><PRE>          <B>App_Stat_Synergex_Check</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_TasETL"></A>
+<H3>App_Stat_TasETL</H3><PRE>          <B>App_Stat_TasETL</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_TCat_Load"></A>
+<H3>App_Stat_TCat_Load</H3><PRE>          <B>App_Stat_TCat_Load</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_TccLoad"></A>
+<H3>App_Stat_TccLoad</H3><PRE>          <B>App_Stat_TccLoad</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_TransportSale"></A>
+<H3>App_Stat_TransportSale</H3><PRE>          <B>App_Stat_TransportSale</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PROCEDURE App_Stat_Acusend_Morning (p_RunId     IN     application_log.run_id%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_LogMethod IN     VARCHAR2,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_Status    IN OUT application_status.application_status_code%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_Message   IN OUT application_status.application_message%TYPE,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                                    p_ErrorCode IN OUT VARCHAR2);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_Xmis_Check"></A>
+<H3>App_Stat_Xmis_Check</H3><PRE>          <B>App_Stat_Xmis_Check</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="App_Stat_Xmis_Overall"></A>
+<H3>App_Stat_Xmis_Overall</H3><PRE>          <B>App_Stat_Xmis_Overall</B>( p_RunId IN application_log . run_id % TYPE , p_LogMethod IN VARCHAR2 , p_Status IN OUT application_status . application_status_code % TYPE , p_Message IN OUT application_status . application_message % TYPE , p_ErrorCode IN OUT VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="Get_TAS_ETL_Status"></A>
+<H3>Get_TAS_ETL_Status</H3><PRE>          <B>Get_TAS_ETL_Status</B>( p_CheckDate IN DATE ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="Set_Dmis_Season"></A>
+<H3>Set_Dmis_Season</H3><PRE>          <B>Set_Dmis_Season</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_APP_STAT_PROCEDURES</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516218</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.32</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>16-JAN-18&nbsp;16.22.34</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2009-06-12:10:30:32</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE p_App_Stat_Procedures IS
+
+  -- Author  : JDURNFORD
+  -- Created : 22/02/2006 13:35:49
+  -- Purpose : Contain the separate procedures called from p_Application_Status_Check
+
+PROCEDURE App_Stat_DMIS_Check (p_RunId     IN     application_log.run_id%TYPE,
+                               p_LogMethod IN     VARCHAR2,
+                               p_Status    IN OUT application_status.application_status_code%TYPE,
+                               p_Message   IN OUT application_status.application_message%TYPE,
+                               p_ErrorCode IN OUT VARCHAR2);
+  
+  
+  
+PROCEDURE App_Stat_Synergex_Check (p_RunId     IN     application_log.run_id%TYPE,
+                                   p_LogMethod IN     VARCHAR2,
+                                   p_Status    IN OUT application_status.application_status_code%TYPE,
+                                   p_Message   IN OUT application_status.application_message%TYPE,
+                                   p_ErrorCode IN OUT VARCHAR2);
+
+                                   
+                                   
+PROCEDURE App_Stat_FinCalc_Check (p_RunId     IN     application_log.run_id%TYPE,
+                                  p_LogMethod IN     VARCHAR2,
+                                  p_Status    IN OUT application_status.application_status_code%TYPE,
+                                  p_Message   IN OUT application_status.application_message%TYPE,
+                                  p_ErrorCode IN OUT VARCHAR2);
+
+                                  
+PROCEDURE App_Stat_Booking_Check (p_RunId     IN     application_log.run_id%TYPE,
+                                  p_LogMethod IN     VARCHAR2,
+                                  p_Status    IN OUT application_status.application_status_code%TYPE,
+                                  p_Message   IN OUT application_status.application_message%TYPE,
+                                  p_ErrorCode IN OUT VARCHAR2);
+                                  
+PROCEDURE App_Stat_Redo1_Check (p_RunId     IN     application_log.run_id%TYPE,
+                                p_LogMethod IN     VARCHAR2,
+                                p_Status    IN OUT application_status.application_status_code%TYPE,
+                                p_Message   IN OUT application_status.application_message%TYPE,
+                                p_ErrorCode IN OUT VARCHAR2);
+  
+  
+  
+PROCEDURE App_Stat_Xmis_Check (p_RunId     IN     application_log.run_id%TYPE,
+                               p_LogMethod IN     VARCHAR2,
+                               p_Status    IN OUT application_status.application_status_code%TYPE,
+                               p_Message   IN OUT application_status.application_message%TYPE,
+                               p_ErrorCode IN OUT VARCHAR2);
+  
+  
+  
+PROCEDURE App_Stat_Xmis_Overall (p_RunId     IN     application_log.run_id%TYPE,
+                                 p_LogMethod IN     VARCHAR2,
+                                 p_Status    IN OUT application_status.application_status_code%TYPE,
+                                 p_Message   IN OUT application_status.application_message%TYPE,
+                                 p_ErrorCode IN OUT VARCHAR2);
+
+                                 
+                                 
+PROCEDURE App_Stat_TCat_Load (p_RunId     IN     application_log.run_id%TYPE,
+                              p_LogMethod IN     VARCHAR2,
+                              p_Status    IN OUT application_status.application_status_code%TYPE,
+                              p_Message   IN OUT application_status.application_message%TYPE,
+                              p_ErrorCode IN OUT VARCHAR2);
+
+                              
+                              
+PROCEDURE App_Stat_Retail_Profit (p_RunId     IN     application_log.run_id%TYPE,
+                                  p_LogMethod IN     VARCHAR2,
+                                  p_Status    IN OUT application_status.application_status_code%TYPE,
+                                  p_Message   IN OUT application_status.application_message%TYPE,
+                                  p_ErrorCode IN OUT VARCHAR2);
+
+
+                              
+PROCEDURE App_Stat_Retail_FX (p_RunId     IN     application_log.run_id%TYPE,
+                              p_LogMethod IN     VARCHAR2,
+                              p_Status    IN OUT application_status.application_status_code%TYPE,
+                              p_Message   IN OUT application_status.application_message%TYPE,
+                              p_ErrorCode IN OUT VARCHAR2);
+
+
+
+PROCEDURE App_Stat_TccLoad (p_RunId     IN     application_log.run_id%TYPE,
+                            p_LogMethod IN     VARCHAR2,
+                            p_Status    IN OUT application_status.application_status_code%TYPE,
+                            p_Message   IN OUT application_status.application_message%TYPE,
+                            p_ErrorCode IN OUT VARCHAR2);
+
+
+PROCEDURE App_Stat_FXOrder (p_RunId     IN     application_log.run_id%TYPE,
+                            p_LogMethod IN     VARCHAR2,
+                            p_Status    IN OUT application_status.application_status_code%TYPE,
+                            p_Message   IN OUT application_status.application_message%TYPE,
+                            p_ErrorCode IN OUT VARCHAR2);
+
+PROCEDURE Set_Dmis_Season;
+
+
+/*PROCEDURE App_Stat_Acusend_Regular (p_RunId     IN     application_log.run_id%TYPE,
+                                    p_LogMethod IN     VARCHAR2,
+                                    p_Status    IN OUT application_status.application_status_code%TYPE,
+                                    p_Message   IN OUT application_status.application_message%TYPE,
+                                    p_ErrorCode IN OUT VARCHAR2);
+*/
+/*PROCEDURE App_Stat_Acusend_Morning (p_RunId     IN     application_log.run_id%TYPE,
+                                    p_LogMethod IN     VARCHAR2,
+                                    p_Status    IN OUT application_status.application_status_code%TYPE,
+                                    p_Message   IN OUT application_status.application_message%TYPE,
+                                    p_ErrorCode IN OUT VARCHAR2);
+*/
+
+PROCEDURE App_Stat_TransportSale (p_RunId     IN     application_log.run_id%TYPE,
+                                  p_LogMethod IN     VARCHAR2,
+                                  p_Status    IN OUT application_status.application_status_code%TYPE,
+                                  p_Message   IN OUT application_status.application_message%TYPE,
+                                  p_ErrorCode IN OUT VARCHAR2);
+
+PROCEDURE App_Stat_DMIS_Run (p_RunId     IN     application_log.run_id%TYPE,
+                             p_LogMethod IN     VARCHAR2,
+                             p_Status    IN OUT application_status.application_status_code%TYPE,
+                             p_Message   IN OUT application_status.application_message%TYPE,
+                             p_ErrorCode IN OUT VARCHAR2);
+
+PROCEDURE App_Stat_FX_Early (p_RunId     IN     application_log.run_id%TYPE,
+                             p_LogMethod IN     VARCHAR2,
+                             p_Status    IN OUT application_status.application_status_code%TYPE,
+                             p_Message   IN OUT application_status.application_message%TYPE,
+                             p_ErrorCode IN OUT VARCHAR2);
+
+PROCEDURE App_Stat_HFC_Overall (p_RunId     IN     application_log.run_id%TYPE,
+                                p_LogMethod IN     VARCHAR2,
+                                p_Status    IN OUT application_status.application_status_code%TYPE,
+                                p_Message   IN OUT application_status.application_message%TYPE,
+                                p_ErrorCode IN OUT VARCHAR2);
+
+/*PROCEDURE App_Stat_Acusend_Engines (p_RunId     IN     application_log.run_id%TYPE,
+                                    p_LogMethod IN     VARCHAR2,
+                                    p_Status    IN OUT application_status.application_status_code%TYPE,
+                                    p_Message   IN OUT application_status.application_message%TYPE,
+                                    p_ErrorCode IN OUT VARCHAR2);
+*/
+PROCEDURE App_Stat_Midas (p_RunId     IN     application_log.run_id%TYPE,
+                          p_LogMethod IN     VARCHAR2,
+                          p_Status    IN OUT application_status.application_status_code%TYPE,
+                          p_Message   IN OUT application_status.application_message%TYPE,
+                          p_ErrorCode IN OUT VARCHAR2);
+                          
+FUNCTION Get_TAS_ETL_Status (p_CheckDate  IN  DATE) 
+RETURN VARCHAR2;
+
+PROCEDURE App_Stat_TasETL (p_RunId     IN     application_log.run_id%TYPE,
+                           p_LogMethod IN     VARCHAR2,
+                           p_Status    IN OUT application_status.application_status_code%TYPE,
+                           p_Message   IN OUT application_status.application_message%TYPE,
+                           p_ErrorCode IN OUT VARCHAR2);
+                          
+
+PROCEDURE App_Stat_FullCheck (p_RunId     IN     application_log.run_id%TYPE,
+                              p_LogMethod IN     VARCHAR2,
+                              p_Status    IN OUT application_status.application_status_code%TYPE,
+                              p_Message   IN OUT application_status.application_message%TYPE,
+                              p_ErrorCode IN OUT VARCHAR2);
+
+END p_App_Stat_Procedures;
+
+ </pre>
+</div>
+</div>
+</div>
+</body>
+</html>

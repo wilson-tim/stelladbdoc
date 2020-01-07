@@ -1,0 +1,222 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_BOOKING_EXTRACT/report.js" type="text/javascript"></script>
+<link href="P_BOOKING_EXTRACT/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_BOOKING_EXTRACT</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P> Author  : JDURNFORD</P><HR><P></P><A NAME="type_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Type Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#return_refcursor">return_refcursor</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Public type declarations</TD></TR>
+</TABLE><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#Extract_Accom_Details">Extract_Accom_Details</A></B>( p_CompanyCode IN VARCHAR2 , p_BookingRef IN VARCHAR2 , p_SeasonType IN VARCHAR2 , p_SeasonYear IN VARCHAR2 ) RETURN return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Main Function to return a cursor containing the accommodation details</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#Extract_Details">Extract_Details</A></B>( p_CompanyCode IN VARCHAR2 , p_BookingRef IN VARCHAR2 , p_SeasonType IN VARCHAR2 , p_SeasonYear IN VARCHAR2 , p_BookingCur IN OUT return_refcursor , p_FlightCur IN OUT return_refcursor , p_AccomCur IN OUT return_refcursor ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Main Procedure to return both flight & accommodation cursors</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#Extract_Flight_Details">Extract_Flight_Details</A></B>( p_CompanyCode IN VARCHAR2 , p_BookingRef IN VARCHAR2 , p_SeasonType IN VARCHAR2 , p_SeasonYear IN VARCHAR2 ) RETURN return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Main Function to return a cursor containing the booking & flight details</TD></TR>
+</TABLE>
+<P></P><A NAME="type_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Type Detail</B></FONT></TD></TABLE><A NAME="return_refcursor"></A>
+<H3>return_refcursor</H3><PRE>          <B>return_refcursor</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Public type declarations<DD><DL></DL></DD></DL><HR><P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="Extract_Accom_Details"></A>
+<H3>Extract_Accom_Details</H3><PRE>          <B>Extract_Accom_Details</B>( p_CompanyCode IN VARCHAR2 , p_BookingRef IN VARCHAR2 , p_SeasonType IN VARCHAR2 , p_SeasonYear IN VARCHAR2 ) RETURN return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Main Function to return a cursor containing the accommodation details<DD><DL></DL></DD></DL><HR><A NAME="Extract_Details"></A>
+<H3>Extract_Details</H3><PRE>          <B>Extract_Details</B>( p_CompanyCode IN VARCHAR2 , p_BookingRef IN VARCHAR2 , p_SeasonType IN VARCHAR2 , p_SeasonYear IN VARCHAR2 , p_BookingCur IN OUT return_refcursor , p_FlightCur IN OUT return_refcursor , p_AccomCur IN OUT return_refcursor ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Main Procedure to return both flight & accommodation cursors<DD><DL></DL></DD></DL><HR><A NAME="Extract_Flight_Details"></A>
+<H3>Extract_Flight_Details</H3><PRE>          <B>Extract_Flight_Details</B>( p_CompanyCode IN VARCHAR2 , p_BookingRef IN VARCHAR2 , p_SeasonType IN VARCHAR2 , p_SeasonYear IN VARCHAR2 ) RETURN return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Main Function to return a cursor containing the booking & flight details<DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_BOOKING_EXTRACT</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516219</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.32</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>16-JAN-18&nbsp;16.22.34</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2009-06-17:10:36:52</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE p_Booking_Extract IS
+
+  -- Author  : JDURNFORD
+  -- Created : 12/12/2006 11:45:35
+  -- Purpose : Extract booking data from the Warehouse relating to either 
+  --           Mainstream or Travel-Link
+
+  -- Public type declarations
+  TYPE return_refcursor is REF CURSOR;
+
+  v_Start_Errm          CONSTANT  VARCHAR2(40) := '%%FCE_START_ERRM%%';
+  v_End_Errm            CONSTANT  VARCHAR2(40) := '%%FCE_END_ERRM%%';
+  v_Start_ErrCode       CONSTANT  VARCHAR2(40) := '%%FCE_START_ERR_CODE%%';
+  v_End_ErrCode         CONSTANT  VARCHAR2(40) := '%%FCE_END_ERR_CODE%%';
+  
+  -- Main Function to return a cursor containing the accommodation details
+  FUNCTION Extract_Accom_Details (p_CompanyCode   IN VARCHAR2,
+                                  p_BookingRef    IN VARCHAR2,
+                                  p_SeasonType    IN VARCHAR2,
+                                  p_SeasonYear    IN VARCHAR2)
+  RETURN return_refcursor;
+
+
+  -- Main Function to return a cursor containing the booking & flight details
+  FUNCTION Extract_Flight_Details (p_CompanyCode   IN VARCHAR2,
+                                   p_BookingRef    IN VARCHAR2,
+                                   p_SeasonType    IN VARCHAR2,
+                                   p_SeasonYear    IN VARCHAR2)
+  RETURN return_refcursor;
+  
+
+  -- Main Procedure to return both flight & accommodation cursors
+  PROCEDURE Extract_Details (p_CompanyCode   IN VARCHAR2,
+                             p_BookingRef    IN VARCHAR2,
+                             p_SeasonType    IN VARCHAR2,
+                             p_SeasonYear    IN VARCHAR2,
+                             p_BookingCur    IN OUT return_refcursor,
+                             p_FlightCur     IN OUT return_refcursor,
+                             p_AccomCur      IN OUT return_refcursor);
+  
+  
+END p_Booking_Extract;
+
+ </pre>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_TEXT_HANDLER/report.js" type="text/javascript"></script>
+<link href="P_TEXT_HANDLER/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_TEXT_HANDLER</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P> Author  : LASHTON</P><HR><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#concat_list">concat_list</A></B>( p_cur_sql VARCHAR2 , p_concat_char IN CHAR DEFAULT '' ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #param p_concat_char  The character to be used as a delimiter e.g. a comma. Leave blank/null for no delimiter - optional   </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#concat_list">concat_list</A></B>( p_cur sys_refcursor , p_concat_char IN CHAR DEFAULT '' ) RETURN CLOB ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #param p_concat_char  The character to be used as a delimiter e.g. a comma. Leave blank/null for no delimiter - optional   </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#wordwrap">wordwrap</A></B>( p_textin IN CLOB DEFAULT NULL , p_rmargin IN INTEGER DEFAULT 120 , p_pad IN VARCHAR2 DEFAULT ' ' , p_worddelim IN VARCHAR2 DEFAULT ' ' , p_just IN VARCHAR2 DEFAULT 'LEFT' ) RETURN CLOB ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;             #param  p_just = justify how? Left,Right,Center  </TD></TR>
+</TABLE>
+<P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="concat_list"></A>
+<H3>concat_list</H3><PRE>          <B>concat_list</B>( p_cur_sql VARCHAR2 , p_concat_char IN CHAR DEFAULT '' ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #param p_concat_char  The character to be used as a delimiter e.g. a comma. Leave blank/null for no delimiter - optional   <DD><DL></DL></DD></DL><HR><A NAME="concat_list"></A>
+<H3>concat_list</H3><PRE>          <B>concat_list</B>( p_cur sys_refcursor , p_concat_char IN CHAR DEFAULT '' ) RETURN CLOB ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #param p_concat_char  The character to be used as a delimiter e.g. a comma. Leave blank/null for no delimiter - optional   <DD><DL></DL></DD></DL><HR><A NAME="wordwrap"></A>
+<H3>wordwrap</H3><PRE>          <B>wordwrap</B>( p_textin IN CLOB DEFAULT NULL , p_rmargin IN INTEGER DEFAULT 120 , p_pad IN VARCHAR2 DEFAULT ' ' , p_worddelim IN VARCHAR2 DEFAULT ' ' , p_just IN VARCHAR2 DEFAULT 'LEFT' ) RETURN CLOB ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;             #param  p_just = justify how? Left,Right,Center  <DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_TEXT_HANDLER</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516230</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.33</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>16-JAN-18&nbsp;16.22.34</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2009-06-16:14:36:34</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 0)" class="currentrow">
+<td class="currentcell">EXECUTE</td>
+<td class="currentcell">PUBLIC</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">JUTIL</td>
+<td class="currentcell">P_TEXT_HANDLER</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE p_text_handler IS
+
+  -- Author  : LASHTON
+  -- Created : 21/05/2004 11:44:10
+  -- Purpose : various text handling utilities
+
+  g_version      NUMBER := 1.00;
+  g_package_name VARCHAR2(40) := 'p_text_handler';
+  g_statement    NUMBER := 0;
+  g_sqlerrm      VARCHAR2(500);
+  g_sqlcode      CHAR(20);
+
+  ------------------------------------------------------------------------------------ 
+  ------------------------------------------------------------------------------------ 
+  -- NAME:       wwrap
+  -- PURPOSE:    done many times before, this is yet-another wordwrapper but
+  --         much smaller than any ive seen
+  --
+  --         handles LEFT justify, RIGHT justify, CENTER
+  --
+  -- NOTES:     PARAMETERS:
+  --             #param  p_textin = text to format; up to clob size
+  --             #param  p_rmargin = wrap at what col position -- i suggest you set this high in case a line is longer than this length without any breaks in it
+  --             #param  p_pad = pad the text after wrapping with what default to SPACE
+  --             #param  p_worddelim = words delimeted by what? defaults to SPACE
+  --             #param  p_just = justify how? Left,Right,Center  
+  FUNCTION wordwrap(p_textin    IN CLOB DEFAULT NULL,
+                    p_rmargin   IN INTEGER DEFAULT 120,
+                    p_pad       IN VARCHAR2 DEFAULT ' ',
+                    p_worddelim IN VARCHAR2 DEFAULT ' ',
+                    p_just      IN VARCHAR2 DEFAULT 'LEFT') RETURN CLOB;
+
+  /*   create a delimited list of values from a piece of sql 
+  overloaded function to create a ref cursor which can then be passed to concat_list function that accepts 
+     cursors */
+  -- #param p_cur_sql  The piece of sql to be fired and the column to be returned in a list - mandatory
+  -- #param p_concat_char  The character to be used as a delimiter e.g. a comma. Leave blank/null for no delimiter - optional   
+  FUNCTION concat_list(p_cur_sql     VARCHAR2,
+                       p_concat_char IN CHAR DEFAULT '') RETURN VARCHAR2;
+
+  /*   create a delimited list of values from a piece of sql  passed as a ref cursor
+  there is also an overloaded version of this which accepts a sql statement*/
+  -- #param p_cur_sql  The piece of sql to be fired and the column to be returned in a list - mandatory
+  -- #param p_concat_char  The character to be used as a delimiter e.g. a comma. Leave blank/null for no delimiter - optional   
+  FUNCTION concat_list(p_cur         sys_refcursor,
+                       p_concat_char IN CHAR DEFAULT '') RETURN CLOB;
+
+END p_text_handler;
+
+ </pre>
+</div>
+</div>
+</div>
+</body>
+</html>

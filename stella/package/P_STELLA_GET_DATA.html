@@ -1,0 +1,608 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_STELLA_GET_DATA/report.js" type="text/javascript"></script>
+<link href="P_STELLA_GET_DATA/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_STELLA_GET_DATA</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P> Author  : leigh ashton</P><HR><P></P><A NAME="type_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Type Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#g_list_element_type">g_list_element_type</A></B>( list_element VARCHAR2 ( 4000 ) , list_element_length NUMBER ( 9 , 0 ) , list_element_position NUMBER ( 9 , 0 ) ) ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#return_refcursor">return_refcursor</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Public type declarations</TD></TR>
+</TABLE><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#convert_season_type">convert_season_type</A></B>( p_in_season_type CHAR , p_in_season_year CHAR , p_in_branch_code CHAR ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; company code linked to this branch .e.g. summer H and Jarvis shows as C</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#delete_airline_user_alloc">delete_airline_user_alloc</A></B>( p_airline_num NUMBER , p_user_name CHAR ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; username params mandatory<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     airline num not mandatory - if null then all rows for that user will be deleted<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     returns null if successful, returns 'Error,.........' if failure<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#delete_ticket">delete_ticket</A></B>( p_ticket_no CHAR ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ticket no param is mandatory </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_airline">get_airline</A></B>( p_airline_num NUMBER ) RETURN p_stella_get_data . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RETURN ONE row from the table </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_airline_user_allocations">get_airline_user_allocations</A></B>( p_user_name IN CHAR , p_airline_num IN NUMBER ) RETURN p_stella_get_data . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--------------------------------------------------------------</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_all_airlines">get_all_airlines</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RETURN all rows from the table, no where clause - used to build complete lists of all possible values </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_all_branches">get_all_branches</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RETURN all rows from the table, no where clause - used to build complete lists of all possible values</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_all_doc_types">get_all_doc_types</A></B>( p_doc_category IN CHAR ) RETURN p_stella_get_data . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RETURN all rows from the table UNLESS a specific doc type is passed<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  in which case it only returns that one<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - used to build complete lists of all possible values</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_all_iata_details">get_all_iata_details</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RETURN all rows from the table, no where clause - used to build complete lists of all possible values</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_all_reasons">get_all_reasons</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--------------------------------------------------------------</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_first_departure_date">get_first_departure_date</A></B>( p_pnr_id IN NUMBER ) RETURN DATE ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; get first departure date of any flight on this pnr</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_letter_ticket_list">get_letter_ticket_list</A></B>( p_refund_letter_id IN NUMBER ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return comma-spearated list of ticket numbers mentioned in a refund letter<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  parameter: refund_leeter_id - mandatory </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_next_refund_letter_id">get_next_refund_letter_id</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; get next sequence of refund letter id for use as primary key of that table </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_office_address">get_office_address</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return the address of the bsp accounts office from application_registry<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_reconciliation_history">get_reconciliation_history</A></B>( p_pnr_id IN NUMBER ) RETURN p_stella_get_data . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return full list of the reconciliation history for a particular pnr<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_refund_reasons">get_refund_reasons</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return full list of enabled reason codes and descriptions<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    used in refund doc entry<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_refund_tickets">get_refund_tickets</A></B>( p_document_no NUMBER ) RETURN p_stella_get_data . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return result set of refund batch and child tickets details<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  used in refund screen</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_single_refund_letter">get_single_refund_letter</A></B>( p_refund_letter_id IN NUMBER ) RETURN p_stella_get_data . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; params are mandatory </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_single_ticket_details">get_single_ticket_details</A></B>( p_in_ticket_no NUMBER ) RETURN p_stella_get_data . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return all details for a single ticket as a result set </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_specialist_branchcode">get_specialist_branchcode</A></B>( p_group IN branch_group_allocation . group_code % TYPE , p_season_year season . season_year % TYPE , p_season_type season . season_type % TYPE ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; retuns brnach code (USAC/HAJS/SOVE/MEON/CITA etc) from prefix passed as A,L,S,M,C for specialist companies </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_specialist_branchlist">get_specialist_branchlist</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns list of specialist branches , return as result set</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_template_text">get_template_text</A></B>( p_text_template_code IN NUMBER ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; get text to be used as template in a refund letter </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_user_exceptions">get_user_exceptions</A></B>( p_user_name IN CHAR , p_show_bsp_exceptions IN CHAR , p_show_dwhse_exceptions IN CHAR , p_show_itour_exceptions IN CHAR , p_show_tlink_exceptions IN CHAR , p_specialist_branch IN VARCHAR2 , p_user_roles IN VARCHAR2 ) RETURN p_stella_get_data . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return full list of all current exceptions for a particular user's associated airlines<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    and where that user is allowed to see that exception<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    used in exception screen<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     V1.08 new parameter is added as part of Itour reconciliation , JR<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_user_reasons">get_user_reasons</A></B>( p_user_name IN CHAR , p_user_roles IN VARCHAR2 ) RETURN p_stella_get_data . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--------------------------------------------------------------</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#insert_airline_user_alloc">insert_airline_user_alloc</A></B>( p_airline_num NUMBER , p_user_name CHAR , p_amended_user_id CHAR ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all params mandatory<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     returns null if successful, returns 'Error,.........' if failure<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#insert_refund">insert_refund</A></B>( p_refund_document_no CHAR , p_doc_type_code CHAR , p_issue_date DATE , p_dispute_adm_ind CHAR , p_dispute_date DATE , p_entry_user_id CHAR , p_pseudo_city_code CHAR , p_ccy_code CHAR , p_source_ind CHAR , p_ticket_no CHAR , p_airline_num CHAR , p_seat_amt CHAR , p_tax_amt CHAR , p_fare_used_amt CHAR , p_airline_penalty_amt CHAR , p_tax_adj_amt CHAR , p_update_delete_insert_flag CHAR , p_commission_amt CHAR , p_commission_pct CHAR , p_iata_no CHAR , p_refund_reason_code CHAR , p_refund_free_text CHAR ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     returns null if successful, returns 'Error,.........' if failure<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#insert_refund_letter">insert_refund_letter</A></B>( p_refund_letter_id IN NUMBER , p_airline_num IN NUMBER , p_entry_user_id IN VARCHAR2 , p_requested_amt IN NUMBER , p_free_text IN VARCHAR2 , p_ticket_list IN VARCHAR2 ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; insert a refund letter and  associated tickets<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  all params mandatory<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  returns null if ok, returns "Error,....." if an error has occurred<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#insert_ticket">insert_ticket</A></B>( p_source_ind CHAR , p_pnr_no CHAR , p_departure_date DATE , p_ticket_no CHAR , p_airline_num CHAR , p_branch_code CHAR , p_booking_reference_no CHAR , p_season CHAR , p_e_ticket_ind CHAR , p_ticketing_agent_initials CHAR , p_commission_amt CHAR , p_commission_pct CHAR , p_selling_fare_amt CHAR , p_published_fare_amt CHAR , p_iata_no CHAR , p_entry_user_id CHAR , p_ticket_issue_date DATE , p_num_pax CHAR , p_passenger_name CHAR , p_gb_tax_amt CHAR , p_remaining_tax_amt CHAR , p_ub_tax_amt CHAR , p_linked_ticket_no CHAR , p_ccy_code CHAR , p_pseudo_city_code CHAR , p_passenger_type CHAR , p_doc_type_code CHAR , p_update_or_insert CHAR , p_exchange_ticket_no CHAR , p_pnr_id_1 NUMBER , p_tour_code CHAR , p_fare_basis_code CHAR , p_conjunction_ticket_ind CHAR , p_pnr_creation_date DATE DEFAULT NULL , p_othertaxes CHAR DEFAULT NULL , p_ticket_type CHAR DEFAULT NULL , p_group CHAR DEFAULT NULL ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all params mandatory UNLESS it is a void ticket (shown in passenger name field as VOID)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     returns null if successful, returns 'Error,.........' if failure<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     V1.08 , JR added three new parameters<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     p_pnr_creation_date,p_othertaxes,p_ticket_type<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#run_air_load">run_air_load</A></B>( driverclass VARCHAR2 , connectionurl VARCHAR2 , dbuserid VARCHAR2 , dbuserpwd VARCHAR2 , singlefilename VARCHAR2 , runmode VARCHAR2 ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uk.co.firstchoice.stella.StellaAIRLoad.runLoad</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#run_mir_load">run_mir_load</A></B>( driverclass VARCHAR2 , connectionurl VARCHAR2 , dbuserid VARCHAR2 , dbuserpwd VARCHAR2 , singlefilename VARCHAR2 , runmode VARCHAR2 ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is configured via the application registry (JUTIL.APPLICATION_REGISTRY)</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#sp_populate_travelink_ref">sp_populate_travelink_ref</A></B>( p_pnr_no IN pnr . pnr_no % TYPE , p_pnr_creation_date IN CHAR ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This function is called from Airload program for H&J and other specialist brands<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     where it can not read Travelink bookingref from air file it tries to search in the table<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     tlink_view using pnr_no and pnr_creation date<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Note : As per Henry booking_date in Travelink will not be same as pnr_creation date<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     as in scheduled allocations it creates pnr in Amadeus which never goes back into travelink<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#update_exception_reason_code">update_exception_reason_code</A></B>( p_reconcile_type IN CHAR , p_record_id IN NUMBER , p_reason_code IN CHAR , p_user_name IN CHAR , p_old_reason_code IN CHAR ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all params mandatory<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     returns null if successful, returns 'Error,.........' if failure<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     p_reconcile_type<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  this must be B for BSP exceptions, D for data warehouse/booking exceptions (the old ones)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  the parameter p_record_id must be populated<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  with the bsp_Trans_id for bsp exceptions and the pnr_id for data warehouse/booking exceptions<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+</TABLE>
+<P></P><A NAME="type_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Type Detail</B></FONT></TD></TABLE><A NAME="g_list_element_type"></A>
+<H3>g_list_element_type</H3><PRE>          <B>g_list_element_type</B>( list_element VARCHAR2 ( 4000 ) , list_element_length NUMBER ( 9 , 0 ) , list_element_position NUMBER ( 9 , 0 ) ) ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="return_refcursor"></A>
+<H3>return_refcursor</H3><PRE>          <B>return_refcursor</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Public type declarations<DD><DL></DL></DD></DL><HR><P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="convert_season_type"></A>
+<H3>convert_season_type</H3><PRE>          <B>convert_season_type</B>( p_in_season_type CHAR , p_in_season_year CHAR , p_in_branch_code CHAR ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; company code linked to this branch .e.g. summer H and Jarvis shows as C<DD><DL></DL></DD></DL><HR><A NAME="delete_airline_user_alloc"></A>
+<H3>delete_airline_user_alloc</H3><PRE>          <B>delete_airline_user_alloc</B>( p_airline_num NUMBER , p_user_name CHAR ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; username params mandatory<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     airline num not mandatory - if null then all rows for that user will be deleted<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     returns null if successful, returns 'Error,.........' if failure<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="delete_ticket"></A>
+<H3>delete_ticket</H3><PRE>          <B>delete_ticket</B>( p_ticket_no CHAR ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ticket no param is mandatory <DD><DL></DL></DD></DL><HR><A NAME="get_airline"></A>
+<H3>get_airline</H3><PRE>          <B>get_airline</B>( p_airline_num NUMBER ) RETURN p_stella_get_data . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RETURN ONE row from the table <DD><DL></DL></DD></DL><HR><A NAME="get_airline_user_allocations"></A>
+<H3>get_airline_user_allocations</H3><PRE>          <B>get_airline_user_allocations</B>( p_user_name IN CHAR , p_airline_num IN NUMBER ) RETURN p_stella_get_data . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--------------------------------------------------------------<DD><DL></DL></DD></DL><HR><A NAME="get_all_airlines"></A>
+<H3>get_all_airlines</H3><PRE>          <B>get_all_airlines</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RETURN all rows from the table, no where clause - used to build complete lists of all possible values <DD><DL></DL></DD></DL><HR><A NAME="get_all_branches"></A>
+<H3>get_all_branches</H3><PRE>          <B>get_all_branches</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RETURN all rows from the table, no where clause - used to build complete lists of all possible values<DD><DL></DL></DD></DL><HR><A NAME="get_all_doc_types"></A>
+<H3>get_all_doc_types</H3><PRE>          <B>get_all_doc_types</B>( p_doc_category IN CHAR ) RETURN p_stella_get_data . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RETURN all rows from the table UNLESS a specific doc type is passed<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  in which case it only returns that one<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  - used to build complete lists of all possible values<DD><DL></DL></DD></DL><HR><A NAME="get_all_iata_details"></A>
+<H3>get_all_iata_details</H3><PRE>          <B>get_all_iata_details</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RETURN all rows from the table, no where clause - used to build complete lists of all possible values<DD><DL></DL></DD></DL><HR><A NAME="get_all_reasons"></A>
+<H3>get_all_reasons</H3><PRE>          <B>get_all_reasons</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--------------------------------------------------------------<DD><DL></DL></DD></DL><HR><A NAME="get_first_departure_date"></A>
+<H3>get_first_departure_date</H3><PRE>          <B>get_first_departure_date</B>( p_pnr_id IN NUMBER ) RETURN DATE ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; get first departure date of any flight on this pnr<DD><DL></DL></DD></DL><HR><A NAME="get_letter_ticket_list"></A>
+<H3>get_letter_ticket_list</H3><PRE>          <B>get_letter_ticket_list</B>( p_refund_letter_id IN NUMBER ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return comma-spearated list of ticket numbers mentioned in a refund letter<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  parameter: refund_leeter_id - mandatory <DD><DL></DL></DD></DL><HR><A NAME="get_next_refund_letter_id"></A>
+<H3>get_next_refund_letter_id</H3><PRE>          <B>get_next_refund_letter_id</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; get next sequence of refund letter id for use as primary key of that table <DD><DL></DL></DD></DL><HR><A NAME="get_office_address"></A>
+<H3>get_office_address</H3><PRE>          <B>get_office_address</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return the address of the bsp accounts office from application_registry<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="get_reconciliation_history"></A>
+<H3>get_reconciliation_history</H3><PRE>          <B>get_reconciliation_history</B>( p_pnr_id IN NUMBER ) RETURN p_stella_get_data . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return full list of the reconciliation history for a particular pnr<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="get_refund_reasons"></A>
+<H3>get_refund_reasons</H3><PRE>          <B>get_refund_reasons</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return full list of enabled reason codes and descriptions<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    used in refund doc entry<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="get_refund_tickets"></A>
+<H3>get_refund_tickets</H3><PRE>          <B>get_refund_tickets</B>( p_document_no NUMBER ) RETURN p_stella_get_data . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return result set of refund batch and child tickets details<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  used in refund screen<DD><DL></DL></DD></DL><HR><A NAME="get_single_refund_letter"></A>
+<H3>get_single_refund_letter</H3><PRE>          <B>get_single_refund_letter</B>( p_refund_letter_id IN NUMBER ) RETURN p_stella_get_data . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; params are mandatory <DD><DL></DL></DD></DL><HR><A NAME="get_single_ticket_details"></A>
+<H3>get_single_ticket_details</H3><PRE>          <B>get_single_ticket_details</B>( p_in_ticket_no NUMBER ) RETURN p_stella_get_data . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return all details for a single ticket as a result set <DD><DL></DL></DD></DL><HR><A NAME="get_specialist_branchcode"></A>
+<H3>get_specialist_branchcode</H3><PRE>          <B>get_specialist_branchcode</B>( p_group IN branch_group_allocation . group_code % TYPE , p_season_year season . season_year % TYPE , p_season_type season . season_type % TYPE ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; retuns brnach code (USAC/HAJS/SOVE/MEON/CITA etc) from prefix passed as A,L,S,M,C for specialist companies <DD><DL></DL></DD></DL><HR><A NAME="get_specialist_branchlist"></A>
+<H3>get_specialist_branchlist</H3><PRE>          <B>get_specialist_branchlist</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns list of specialist branches , return as result set<DD><DL></DL></DD></DL><HR><A NAME="get_template_text"></A>
+<H3>get_template_text</H3><PRE>          <B>get_template_text</B>( p_text_template_code IN NUMBER ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; get text to be used as template in a refund letter <DD><DL></DL></DD></DL><HR><A NAME="get_user_exceptions"></A>
+<H3>get_user_exceptions</H3><PRE>          <B>get_user_exceptions</B>( p_user_name IN CHAR , p_show_bsp_exceptions IN CHAR , p_show_dwhse_exceptions IN CHAR , p_show_itour_exceptions IN CHAR , p_show_tlink_exceptions IN CHAR , p_specialist_branch IN VARCHAR2 , p_user_roles IN VARCHAR2 ) RETURN p_stella_get_data . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return full list of all current exceptions for a particular user's associated airlines<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    and where that user is allowed to see that exception<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    used in exception screen<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     V1.08 new parameter is added as part of Itour reconciliation , JR<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="get_user_reasons"></A>
+<H3>get_user_reasons</H3><PRE>          <B>get_user_reasons</B>( p_user_name IN CHAR , p_user_roles IN VARCHAR2 ) RETURN p_stella_get_data . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--------------------------------------------------------------<DD><DL></DL></DD></DL><HR><A NAME="insert_airline_user_alloc"></A>
+<H3>insert_airline_user_alloc</H3><PRE>          <B>insert_airline_user_alloc</B>( p_airline_num NUMBER , p_user_name CHAR , p_amended_user_id CHAR ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all params mandatory<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     returns null if successful, returns 'Error,.........' if failure<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="insert_refund"></A>
+<H3>insert_refund</H3><PRE>          <B>insert_refund</B>( p_refund_document_no CHAR , p_doc_type_code CHAR , p_issue_date DATE , p_dispute_adm_ind CHAR , p_dispute_date DATE , p_entry_user_id CHAR , p_pseudo_city_code CHAR , p_ccy_code CHAR , p_source_ind CHAR , p_ticket_no CHAR , p_airline_num CHAR , p_seat_amt CHAR , p_tax_amt CHAR , p_fare_used_amt CHAR , p_airline_penalty_amt CHAR , p_tax_adj_amt CHAR , p_update_delete_insert_flag CHAR , p_commission_amt CHAR , p_commission_pct CHAR , p_iata_no CHAR , p_refund_reason_code CHAR , p_refund_free_text CHAR ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     returns null if successful, returns 'Error,.........' if failure<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="insert_refund_letter"></A>
+<H3>insert_refund_letter</H3><PRE>          <B>insert_refund_letter</B>( p_refund_letter_id IN NUMBER , p_airline_num IN NUMBER , p_entry_user_id IN VARCHAR2 , p_requested_amt IN NUMBER , p_free_text IN VARCHAR2 , p_ticket_list IN VARCHAR2 ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; insert a refund letter and  associated tickets<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  all params mandatory<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  returns null if ok, returns "Error,....." if an error has occurred<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="insert_ticket"></A>
+<H3>insert_ticket</H3><PRE>          <B>insert_ticket</B>( p_source_ind CHAR , p_pnr_no CHAR , p_departure_date DATE , p_ticket_no CHAR , p_airline_num CHAR , p_branch_code CHAR , p_booking_reference_no CHAR , p_season CHAR , p_e_ticket_ind CHAR , p_ticketing_agent_initials CHAR , p_commission_amt CHAR , p_commission_pct CHAR , p_selling_fare_amt CHAR , p_published_fare_amt CHAR , p_iata_no CHAR , p_entry_user_id CHAR , p_ticket_issue_date DATE , p_num_pax CHAR , p_passenger_name CHAR , p_gb_tax_amt CHAR , p_remaining_tax_amt CHAR , p_ub_tax_amt CHAR , p_linked_ticket_no CHAR , p_ccy_code CHAR , p_pseudo_city_code CHAR , p_passenger_type CHAR , p_doc_type_code CHAR , p_update_or_insert CHAR , p_exchange_ticket_no CHAR , p_pnr_id_1 NUMBER , p_tour_code CHAR , p_fare_basis_code CHAR , p_conjunction_ticket_ind CHAR , p_pnr_creation_date DATE DEFAULT NULL , p_othertaxes CHAR DEFAULT NULL , p_ticket_type CHAR DEFAULT NULL , p_group CHAR DEFAULT NULL ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all params mandatory UNLESS it is a void ticket (shown in passenger name field as VOID)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     returns null if successful, returns 'Error,.........' if failure<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     V1.08 , JR added three new parameters<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     p_pnr_creation_date,p_othertaxes,p_ticket_type<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="run_air_load"></A>
+<H3>run_air_load</H3><PRE>          <B>run_air_load</B>( driverclass VARCHAR2 , connectionurl VARCHAR2 , dbuserid VARCHAR2 , dbuserpwd VARCHAR2 , singlefilename VARCHAR2 , runmode VARCHAR2 ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; uk.co.firstchoice.stella.StellaAIRLoad.runLoad<DD><DL></DL></DD></DL><HR><A NAME="run_mir_load"></A>
+<H3>run_mir_load</H3><PRE>          <B>run_mir_load</B>( driverclass VARCHAR2 , connectionurl VARCHAR2 , dbuserid VARCHAR2 , dbuserpwd VARCHAR2 , singlefilename VARCHAR2 , runmode VARCHAR2 ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is configured via the application registry (JUTIL.APPLICATION_REGISTRY)<DD><DL></DL></DD></DL><HR><A NAME="sp_populate_travelink_ref"></A>
+<H3>sp_populate_travelink_ref</H3><PRE>          <B>sp_populate_travelink_ref</B>( p_pnr_no IN pnr . pnr_no % TYPE , p_pnr_creation_date IN CHAR ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This function is called from Airload program for H&J and other specialist brands<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     where it can not read Travelink bookingref from air file it tries to search in the table<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     tlink_view using pnr_no and pnr_creation date<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Note : As per Henry booking_date in Travelink will not be same as pnr_creation date<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     as in scheduled allocations it creates pnr in Amadeus which never goes back into travelink<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="update_exception_reason_code"></A>
+<H3>update_exception_reason_code</H3><PRE>          <B>update_exception_reason_code</B>( p_reconcile_type IN CHAR , p_record_id IN NUMBER , p_reason_code IN CHAR , p_user_name IN CHAR , p_old_reason_code IN CHAR ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all params mandatory<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     returns null if successful, returns 'Error,.........' if failure<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     p_reconcile_type<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  this must be B for BSP exceptions, D for data warehouse/booking exceptions (the old ones)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  the parameter p_record_id must be populated<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  with the bsp_Trans_id for bsp exceptions and the pnr_id for data warehouse/booking exceptions<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>STELLA</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_STELLA_GET_DATA</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516778</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;17.30.44</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>16-DEC-19&nbsp;14.44.05</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2019-05-13:10:42:53</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 0)" class="currentrow">
+<td class="currentcell">EXECUTE</td>
+<td class="currentcell">SECTOR_APEX</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">STELLA</td>
+<td class="currentcell">P_STELLA_GET_DATA</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE p_stella_get_data IS
+  -- Author  : leigh ashton
+  -- Created : 03/01/03
+  -- Purpose : Defines the procedures and functions for the Stella system
+  --         : data extracts. These stored procedures / functions are used by java programs to
+  --         : read data from Oracle
+
+  -- V1.08   : JR, Airload changes, for Amadeus
+  --         : Added  3 new parameters  in insert_ticket function , values are optional for last two
+  --
+  -- V1.10   : JR, Voided Air Changes for air tickets
+  --         : Added nvl in update ticket sql for ticket_issue date, ticket agent inititals, tour code and fare basis code
+  --         : to keep their original values when tickets are voided
+  --
+  -- V.11    : JR, added 3 functions for Specialist Business release
+  -- V1.12   : removed any reference to jutil.security_user table (get_user_reason,et_user_exceptions).. LDAP security uses notes user.
+  -- V 1.13  : added doc_type_code in insert_refund finction to allow tp update refund_doc_type
+
+  -- Public type declarations
+  TYPE return_refcursor IS REF CURSOR;
+
+  g_version   NUMBER := 1.11;
+  g_statement NUMBER := 0;
+  g_sqlerrm   VARCHAR2(500);
+  g_sqlcode   CHAR(20);
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  -- LA v1.05 added refund letter stuff
+  -- LA v1.07 added reasons for refund docs
+  ----------------------------------------------------------------
+
+  -- run_mir_load is the call specification to the java Stored procedure
+  -- uk.co.firstchoice.stella.StellaMIRLoad.runLoad
+  -- It loads tickets from source files in file system
+  -- The routine
+  -- is configured via the application registry (JUTIL.APPLICATION_REGISTRY)
+  FUNCTION run_mir_load(driverclass    VARCHAR2,
+                        connectionurl  VARCHAR2,
+                        dbuserid       VARCHAR2,
+                        dbuserpwd      VARCHAR2,
+                        singlefilename VARCHAR2,
+                        runmode        VARCHAR2) RETURN CHAR;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+
+  -- run air load is the call specification to the java Stored procedure
+  -- uk.co.firstchoice.stella.StellaAIRLoad.runLoad
+  FUNCTION run_air_load(driverclass    VARCHAR2,
+                        connectionurl  VARCHAR2,
+                        dbuserid       VARCHAR2,
+                        dbuserpwd      VARCHAR2,
+                        singlefilename VARCHAR2,
+                        runmode        VARCHAR2) RETURN CHAR;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  -- get first departure date of any flight on this pnr
+  FUNCTION get_first_departure_date(p_pnr_id IN NUMBER) RETURN DATE;
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  -- take branch code and return the appropriate season_type code based on the
+  -- company code linked to this branch .e.g. summer H and Jarvis shows as C
+  FUNCTION convert_season_type(p_in_season_type CHAR,
+                               p_in_season_year CHAR,
+                               p_in_branch_code CHAR) RETURN VARCHAR2;
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  FUNCTION get_airline_user_allocations(p_user_name   IN CHAR,
+                                        p_airline_num IN NUMBER)
+    RETURN p_stella_get_data.return_refcursor;
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+
+  FUNCTION get_user_reasons(p_user_name  IN CHAR,
+                            p_user_roles IN VARCHAR2)
+    RETURN p_stella_get_data.return_refcursor;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  FUNCTION get_all_reasons    
+  
+   RETURN p_stella_get_data.return_refcursor;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  /* return full list of all current exceptions for a particular user's associated airlines
+    and where that user is allowed to see that exception
+    used in exception screen
+     V1.08 new parameter is added as part of Itour reconciliation , JR
+  */
+
+  FUNCTION get_user_exceptions(p_user_name             IN CHAR,
+                               p_show_bsp_exceptions   IN CHAR,
+                               p_show_dwhse_exceptions IN CHAR,
+                               p_show_itour_exceptions IN CHAR,
+                               p_show_tlink_exceptions IN CHAR,
+                               p_specialist_branch     IN VARCHAR2,
+                               p_user_roles            IN VARCHAR2)
+    RETURN p_stella_get_data.return_refcursor;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  /* return full list of the reconciliation history for a particular pnr
+  */
+  FUNCTION get_reconciliation_history(p_pnr_id IN NUMBER)
+    RETURN p_stella_get_data.return_refcursor;
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+
+  /* return result set of refund batch and child tickets details
+  used in refund screen*/
+  FUNCTION get_refund_tickets(p_document_no NUMBER)
+    RETURN p_stella_get_data.return_refcursor;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  /* return all details for a single ticket as a result set */
+  FUNCTION get_single_ticket_details(p_in_ticket_no NUMBER)
+    RETURN p_stella_get_data.return_refcursor;
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  -- **********************************************************************
+  -- GET_ALL_AIRLINES()
+  -- **********************************************************************
+  -- This function returns the requested airline data from the
+  -- airline table in the form of a result set.
+  /* RETURN all rows from the table, no where clause - used to build complete lists of all possible values */
+  FUNCTION get_all_airlines RETURN p_stella_get_data.return_refcursor;
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  -- get single airline's full details,, return as result set
+  -- function get_airline looks up a single airline using airline_Num and returns the airline name or -1 if none found
+  /* RETURN ONE row from the table */
+  FUNCTION get_airline(p_airline_num NUMBER)
+    RETURN p_stella_get_data.return_refcursor; -- returns airline name if valid, returns "-1" if no airline found
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  -- get all branches and their details
+  /* RETURN all rows from the table, no where clause - used to build complete lists of all possible values*/
+  FUNCTION get_all_branches RETURN p_stella_get_data.return_refcursor;
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  -- get all iata numbers from table, return as result set
+  /* RETURN all rows from the table, no where clause - used to build complete lists of all possible values*/
+  FUNCTION get_all_iata_details RETURN p_stella_get_data.return_refcursor;
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  -- get all rows from doc_type table
+  /* RETURN all rows from the table UNLESS a specific doc type is passed
+  in which case it only returns that one
+  - used to build complete lists of all possible values*/
+  FUNCTION get_all_doc_types(p_doc_category IN CHAR)
+    RETURN p_stella_get_data.return_refcursor;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  -- stored proc to insert a ticket and pnr - used from either GUI or from batch MIR load
+  /* all params mandatory UNLESS it is a void ticket (shown in passenger name field as VOID)
+     returns null if successful, returns 'Error,.........' if failure
+  
+     V1.08 , JR added three new parameters
+     p_pnr_creation_date,p_othertaxes,p_ticket_type
+  
+  */
+
+  FUNCTION insert_ticket(p_source_ind               CHAR,
+                         p_pnr_no                   CHAR,
+                         p_departure_date           DATE,
+                         p_ticket_no                CHAR,
+                         p_airline_num              CHAR,
+                         p_branch_code              CHAR,
+                         p_booking_reference_no     CHAR,
+                         p_season                   CHAR,
+                         p_e_ticket_ind             CHAR,
+                         p_ticketing_agent_initials CHAR,
+                         p_commission_amt           CHAR,
+                         p_commission_pct           CHAR,
+                         p_selling_fare_amt         CHAR,
+                         p_published_fare_amt       CHAR,
+                         p_iata_no                  CHAR,
+                         p_entry_user_id            CHAR,
+                         p_ticket_issue_date        DATE,
+                         p_num_pax                  CHAR,
+                         p_passenger_name           CHAR,
+                         p_gb_tax_amt               CHAR,
+                         p_remaining_tax_amt        CHAR,
+                         p_ub_tax_amt               CHAR,
+                         p_linked_ticket_no         CHAR,
+                         p_ccy_code                 CHAR,
+                         p_pseudo_city_code         CHAR,
+                         p_passenger_type           CHAR,
+                         p_doc_type_code            CHAR,
+                         p_update_or_insert         CHAR,
+                         p_exchange_ticket_no       CHAR,
+                         p_pnr_id_1                 NUMBER, -- passed only if an update is to be issued
+                         p_tour_code                CHAR,
+                         p_fare_basis_code          CHAR,
+                         p_conjunction_ticket_ind   CHAR,
+                         p_pnr_creation_date        DATE DEFAULT NULL,
+                         p_othertaxes               CHAR DEFAULT NULL,
+                         p_ticket_type              CHAR DEFAULT NULL,
+                         p_group                    CHAR DEFAULT NULL
+                         
+                         
+                         ) RETURN CHAR;
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+
+  -- insert a refund batch and a refund ticket row
+  /*
+     returns null if successful, returns 'Error,.........' if failure
+  */
+
+  FUNCTION insert_refund(p_refund_document_no        CHAR,
+                         p_doc_type_code             CHAR,
+                         p_issue_date                DATE,
+                         p_dispute_adm_ind           CHAR,
+                         p_dispute_date              DATE,
+                         p_entry_user_id             CHAR,
+                         p_pseudo_city_code          CHAR,
+                         p_ccy_code                  CHAR,
+                         p_source_ind                CHAR,
+                         p_ticket_no                 CHAR,
+                         p_airline_num               CHAR,
+                         p_seat_amt                  CHAR,
+                         p_tax_amt                   CHAR,
+                         p_fare_used_amt             CHAR,
+                         p_airline_penalty_amt       CHAR,
+                         p_tax_adj_amt               CHAR,
+                         p_update_delete_insert_flag CHAR,
+                         p_commission_amt            CHAR,
+                         p_commission_pct            CHAR,
+                         p_iata_no                   CHAR,
+                         p_refund_reason_code        CHAR,
+                         p_refund_free_text          CHAR
+                         
+                         ) RETURN CHAR;
+
+  -------------------------------------------------------------
+  -------------------------------------------------------------
+  /* function to be called from exceptions screen to
+  move exception onwards in the reconciliation process/workflow */
+  /* all params mandatory
+     returns null if successful, returns 'Error,.........' if failure
+     p_reconcile_type
+  this must be B for BSP exceptions, D for data warehouse/booking exceptions (the old ones)
+  
+  the parameter p_record_id must be populated
+  with the bsp_Trans_id for bsp exceptions and the pnr_id for data warehouse/booking exceptions
+  
+  */
+
+  FUNCTION update_exception_reason_code(p_reconcile_type  IN CHAR,
+                                        p_record_id       IN NUMBER,
+                                        p_reason_code     IN CHAR,
+                                        p_user_name       IN CHAR,
+                                        p_old_reason_code IN CHAR)
+    RETURN CHAR;
+
+  -------------------------------------------------------------
+  -------------------------------------------------------------
+  /*  add a new entry to the airline_user_allocation table*/
+  /* all params mandatory
+     returns null if successful, returns 'Error,.........' if failure
+  */
+  FUNCTION insert_airline_user_alloc(p_airline_num     NUMBER,
+                                     p_user_name       CHAR,
+                                     p_amended_user_id CHAR) RETURN VARCHAR2;
+
+  -------------------------------------------------------------
+  -------------------------------------------------------------
+  /* delete an entry from the airline_user_allocation table*/
+  /* username params mandatory
+     airline num not mandatory - if null then all rows for that user will be deleted
+     returns null if successful, returns 'Error,.........' if failure
+  */
+  FUNCTION delete_airline_user_alloc(p_airline_num NUMBER,
+                                     p_user_name   CHAR) RETURN VARCHAR2;
+
+  /* delete a ticket and all associated data */
+  /* ticket no param is mandatory */
+  FUNCTION delete_ticket(p_ticket_no CHAR) RETURN VARCHAR2;
+
+  -----------------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------------------
+  /* return the address of the bsp accounts office from application_registry
+  */
+
+  FUNCTION get_office_address RETURN VARCHAR2;
+
+  /* return comma-spearated list of ticket numbers mentioned in a refund letter
+  parameter: refund_leeter_id - mandatory */
+  FUNCTION get_letter_ticket_list(p_refund_letter_id IN NUMBER)
+    RETURN VARCHAR2;
+
+  /* return full details of a refund letter and associated tickets */
+  /* params are mandatory */
+  FUNCTION get_single_refund_letter(p_refund_letter_id IN NUMBER)
+    RETURN p_stella_get_data.return_refcursor;
+
+  /* insert a refund letter and  associated tickets
+  all params mandatory
+  returns null if ok, returns "Error,....." if an error has occurred
+  */
+
+  FUNCTION insert_refund_letter(p_refund_letter_id IN NUMBER, -- should have come from refund_letter_seq which was previously retrieved by
+                                p_airline_num      IN NUMBER,
+                                p_entry_user_id    IN VARCHAR2,
+                                p_requested_amt    IN NUMBER,
+                                p_free_text        IN VARCHAR2,
+                                p_ticket_list      IN VARCHAR2 -- make this an array??
+                                ) RETURN VARCHAR2;
+
+  /* get next sequence of refund letter id for use as primary key of that table */
+  FUNCTION get_next_refund_letter_id RETURN NUMBER;
+
+  /* get text to be used as template in a refund letter */
+  FUNCTION get_template_text(p_text_template_code IN NUMBER) RETURN VARCHAR2;
+
+  /* return full list of enabled reason codes and descriptions
+    used in refund doc entry
+  */
+  FUNCTION get_refund_reasons RETURN p_stella_get_data.return_refcursor;
+
+
+  /* This function is called from Airload program for H&J and other specialist brands
+     where it can not read Travelink bookingref from air file it tries to search in the table
+     tlink_view using pnr_no and pnr_creation date
+  
+     Note : As per Henry booking_date in Travelink will not be same as pnr_creation date
+     as in scheduled allocations it creates pnr in Amadeus which never goes back into travelink
+  
+  */
+
+  FUNCTION sp_populate_travelink_ref(p_pnr_no            IN pnr.pnr_no%TYPE,
+                                     p_pnr_creation_date IN CHAR) RETURN CHAR;
+
+
+
+  /* retuns brnach code (USAC/HAJS/SOVE/MEON/CITA etc) from prefix passed as A,L,S,M,C for specialist companies */
+  FUNCTION get_specialist_branchcode(p_group       IN branch_group_allocation.group_code%TYPE,
+                                     p_season_year season.season_year%TYPE,
+                                     p_season_type season.season_type%TYPE)
+    RETURN CHAR;
+  --p_stella_get_data.return_refcursor;
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------
+  --returns list of specialist branches , return as result set
+  FUNCTION get_specialist_branchlist
+    RETURN p_stella_get_data.return_refcursor;
+
+  TYPE g_list_element_type IS RECORD(
+    list_element          VARCHAR2(4000),
+    list_element_length   NUMBER(9, 0),
+    list_element_position NUMBER(9, 0));
+
+  TYPE g_list_tab_t IS TABLE OF g_list_element_type;
+
+END p_stella_get_data; -- end of package HEADER</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

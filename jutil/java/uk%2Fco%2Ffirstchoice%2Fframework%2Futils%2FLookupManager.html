@@ -1,0 +1,179 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="uk%252Fco%252Ffirstchoice%252Fframework%252Futils%252FLookupManager/report.js" type="text/javascript"></script>
+<link href="uk%252Fco%252Ffirstchoice%252Fframework%252Futils%252FLookupManager/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">uk/co/firstchoice/framework/utils/LookupManager</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Source</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Policies</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>NAME</td>
+<td>uk/co/firstchoice/framework/utils/LookupManager</td>
+</tr>
+<tr>
+<td>TYPE</td>
+<td>JAVA&nbsp;CLASS</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.39</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>19-JAN-18&nbsp;14.20.26</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<pre>
+/*
+ * LookupManager.java
+ *
+ * Created on 01 September 2003, 11:25
+ */
+
+package uk.co.firstchoice.framework.utils;
+
+import java.io.*;
+import java.net.URL;
+import java.util.Vector;
+import java.util.Properties;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import java.util.StringTokenizer;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import uk.co.firstchoice.framework.utils.Printer;
+
+/**
+ *
+ * @author  mkonda
+ */
+public class LookupManager {
+    
+    private static Context ctx = null;
+    
+	private static Object obj = null;
+	
+	private static Properties _props = null;
+    
+    public LookupManager() {
+    }
+    
+    public static Object lookup(String jndiName){
+        
+        try{
+            ctx = getInitialContext();
+            obj = ctx.lookup(jndiName);
+        }catch(NamingException nex){
+            Printer.print(" Lookup Exception "+nex.getMessage());
+            nex.printStackTrace();
+        }
+       
+       return obj;
+    }
+    
+     public static Context getInitialContext(){
+	
+	String ctxFactory = "jrun.naming.JRunContextFactory";//ps.getProperty("Context.INITIAL_CONTEXT_FACTORY");
+        String ctxUrl  = "cra-devweb2:2003";//ps.getProperty("Context.PROVIDER_URL");
+        
+        Context ctx = null;
+        Properties props = new Properties();
+        
+        props.put ("Context.INITIAL_CONTEXT_FACTORY", ctxFactory);
+        props.put ("Context.PROVIDER_URL", ctxUrl);
+
+        try{
+            ctx = new InitialContext(props);
+        }catch(NamingException ex){
+           Printer.print("Context Exception "+ex.getMessage());      
+           ex.printStackTrace();
+        }
+        return ctx;
+      }
+    
+     public static void loadProperties() {
+        _props = new Properties();
+        URL url = null;
+        String delim = "=";
+        String line = null;
+        InputStream in = null;
+        Vector v = new Vector();
+        StringTokenizer tok = null;
+        BufferedReader buffIn = null;
+        InputStreamReader inputReader = null;
+        
+        try{
+            
+            url = ClassLoader.getSystemResource("data.properties");
+            _props.load(url.openStream()) ;       
+
+        }catch(NullPointerException ex){
+            Printer.print(" Properties file not found !!"+ex.getMessage ());
+            ex.printStackTrace ();
+        }catch(Exception ex){
+            Printer.print(" Exception occured while loading properties file: "+ex.getMessage ());
+        }
+    }    
+}
+</pre>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>KIND</th>
+<th>GRANTEE_NAME</th>
+<th>TYPE_SCHEMA</th>
+<th>TYPE_NAME</th>
+<th>NAME</th>
+<th>ACTION</th>
+<th>ENABLED</th>
+<th>SEQ</th>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

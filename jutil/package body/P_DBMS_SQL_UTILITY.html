@@ -1,0 +1,237 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_DBMS_SQL_UTILITY/report.js" type="text/javascript"></script>
+<link href="P_DBMS_SQL_UTILITY/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_DBMS_SQL_UTILITY</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P></P><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_DBMS_SQL_UTILITY</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516259</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE&nbsp;BODY</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.37</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>16-JAN-18&nbsp;16.22.37</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2009-06-12:10:30:34</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+package body p_dbms_sql_utility
+     as
+     g_number_of_columns   dbms_sql.number_table;
+
+-----------------------------------------------------------------------------------
+--Verison  :1.0
+--Author   :Jyoti Renganathan
+--Created  : 21/06/04
+--Purpose  : Define all the columns in a given cursor and store into veriable of type dbms.sql.desc_tab
+--           This is only called for select cursor
+-----------------------------------------------------------------------------------
+
+     procedure define_all( p_cursor in integer )
+     as
+         v_columnValue   varchar2(4000);
+         v_desctable       dbms_sql.desc_tab2;
+         v_colcount      integer;
+     begin
+        -- Pass p_cursor and populate l_colCnt and ldescTb1
+        -- Get the total number of columns(l_colcount) from the p_cursor query and
+        -- Get the description of the columns(l_desctable) from the p_cursor query
+         dbms_sql.describe_columns2( p_cursor,v_colcount, v_desctable );
+
+         -- Go through each column in p_cursor
+         for i in 1 .. v_colcount loop
+
+         -- p_cursor          : cursor to define the row to be selected.
+         -- i                 : Position of the column in the row being defined.
+         -- v_columnvalue     : Type of the value being passed in for this parameter is
+         --                     the type of the column to be defined.
+         -- column size(4000) : Maximum expected size of the value in bytes for the
+         --                     varchar2 column.
+            dbms_sql.define_column(p_cursor, i,v_columnvalue, 4000 );
+         end loop;
+            g_number_of_columns(p_cursor) := v_colcount;
+
+     end;
+
+-----------------------------------------------------------------------------------
+--Author   : Jyoti Renganathan
+--Created  : 21/06/04
+--Verison  : 1.0
+--Purpose  : Fetch Column Value for the passed cursor ,
+--           This procedure is called once for each row of cursor p_cursor
+-----------------------------------------------------------------------------------
+
+     function fetch_row( p_cursor in integer )
+         return varchar2_table
+     is
+         v_return        varchar2_table;
+     begin
+
+         -- Go through each column in the cursor
+         for i in 1 .. g_number_of_columns(p_cursor) loop
+            v_return(i) := NULL;
+            -- column_value() procedure is used to access the data retrieved by "fetch_rows".
+            dbms_sql.column_value( p_cursor, i,v_return(i) );
+         end loop;
+
+         return v_return;
+
+     end;
+-----------------------------------------------------------------------------------
+
+end p_dbms_sql_utility;
+
+
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

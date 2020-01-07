@@ -1,0 +1,287 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_STELLA_TLINK_RECONCILIATION/report.js" type="text/javascript"></script>
+<link href="P_STELLA_TLINK_RECONCILIATION/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_STELLA_TLINK_RECONCILIATION</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P>                                                                                <BR>  <BR>  Purpose<BR>  -------<BR>  Processing to reconcile stella bookings against Travelink<BR>  <BR>  History<BR>  -------<BR>  <BR>  Date      By          Description                                    Version<BR>  ----      ----------- ---------------------------------------------- -------<BR>  04/11/05  Paul Butler  Initial version cloned from itour version        001<BR>                                                                                  </P><HR><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#tlink_missingbkg_report">tlink_missingbkg_report</A></B>( parm_no_days_pre_dept IN NUMBER , p_sqlerrm OUT CHAR , p_valid OUT BOOLEAN , p_no_of_rows OUT NUMBER ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#tlink_stella_reconcile">tlink_stella_reconcile</A></B>( p_branch_code IN CHAR , p_pnr_no IN CHAR , p_season_type IN CHAR , p_season_year IN CHAR , p_airline_num IN NUMBER , p_no_of_days_previous IN NUMBER , p_sqlerrm OUT CHAR , p_no_of_rows OUT CHAR , p_valid OUT BOOLEAN ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#version">version</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------</TD></TR>
+</TABLE>
+<P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="tlink_missingbkg_report"></A>
+<H3>tlink_missingbkg_report</H3><PRE>          <B>tlink_missingbkg_report</B>( parm_no_days_pre_dept IN NUMBER , p_sqlerrm OUT CHAR , p_valid OUT BOOLEAN , p_no_of_rows OUT NUMBER ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------<DD><DL></DL></DD></DL><HR><A NAME="tlink_stella_reconcile"></A>
+<H3>tlink_stella_reconcile</H3><PRE>          <B>tlink_stella_reconcile</B>( p_branch_code IN CHAR , p_pnr_no IN CHAR , p_season_type IN CHAR , p_season_year IN CHAR , p_airline_num IN NUMBER , p_no_of_days_previous IN NUMBER , p_sqlerrm OUT CHAR , p_no_of_rows OUT CHAR , p_valid OUT BOOLEAN ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------<DD><DL></DL></DD></DL><HR><A NAME="version"></A>
+<H3>version</H3><PRE>          <B>version</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------<DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>STELLA</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_STELLA_TLINK_RECONCILIATION</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516782</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;17.30.44</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>16-JAN-18&nbsp;17.30.45</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2009-11-03:17:37:19</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 0)" class="currentrow">
+<td class="currentcell">EXECUTE</td>
+<td class="currentcell">PUBLIC</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">STELLA</td>
+<td class="currentcell">P_STELLA_TLINK_RECONCILIATION</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE        p_stella_tlink_reconciliation IS
+
+  /* ***************************************************************************** *
+  
+  Purpose
+  -------
+  Processing to reconcile stella bookings against Travelink
+  
+  History
+  -------
+  
+  Date      By          Description                                    Version
+  ----      ----------- ---------------------------------------------- -------
+  04/11/05  Paul Butler  Initial version cloned from itour version        001
+  * ***************************************************************************** */
+
+  -- Public declarations
+  g_version   VARCHAR2(20) := '001';
+  g_app_key   jutil.application_log.application_key%TYPE := 'STLTLR';
+  g_statement NUMBER := 0;
+  g_sqlerrm   VARCHAR2(500);
+  g_sqlcode   CHAR(20);
+  g_debug     BOOLEAN := FALSE;
+
+  g_log_sequence jutil.application_log.log_sequence%TYPE;
+
+  ------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------
+
+  PROCEDURE tlink_stella_reconcile(p_branch_code         IN CHAR, -- optional
+                                   p_pnr_no              IN CHAR, -- optional
+                                   p_season_type         IN CHAR, -- optional
+                                   p_season_year         IN CHAR, -- optional
+                                   p_airline_num         IN NUMBER, -- optional
+                                   p_no_of_days_previous IN NUMBER, -- mandatory
+                                   p_sqlerrm             OUT CHAR,
+                                   p_no_of_rows          OUT CHAR,
+                                   p_valid               OUT BOOLEAN);
+
+  /*   this procedure is the Itour to stella reconciliation process
+  - compares costs of tickets in stella data with that
+  in Itour View
+  */
+
+  ------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------
+
+
+  FUNCTION version RETURN VARCHAR2;
+
+  /* ***************************************************************************** *
+  
+  Purpose
+  -------
+  Returns current version of the package.
+  
+  History
+  -------
+  
+  Date      By          Description                                    Version
+  --------  ----------- ---------------------------------------------- -------
+  02/09/02  L Ashton     Initial version.                                 001
+  
+  Parameters
+  ----------
+  Name             Description                                         Default In/Out
+  ---------------- --------------------------------------------------- ------- ------
+  
+  Notes:
+  
+  Example Call
+  ------------
+  SELECT p_stella.reconciliation.version
+  FROM dual;
+  
+  * ***************************************************************************** */
+
+
+  ------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------
+  PROCEDURE tlink_missingbkg_report(
+                                    /*
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Purpose
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        This procedure creates missing bookings  from stella  which exist in Travelink
+                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Date      By          Description                                    Version
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          --------  ----------- ---------------------------------------------- -------
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          05/12/04  Jyoti R.     Initial version.                                 001
+                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        -- Created on 05/12/2004 by Jyoti
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        */
+                                    
+                                    parm_no_days_pre_dept IN NUMBER,
+                                    p_sqlerrm             OUT CHAR,
+                                    p_valid               OUT BOOLEAN,
+                                    p_no_of_rows          OUT NUMBER);
+  ------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+END p_stella_tlink_reconciliation; --end of package
+
+ </pre>
+</div>
+</div>
+</div>
+</body>
+</html>

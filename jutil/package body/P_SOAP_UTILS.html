@@ -1,0 +1,977 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_SOAP_UTILS/report.js" type="text/javascript"></script>
+<link href="P_SOAP_UTILS/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_SOAP_UTILS</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P>                                                                                <BR>  History<BR>  -------                                                                   Version<BR>  Date      By          Description                                         Hdr Bdy<BR>  ----      ----------- --------------------------------------------------- --- ---<BR>  14/01/05  A.James     Initial version.                                    001 001<BR>  24/03/05  P Butler    Added comments and various mods for implementation<BR>  29/09/05  P Butler    Use time in secs for APP_UTIL.LOG logging sequence to avoid<BR>                         PK_APLOG dup key violations.<BR><BR>                                                                                </P><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_SOAP_UTILS</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516263</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE&nbsp;BODY</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.38</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>16-JAN-18&nbsp;16.22.38</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2009-06-17:10:33:44</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 0)" class="currentrow">
+<td class="currentcell">EXECUTE</td>
+<td class="currentcell">PUBLIC</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">JUTIL</td>
+<td class="currentcell">P_SOAP_UTILS</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE BODY p_soap_utils AS
+/* ***************************************************************************** *
+  History
+  -------                                                                   Version
+  Date      By          Description                                         Hdr Bdy
+  ----      ----------- --------------------------------------------------- --- ---
+  14/01/05  A.James     Initial version.                                    001 001
+  24/03/05  P Butler    Added comments and various mods for implementation
+  29/09/05  P Butler    Use time in secs for APP_UTIL.LOG logging sequence to avoid
+                         PK_APLOG dup key violations.
+
+* ***************************************************************************** */
+g_app_key           application.application_key%TYPE := 'OSPREY';
+g_log_sequence      application_log.log_sequence%TYPE;
+
+
+  FUNCTION new_request(method    IN VARCHAR2,
+                       namespace IN VARCHAR2) RETURN request AS
+  /* ***************************************************************************** *
+  Purpose
+  -------
+  This function populates the method and namespace and returns the request object. 
+
+  History
+  -------
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  14/01/05  A.James     Initial version.                                      001
+
+  Notes:
+  The abstract datatype 'request' is used to define a soap request. It contains the name
+  of the method that will be called on the Web service, and the XML namespace of that method.
+  
+  * ***************************************************************************** */  
+  v_req   request;
+  
+  BEGIN
+  
+    v_req.method    := method;
+    v_req.namespace := namespace;
+    RETURN v_req;
+    
+  END new_request;
+
+/* ***************************************************************************** */
+
+  PROCEDURE add_parameter(req   IN OUT NOCOPY request,
+                          NAME  IN VARCHAR2,
+                          TYPE  IN VARCHAR2,
+                          VALUE IN VARCHAR2) AS
+/* ***************************************************************************** *
+  Purpose
+  -------
+  When building RPC style SOAP messages, it is necessary to define the datatypes of 
+  the incoming arguments using XML Schema. This procedure does this by letting 
+  the caller pass in the parameter name, type, and value.
+
+  History
+  -------
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  14/01/05  A.James     Initial version.                                      001
+  24/03/05  P.Butler    Added comments
+  
+  Notes:
+  type request comprises:     method,  namespace,  body
+  
+  * ***************************************************************************** */
+ 
+  BEGIN
+  
+    req.BODY := req.BODY || '&lt;' || NAME || ' xsi:type="' || TYPE || '">' ||
+                VALUE || '&lt;/' || NAME || '>';
+    --req.BODY := req.BODY || '&lt;' || NAME || '>' || '&lt;![CDATA[' ||
+    --            VALUE || ']]> ' || '&lt;/' || NAME || '>';
+    
+  END add_parameter;
+
+/* ***************************************************************************** */
+
+  PROCEDURE generate_envelope(req IN OUT NOCOPY request,
+                              env IN OUT NOCOPY VARCHAR2) AS
+/* ***************************************************************************** *
+  Purpose
+  -------
+  Prior to sending the SOAP request off it must be wrapped in a 
+  SOAP envelope, a standard header that prefixes the body of the message. The end result
+  is a SOAP message ready to be sent to the target Web service in the variable env.
+
+  History
+  -------
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  14/01/05  A.James     Initial version.                                      001
+  24/03/05  P.Butler    Added comments
+  
+  Notes:
+  
+  * ***************************************************************************** */
+  
+  BEGIN
+  
+    env := '&lt;?xml version=''1.0''?>' ||
+           '&lt;SOAP-ENV:Envelope ' ||
+           'xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" ' ||
+           'xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance" ' ||
+           'xmlns:xsd="http://www.w3.org/1999/XMLSchema"> ' ||
+           '&lt;SOAP-ENV:Body>&lt;' || req.method || ' ' || req.namespace ||
+           '  SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">' ||
+           req.BODY || '&lt;/' || req.method ||
+           '>&lt;/SOAP-ENV:Body>&lt;/SOAP-ENV:Envelope>';
+           
+  END generate_envelope;
+  
+/* ***************************************************************************** */
+
+  PROCEDURE show_envelope(env IN OUT NOCOPY CLOB) AS
+/* ***************************************************************************** *
+  Purpose
+  -------
+  Overloaded utility procedure which takes input envelope parameter as a CLOB and 
+  displays the content of the soap envelope using dbms_output, 60 characters per line.
+
+  History
+  -------
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  14/01/05  A.James     Initial version.                                      001
+  24/03/05  P.Butler    Added comments
+  
+  Notes:
+  
+  * ***************************************************************************** */
+
+    v_i   PLS_INTEGER;
+    v_len PLS_INTEGER;
+    
+  BEGIN
+    v_i   := 1;
+    v_len := length(env);
+
+    -- Loop through envelope, displaying 60 characters per line
+    WHILE (v_i &lt;= v_len) LOOP
+      dbms_output.put_line(substr(env, v_i, 60));
+      v_i := v_i + 60;
+    END LOOP;
+    
+  END show_envelope;
+
+/* ***************************************************************************** */
+
+  PROCEDURE show_envelope(env IN VARCHAR2) AS
+/* ***************************************************************************** *
+  Purpose
+  -------
+  Overloaded utility procedure which takes input envelope parameter as a VARCHAR2 and 
+  displays the content of the soap envelope using dbms_output, 60 characters per line.
+
+  History
+  -------
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  14/01/05  A.James     Initial version.                                      001
+  24/03/05  P.Butler    Added comments
+  
+  Notes:
+  
+  * ***************************************************************************** */
+
+    v_i   PLS_INTEGER;
+    v_len PLS_INTEGER;
+
+  BEGIN
+    v_i   := 1;
+    v_len := length(env);
+
+    -- Loop through envelope, displaying 60 characters per line
+    WHILE (v_i &lt;= v_len) LOOP
+      dbms_output.put_line(substr(env, v_i, 60));
+      v_i := v_i + 60;
+    END LOOP;
+    
+  END show_envelope;
+
+/* ***************************************************************************** */
+
+  FUNCTION check_fault(resp IN OUT NOCOPY response)
+           RETURN NUMBER
+/* ***************************************************************************** *
+  Purpose
+  -------
+  check_fault does an XPath query of the soap response object to see if any errors 
+  were returned by the Web service. The 'extract' function is used on the response 
+  to see if there has been a fault and then two other lines of code extract the 
+  fault_code and the fault_string.
+
+  History
+  -------
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  14/01/05  A.James     Initial version.                                      001
+  24/03/05  P.Butler    Added comments
+  
+  Notes:
+  
+  * ***************************************************************************** */
+  AS
+    v_return_code          NUMBER := 0;
+    v_fault_node           xmltype;
+    v_fault_code           VARCHAR2(256);
+    v_fault_string         VARCHAR2(32767);
+  
+  BEGIN
+    -- Find and extract the fault node from the Soap response if present
+    v_fault_node := resp.doc.extract('/soap:Fault',
+                                   'xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/');
+                                   
+    IF (v_fault_node IS NOT NULL) THEN
+    
+       v_return_code := 1;        -- denotes failure
+       -- Get string value of fault code from the fault node
+       v_fault_code   := v_fault_node.extract('/soap:Fault/faultcode/child::text()',
+                                         'xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/')
+                                         .getstringval();
+       -- Get string value of fault string from the fault node                    
+       v_fault_string := v_fault_node.extract('/soap:Fault/faultstring/child::text()',
+                                         'xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/')
+                                         .getstringval();
+                                         
+/*       raise_application_error(-20000, fault_code || ' - ' || fault_string);*/
+       -- Log the error with the fault code and string value
+       g_log_sequence := dbms_utility.get_time();
+       app_util.log( g_app_key, 'p_soap_utils.check_fault', g_log_sequence, to_char(SYSDATE, 'dd-mon-yy hh24:mi:ss'),
+                      'Web Service fault', 'ERROR', 'fault_code: ' || v_fault_code, ' fault_string: ' || v_fault_string );
+      
+    END IF;
+    
+    RETURN v_return_code;
+    
+    EXCEPTION WHEN OTHERS THEN
+         v_return_code := 1;
+         g_log_sequence := dbms_utility.get_time();
+         app_util.log( g_app_key, 'p_soap_utils.check_fault', g_log_sequence, to_char(SYSDATE, 'dd-mon-yy hh24:mi:ss'),
+                      'Web Service fault', 'ERROR', 'Non-specific web service error', 'SQLERRM: ' || 
+                      SQLERRM || '. Check web site is up' );
+         RETURN v_return_code;
+     
+  END check_fault;
+
+/* ***************************************************************************** */
+
+  FUNCTION invoke( req          IN OUT NOCOPY request,
+                   url          IN VARCHAR2,
+                   action       IN VARCHAR2,
+                   username     IN VARCHAR2 DEFAULT NULL,
+                   password     IN VARCHAR2 DEFAULT NULL,                   
+                   http_version IN VARCHAR2 DEFAULT utl_http.HTTP_VERSION_1_1 ) 
+  RETURN response 
+/* ***************************************************************************** *
+  Purpose
+  -------
+  This function sends the SOAP message off to the Web service endpoint. 
+  It takes the outgoing SOAP request, the Web service URL, an action as a set of parameters,
+  username and password to access the service, and http_version. After generating the 
+  SOAP Envelope the native database function UTL_HTTP is used to send the soap message. 
+  The UTL_HTTP package facilitates setting the attributes of an HTTP request, sending 
+  the request and then receiving and processing the result.
+  A response object is returned.
+  
+  History
+  -------
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  14/01/05  A.James     Initial version.                                      001
+  24/03/05  P.Butler    Added comments
+  
+  Notes:
+  
+  * ***************************************************************************** */
+
+  AS
+    env                 VARCHAR2(32767);
+    http_req            utl_http.req;
+    http_resp           utl_http.resp;
+    resp                response;
+    
+    http_resp_name      VARCHAR2(256);
+    http_resp_value     VARCHAR2(32767);
+    
+    http_resp_clob      CLOB;
+
+    my_scheme           VARCHAR2(256);
+    my_realm            VARCHAR2(256);
+    my_proxy            BOOLEAN;
+
+    unauthorised        EXCEPTION;
+    web_site_error      EXCEPTION;
+    
+    errm                VARCHAR2(4000);
+    return_code         NUMBER(3);
+    
+  BEGIN
+  
+    -- Call procedure to wrap Soap envelope around Soap request and return it in 'env'
+    generate_envelope(req, env);
+    /*show_envelope(env);*/    -- displays envelope via dbms_output for testing
+
+    -- Begin new HTTP request. utl_http establishes the network connection to the target Web server 
+    -- and sends the HTTP request line.
+    http_req := utl_http.begin_request(url, action, http_version);
+
+    -- Tell utl_http to raise detailed exceptions (instead of default request_failed exception)
+    utl_http.set_detailed_excp_support(TRUE); 
+    -- Keep the network connection open for multiple invocations to improve performance 
+    utl_http.set_persistent_conn_support(TRUE);      
+ 
+    -- set up the HTTP header indicating that the message will be of type text/xml 
+    utl_http.set_header(http_req, 'Content-Type', 'text/xml');
+    utl_http.set_header(http_req, 'Content-Length', length(env));
+    utl_http.set_header(http_req, 'SOAPAction', '');             -- empty action parameter
+
+    -- Specify a user ID and password for services that require them.
+    IF (username IS NOT NULL) THEN
+       utl_http.set_authentication(http_req, username, password);
+    END IF;
+
+    -- Write text data from env variable into http request body
+    utl_http.write_text(http_req, env);
+
+    BEGIN
+      -- Now read the http response, which includes status code and reason phrase
+      http_resp := utl_http.get_response(http_req);
+
+      -- Show the status codes and reason phrase of the response.
+--      dbms_output.put_line('HTTP response status code: ' || http_resp.status_code);
+--      dbms_output.put_line('HTTP response reason phrase: ' || http_resp.reason_phrase);
+
+      -- Look for client-side error and report it.
+      IF (http_resp.status_code >= 400) AND (http_resp.status_code &lt;= 499) THEN
+         -- Unauthorised request - detect whether the page is password protected, and we didn't supply
+         -- the right authorization.
+         IF (http_resp.status_code = utl_http.HTTP_UNAUTHORIZED) THEN
+         -- Get the authentication information required for the request to be authorized 
+            utl_http.get_authentication(http_resp, my_scheme, my_realm, my_proxy);
+            IF (my_proxy) THEN
+               errm := 'Web proxy server is protected.';
+               errm := errm||'Please supply the required ' 
+                           ||my_scheme 
+                           ||' authentication username/password for realm ' 
+                           ||my_realm 
+                           ||' for the proxy server.';
+            ELSE
+               errm := 'Web page '||url||' is protected.';
+               errm := errm||'Please supply the required ' 
+                           ||my_scheme 
+                           ||' authentication username/password for realm ' 
+                           ||my_realm 
+                           ||' for the Web page.';
+            END IF;
+         ELSE
+           errm := 'Check the URL.';
+         END IF;
+
+         utl_http.end_response(http_resp);        -- Completes the http request and response
+         RAISE unauthorised;
+
+      -- Look for server-side error and report it.
+      ELSIF (http_resp.status_code >= 500) AND (http_resp.status_code &lt;= 599) THEN
+         -- Problem with the web site
+         errm := 'Check if the Web site is up.';
+         utl_http.end_response(http_resp);
+         RAISE web_site_error;
+
+      END IF;
+    
+      -- The HTTP header lines contain information about cookies, character sets,
+      -- and other data that client and server can use to customize each session.
+      
+      FOR i IN 1..utl_http.get_header_count(http_resp) LOOP
+          -- Using a count of the number of http response headers in the response
+          -- get each of the header names and values
+          utl_http.get_header(http_resp, i, http_resp_name, http_resp_value);
+--          dbms_output.put_line(http_resp_name || ': ' || http_resp_value);
+      END LOOP;
+
+      -- Keep reading lines until no more are left and the end-of-body exception is raised.
+      LOOP
+          -- Read the response body in text form into http_resp_value
+          utl_http.read_line(http_resp, http_resp_value);
+          -- Build up the response into a clob
+          http_resp_clob := http_resp_clob||http_resp_value;
+--          dbms_output.put_line(substr(http_resp_value,1,240));
+      END LOOP;
+      
+      EXCEPTION
+        WHEN utl_http.end_of_body THEN
+           utl_http.end_response(http_resp);
+    END;
+
+    -- Create xml in response doc field from the http clob
+    resp.doc := xmltype.createxml(http_resp_clob);
+
+    resp.doc := resp.doc.extract('/soap:Envelope/soap:Body/child::node()',
+                                 'xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"');
+
+    -- show_envelope(resp.doc.getstringval());
+    /*show_envelope(http_resp_clob);*/   -- displays envelope via dbms_output for testing 
+    return_code := check_fault(resp);
+    
+    RETURN resp;
+
+  EXCEPTION
+    WHEN web_site_error
+         OR
+         unauthorised
+    THEN       
+--         RAISE_application_error(-20000,'Invoke failed, error: '||errm);
+         g_log_sequence := dbms_utility.get_time();
+         app_util.log( g_app_key, 'p_soap_utils.invoke', g_log_sequence, to_char(SYSDATE, 'dd-mon-yy hh24:mi:ss'),
+                      'Exception', 'ERROR', 'Website error or unauthorised', errm );
+         RETURN resp;
+
+    WHEN OTHERS THEN
+         errm := SQLERRM;       
+--         RAISE_application_error(-20000,'Invoke failed, error: '||errm||' '||utl_http.get_detailed_sqlerrm);  
+         g_log_sequence := dbms_utility.get_time();
+         app_util.log( g_app_key, 'p_soap_utils.invoke', g_log_sequence, to_char(SYSDATE, 'dd-mon-yy hh24:mi:ss'),
+                      'Invoke failed', 'ERROR', 'Others Exception',
+                       'Error: '||errm||' '||utl_http.get_detailed_sqlerrm );
+         RETURN resp;
+         
+  END invoke;
+
+/* ***************************************************************************** */
+
+  FUNCTION invoke_varchar2(req          IN OUT NOCOPY request,
+                           url          IN VARCHAR2,
+                           action       IN VARCHAR2,
+                           username     IN VARCHAR2 DEFAULT NULL,
+                           password     IN VARCHAR2 DEFAULT NULL,                   
+                           http_version IN VARCHAR2 DEFAULT utl_http.HTTP_VERSION_1_1) 
+  RETURN VARCHAR2 
+/* ***************************************************************************** *
+  Purpose
+  -------
+  This function sends the SOAP message off to the Web service endpoint. 
+  It takes the outgoing SOAP request, the Web service URL, an action as a set of parameters,
+  username and password to access the service, and http_version. After generating the 
+  SOAP Envelope the native database function UTL_HTTP is used to send the soap message. 
+  The UTL_HTTP package facilitates setting the attributes of an HTTP request, sending 
+  the request and then receiving and processing the result.
+  A varchar2 variable is returned.
+  
+  History
+  -------
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  14/01/05  A.James     Initial version.                                      001
+  24/03/05  P.Butler    Added comments
+  
+  Notes:
+  
+  * ***************************************************************************** */
+  AS
+    env                 VARCHAR2(32767);
+    http_req            utl_http.req;
+    http_resp           utl_http.resp;
+    resp                VARCHAR2(32767);
+    
+    http_resp_name      VARCHAR2(256);
+    http_resp_value     VARCHAR2(1024);
+    
+    http_resp_clob      CLOB;
+
+    my_scheme           VARCHAR2(256);
+    my_realm            VARCHAR2(256);
+    my_proxy            BOOLEAN;
+
+    unauthorised        EXCEPTION;
+    web_site_error      EXCEPTION;
+    
+    errm                VARCHAR2(4000);
+    
+  BEGIN
+ 
+    -- Call procedure to wrap Soap envelope around Soap request and return it in 'env'
+    generate_envelope(req, env);
+    /*show_envelope(env);*/    -- displays envelope via dbms_output for testing
+
+    -- Begin new HTTP request. utl_http establishes the network connection to the target Web server 
+    -- and sends the HTTP request line.
+    http_req := utl_http.begin_request(url, action, http_version);
+
+    -- Tell utl_http to raise detailed exceptions (instead of default request_failed exception)
+    utl_http.set_detailed_excp_support(TRUE); 
+    -- Keep the network connection open for multiple invocations to improve performance 
+    utl_http.set_persistent_conn_support(TRUE);      
+  
+    -- set up the HTTP header indicating that the message will be of type text/xml 
+    utl_http.set_header(http_req, 'Content-Type', 'text/xml');
+    utl_http.set_header(http_req, 'Content-Length', length(env));
+    utl_http.set_header(http_req, 'SOAPAction', '');
+
+    -- Specify a user ID and password for services that require them.
+    IF (username IS NOT NULL) THEN
+       utl_http.set_authentication(http_req, username, password);
+    END IF;
+
+    -- Write text data from env variable into http request body
+    utl_http.write_text(http_req, env);
+
+    BEGIN
+      -- Now start receiving the response.
+      http_resp := utl_http.get_response(http_req);
+
+      -- Show the status codes and reason phrase of the response.
+      dbms_output.put_line('HTTP response status code: ' || http_resp.status_code);
+      dbms_output.put_line('HTTP response reason phrase: ' || http_resp.reason_phrase);
+
+      -- Look for client-side error and report it.
+      IF (http_resp.status_code >= 400) AND (http_resp.status_code &lt;= 499) THEN
+         -- Unauthorised request - detect whether the page is password protected, and we didn't supply
+         -- the right authorization.
+         IF (http_resp.status_code = utl_http.HTTP_UNAUTHORIZED) THEN
+            -- Get the authentication information required for the request to be authorized 
+            utl_http.get_authentication(http_resp, my_scheme, my_realm, my_proxy);
+            IF (my_proxy) THEN
+               dbms_output.put_line('Web proxy server is protected.');
+               dbms_output.put('Please supply the required ' 
+                             ||my_scheme 
+                             ||' authentication username/password for realm ' 
+                             ||my_realm 
+                             ||' for the proxy server.');
+            ELSE
+               dbms_output.put_line('Web page '||url||' is protected.');
+               dbms_output.put_line('Please supplied the required ' 
+                                  ||my_scheme 
+                                  ||' authentication username/password for realm ' 
+                                  ||my_realm 
+                                  ||' for the Web page.');
+            END IF;
+         ELSE
+           dbms_output.put_line('Check the URL.');
+         END IF;
+
+         utl_http.end_response(http_resp);
+         RAISE unauthorised;
+
+      -- Look for server-side error and report it.
+      ELSIF (http_resp.status_code >= 500) AND (http_resp.status_code &lt;= 599) THEN
+         -- Problem with the web site
+         dbms_output.put_line('Check if the Web site is up.');
+         utl_http.end_response(http_resp);
+         RAISE web_site_error;
+
+      END IF;
+    
+      -- The HTTP header lines contain information about cookies, character sets,
+      -- and other data that client and server can use to customize each session.
+      FOR i IN 1..utl_http.get_header_count(http_resp) LOOP
+          -- Using a count of the number of http response headers in the response
+          -- get each of the header names and values
+          utl_http.get_header(http_resp, i, http_resp_name, http_resp_value);
+      END LOOP;
+
+      -- Keep reading lines until no more are left and the end-of-body exception is raised.
+      LOOP
+          -- Read the response body in text form into http_resp_value
+          utl_http.read_line(http_resp, http_resp_value);
+          -- Build up the response into a clob
+          http_resp_clob := http_resp_clob||http_resp_value;
+      END LOOP;
+      
+      EXCEPTION
+        WHEN utl_http.end_of_body THEN
+           utl_http.end_response(http_resp);
+    END;
+
+    -- Return the response as a varchar2
+    resp := to_char(http_resp_clob);
+    RETURN resp;
+
+  EXCEPTION
+    WHEN OTHERS THEN
+         errm := SQLERRM;       
+--         RAISE_application_error(-20000,'Invoke failed, error: '||errm||' '||utl_http.get_detailed_sqlerrm);  
+         g_log_sequence := dbms_utility.get_time();
+         app_util.log( g_app_key, 'p_soap_utils.invoke', g_log_sequence, to_char(SYSDATE, 'dd-mon-yy hh24:mi:ss'),
+                      'Invoke failed', 'ERROR', 'Others Exception', 'Error: '||errm||' '||utl_http.get_detailed_sqlerrm );
+         RETURN resp;
+  END invoke_varchar2;
+
+/* ***************************************************************************** */
+
+  FUNCTION invoke_soap_message(req          IN OUT NOCOPY request,
+                               url          IN VARCHAR2,
+                               action       IN VARCHAR2,
+                               soap_message IN VARCHAR2,
+                               username     IN VARCHAR2 DEFAULT NULL,
+                               password     IN VARCHAR2 DEFAULT NULL,                   
+                               http_version IN VARCHAR2 DEFAULT utl_http.HTTP_VERSION_1_1) 
+  RETURN response 
+/* ***************************************************************************** *
+  Purpose
+  -------
+  This function sends the SOAP message off to the Web service endpoint. 
+  It takes the outgoing SOAP request, the Web service URL, an action as a set of parameters,
+  username and password to access the service, and http_version. After generating the 
+  SOAP Envelope the native database function UTL_HTTP is used to send the soap message. 
+  The UTL_HTTP package facilitates setting the attributes of an HTTP request, sending 
+  the request and then receiving and processing the result.
+  
+  History
+  -------
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  14/01/05  A.James     Initial version.                                      001
+  24/03/05  P.Butler    Added comments
+  
+  Notes:
+  
+  * ***************************************************************************** */
+  AS
+    env                 VARCHAR2(32767);
+    http_req            utl_http.req;
+    http_resp           utl_http.resp;
+    resp                response;
+    
+    http_resp_name      VARCHAR2(256);
+    http_resp_value     VARCHAR2(1024);
+    
+    http_resp_clob      CLOB;
+
+    my_scheme           VARCHAR2(256);
+    my_realm            VARCHAR2(256);
+    my_proxy            BOOLEAN;
+
+    unauthorised        EXCEPTION;
+    web_site_error      EXCEPTION;
+    
+    errm                VARCHAR2(4000);
+    return_code         NUMBER(3);
+    
+  BEGIN
+
+    /*show_envelope(soap_message);*/   -- displays envelope via dbms_output for testing
+
+    -- Begin new HTTP request. utl_http establishes the network connection to the target Web server 
+    -- and sends the HTTP request line.
+    http_req := utl_http.begin_request(url, action, http_version);
+
+    -- Tell utl_http to raise detailed exceptions (instead of default request_failed exception)
+    utl_http.set_detailed_excp_support(TRUE); 
+    -- Keep the network connection open for multiple invocations to improve performance 
+    utl_http.set_persistent_conn_support(TRUE);      
+  
+    -- set up the HTTP header indicating that the message will be of type text/xml 
+    utl_http.set_header(http_req, 'Content-Type', 'text/xml');
+    utl_http.set_header(http_req, 'Content-Length', length(soap_message));
+    utl_http.set_header(http_req, 'SOAPAction', '');
+
+    -- Specify a user ID and password for services that require them.
+    IF (username IS NOT NULL) THEN
+       utl_http.set_authentication(http_req, username, password);
+    END IF;
+  
+    -- Write text data from env variable into http request body
+    utl_http.write_text(http_req, soap_message);
+
+    BEGIN
+      -- Now start receiving the response.
+      http_resp := utl_http.get_response(http_req);
+
+      -- Show the status codes and reason phrase of the response.
+      dbms_output.put_line('HTTP response status code: ' || http_resp.status_code);
+      dbms_output.put_line('HTTP response reason phrase: ' || http_resp.reason_phrase);
+
+      -- Look for client-side error and report it.
+      IF (http_resp.status_code >= 400) AND (http_resp.status_code &lt;= 499) THEN
+         -- Unauthorised request - detect whether the page is password protected, and we didn't supply
+         -- the right authorization.
+         IF (http_resp.status_code = utl_http.HTTP_UNAUTHORIZED) THEN
+            -- Get the authentication information required for the request to be authorized 
+            utl_http.get_authentication(http_resp, my_scheme, my_realm, my_proxy);
+            IF (my_proxy) THEN
+               errm := 'Web proxy server is protected.';
+               errm := errm||'Please supply the required ' 
+                           ||my_scheme 
+                           ||' authentication username/password for realm ' 
+                           ||my_realm 
+                           ||' for the proxy server.';
+            ELSE
+               errm := 'Web page '||url||' is protected.';
+               errm := errm||'Please supply the required ' 
+                           ||my_scheme 
+                           ||' authentication username/password for realm ' 
+                           ||my_realm 
+                           ||' for the Web page.';
+            END IF;
+         ELSE
+           errm := 'HTTP response reason phrase: ' || http_resp.reason_phrase || '. Check the URL.';
+         END IF;
+
+         utl_http.end_response(http_resp);
+         RAISE unauthorised;
+
+      -- Look for server-side error and report it.
+      ELSIF (http_resp.status_code >= 500) AND (http_resp.status_code &lt;= 599) THEN
+         -- Problem with the web site
+         errm := 'HTTP response reason phrase: ' || http_resp.reason_phrase || '. Check if the Web site is up.';
+         utl_http.end_response(http_resp);
+         RAISE web_site_error;
+
+      END IF;
+    
+      -- The HTTP header lines contain information about cookies, character sets,
+      -- and other data that client and server can use to customize each session.
+      FOR i IN 1..utl_http.get_header_count(http_resp) LOOP
+          -- Using a count of the number of http response headers in the response
+          -- get each of the header names and values
+          utl_http.get_header(http_resp, i, http_resp_name, http_resp_value);
+      END LOOP;
+
+      -- Keep reading lines until no more are left and the end-of-body exception is raised.
+      LOOP
+          -- Read the response body in text form into http_resp_value
+          /* Dropped usage of read_line as got ERROR: ORA-06525: Length Mismatch for CHAR or RAW data
+             on one flight plan
+          utl_http.read_line(http_resp, http_resp_value);*/
+          utl_http.read_text(http_resp, http_resp_value);
+          -- Build up the response into a clob
+          http_resp_clob := http_resp_clob||http_resp_value;
+      END LOOP;
+      
+    EXCEPTION
+      WHEN utl_http.end_of_body THEN
+           utl_http.end_response(http_resp);
+
+    END;
+
+    -- Create xml in response doc field from the http clob
+    resp.doc := xmltype.createxml(http_resp_clob);
+
+    resp.doc := resp.doc.extract('/soap:Envelope/soap:Body/child::node()',
+                                 'xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"');
+
+    -- show_envelope(resp.doc.getstringval());
+    /*show_envelope(http_resp_clob);*/        -- displays envelope via dbms_output for testing
+    return_code := check_fault(resp);
+    
+    RETURN resp;
+
+  EXCEPTION
+    
+    WHEN web_site_error
+         OR
+         unauthorised
+    THEN       
+--         RAISE_application_error(-20000,'Invoke failed, error: '||errm);  
+         g_log_sequence := dbms_utility.get_time();
+         app_util.log( g_app_key, 'p_soap_utils.invoke', g_log_sequence, to_char(SYSDATE, 'dd-mon-yy hh24:mi:ss'),
+                      'Invoke failed', 'ERROR', 'Website error or unauthorised', errm );
+         RETURN resp;
+    WHEN OTHERS THEN
+         errm := SQLERRM;       
+--         RAISE_application_error(-20000,'Invoke failed, error: '||errm||' '||utl_http.get_detailed_sqlerrm);  
+         g_log_sequence := dbms_utility.get_time();
+         app_util.log( g_app_key, 'p_soap_utils.invoke', g_log_sequence, to_char(SYSDATE, 'dd-mon-yy hh24:mi:ss'),
+                      'Invoke failed', 'ERROR', 'Others Exception',
+                       'ERROR: '||errm||' '||utl_http.get_detailed_sqlerrm );
+         RETURN resp;
+  END invoke_soap_message;
+
+/* ***************************************************************************** */
+
+  FUNCTION get_return_value(resp      IN OUT NOCOPY response,
+                            NAME      IN VARCHAR2,
+                            namespace IN VARCHAR2) RETURN VARCHAR2 AS
+ /* ***************************************************************************** *
+  Purpose
+  -------
+  Function to extract the string value from the xmltype doc field in the response object
+  in the named method.
+  History
+  -------
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  14/01/05  A.James     Initial version.                                      001
+  24/03/05  P.Butler    Added comments
+  
+  Notes:
+  
+  * ***************************************************************************** */
+
+  BEGIN
+    RETURN resp.doc.extract('//' || NAME || '/child::text()', namespace) .getstringval();
+  END get_return_value;
+
+
+END p_soap_utils;
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

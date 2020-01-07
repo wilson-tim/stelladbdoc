@@ -1,0 +1,399 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_DATE_UTILITIES/report.js" type="text/javascript"></script>
+<link href="P_DATE_UTILITIES/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_DATE_UTILITIES</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P>                                                                                <BR><BR><BR>  History<BR>  -------<BR><BR>                                                                            Version<BR>  Date      By          Description                                         Hdr Bdy<BR>  --------  ----------- --------------------------------------------------- --- ---<BR>  29/11/05  A.James     Initial version.                                    001 001<BR>  14/02/06  A.James     Java class moved to a package rather than a single  001 002<BR>                        class.<BR><BR>                                                                                </P><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_DATE_UTILITIES</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516253</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE&nbsp;BODY</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.36</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>17-JAN-18&nbsp;11.07.22</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2018-01-17:11:07:22</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 0)" class="currentrow">
+<td class="currentcell">EXECUTE</td>
+<td class="currentcell">PUBLIC</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">JUTIL</td>
+<td class="currentcell">P_DATE_UTILITIES</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE BODY P_DATE_UTILITIES IS
+
+/* ***************************************************************************** *
+
+
+  History
+  -------
+
+                                                                            Version
+  Date      By          Description                                         Hdr Bdy
+  --------  ----------- --------------------------------------------------- --- ---
+  29/11/05  A.James     Initial version.                                    001 001
+  14/02/06  A.James     Java class moved to a package rather than a single  001 002
+                        class.
+
+* ***************************************************************************** */
+
+  g_new_line                 CONSTANT  VARCHAR2(2) := chr(10);
+  g_quote                    CONSTANT  VARCHAR2(4) := '''';
+
+  FUNCTION version
+  RETURN VARCHAR2
+  /* ***************************************************************************** *
+
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  14/03/05  A.James     Initial version.                                      001
+
+  * ***************************************************************************** */
+  IS
+  BEGIN
+    RETURN 'Package: '||g_package_name||'; Version: '||g_version;
+  END Version;
+
+  FUNCTION Get_Java_Timezone(p_in_tz_name         IN VARCHAR2,
+                             p_in_era             IN VARCHAR2,
+                             p_in_year            in NUMBER,
+                             p_in_month_no        in NUMBER,
+                             p_in_day_no          in NUMBER,
+                             p_in_day_name        IN VARCHAR2,
+                             p_in_day_time_msecs  IN NUMBER) 
+  RETURN NUMBER  
+  /* ***************************************************************************** *
+  Purpose
+  -------
+  Wrapper function for Java class that returns offset (in milliseconds) of date/time
+  in time zone to GMT. It is assumed that the date/time being passed is in GMT.
+ 
+  History
+  -------
+
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  28/11/05  A.James     Initial version.                                      005
+  14/02/06  A.James     Java class moved to a package rather than a single  001 002
+                        class.
+
+  Parameters
+  ----------
+  Name             Description                                         Default In/Out
+  ---------------- --------------------------------------------------- ------- ------
+  p_in_tz_name     Time zone to get offset for.                                  IN
+  p_in_era         Era date/time relates to ('BC' or 'AD').                      IN
+  p_in_year        Year number of date/time.                                     IN
+  p_in_month_no    Month number of date/time.                                    IN
+  p_in_day_no      Day number of date/time.                                      IN
+  p_in_day_name    Name of day (e.g. 'WEDNESDAY') of date/time.                  IN
+  p_in_day_time_   Time of dat/time in milliseconds.                             IN
+  msecs      
+  
+  Notes:
+  
+  1. Raises an SQLException if time zone cannot be recognised and so offset cannot be 
+     calculated.  
+  
+  2. Assumed date/time is in GMT.
+
+  Example Call
+  ------------
+  v_osprey_tz := p_osprey.Get_Java_Timezone('Europe/Lisbon',
+                                            'AD',
+                                            2005,
+                                            11,
+                                            28,
+                                            'MONDAY',
+                                            36320000        -- Time is 10:05:20;
+
+
+  * ***************************************************************************** */
+  IS
+    LANGUAGE JAVA NAME 'uk.co.firstchoice.common.base.datetime.GetJavaTimeZone.GetTZOffset(
+                       java.lang.String,java.lang.String,int,int,int,java.lang.String,int)
+    return int';
+/*
+  FUNCTION Get_Timezone_Datetime(p_in_datetime            IN DATE,
+                                 p_in_datetime_timezone   IN timezone_mapping.timezone_name%TYPE,
+                                 p_in_convert_timezone    IN timezone_mapping.timezone_name%TYPE
+                                )
+  RETURN DATE  
+  * ***************************************************************************** *
+
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  30/11/05  A.James     Initial version.                                      005
+
+  * ***************************************************************************** *
+  IS
+
+    v_parameters   VARCHAR2(200) := substr('Datetime: '
+                                         ||to_char(p_in_datetime,'DD/MM/YYYY HH24:MI:SS')
+                                         ||', Datetime TZ: '
+                                         ||p_in_datetime_timezone
+                                         ||', Coversion TZ: '
+                                         ||p_in_convert_timezone
+                                          ,1
+                                          ,200
+                                          );
+
+    v_code_loc                        VARCHAR2(3);
+    
+    unknown_timezone                  EXCEPTION;
+    PRAGMA exception_init(unknown_timezone, -1882);
+
+    unknown_datetime                  EXCEPTION;
+    PRAGMA exception_init(unknown_datetime, -1878);
+
+    v_return_timestamp                TIMESTAMP WITH TIME ZONE;
+    v_converted_datetime              DATE;
+                   
+  BEGIN
+    v_code_loc := '001';
+    
+    p_common.debug_message(g_package_name||'.Get_Timezone_Datetime parameters'
+                         ||v_parameters
+                          );
+    
+    &lt;&lt;ora_tz_block>>                         
+    BEGIN
+      v_return_timestamp := TO_TIMESTAMP_TZ(to_char(p_in_datetime,'YYYY-MM-DD HH24:MI:SS')||' '||p_in_datetime_timezone
+                                           ,'YYYY-MM-DD HH24:MI:SS TZR'
+                                           ) AT TIME ZONE p_in_convert_timezone;
+                                                               
+      v_converted_datetime := to_date(
+                                      to_char(v_return_timestamp,'DD/MM/YYYY HH24:MI:SS')
+                                     ,'DD/MM/YYYY HH24:MI:SS');
+           
+    EXCEPTION    
+      WHEN unknown_timezone
+           OR
+           unknown_datetime
+      THEN
+   
+      /*
+        If datetime timezone is 'GMT' then try the Java version to get the GMT offset to convert the
+        date/time. 
+     --/
+        IF p_in_datetime_timezone = 'GMT' THEN
+
+           v_code_loc := '010';
+           &lt;&lt;java_tz_block>>
+           DECLARE
+             v_offset_msecs        NUMBER;     
+           BEGIN
+        
+             v_code_loc := '020';
+             p_common.debug_message('Getting Java offset...');
+
+             v_offset_msecs := 
+                       Get_Java_Timezone(p_in_convert_timezone,
+                                         to_char(p_in_datetime,'AD'),                 -- AD or BC
+                                         to_char(p_in_datetime,'YYYY'),
+                                         to_char(p_in_datetime,'MM'),
+                                         to_char(p_in_datetime,'DD'),
+                                         to_char(p_in_datetime,'DAY'),
+                                         (to_char(p_in_datetime,'HH24')) * 60 * 60 * 1000
+                                          +
+                                         (to_char(p_in_datetime,'MI')) * 60 * 1000
+                                          +
+                                         (to_char(p_in_datetime,'SS')) * 1000
+                                        );
+       
+             v_code_loc := '021';
+             p_common.debug_message('Java offset: '||v_offset_msecs);
+
+             v_converted_datetime :=  p_in_datetime + (v_offset_msecs / (60 * 60 * 1000 * 24));
+
+           EXCEPTION
+             WHEN OTHERS THEN 
+        
+               v_code_loc := '030';
+               p_common.debug_message('Java offset not found: '||sqlerrm);
+               v_converted_datetime := NULL;
+           END java_tz_block;
+      
+        ELSE
+        
+           v_code_loc := '040';
+           v_converted_datetime := NULL;
+
+        END IF;       
+        
+        v_code_loc := '050';
+      END ora_tz_block;     
+
+      RETURN v_converted_datetime;
+      
+  EXCEPTION        
+    WHEN OTHERS THEN
+         p_common.handle_error(g_package_name||'.Get_Timezone_Datetime'
+                              ,v_code_loc       -- Code location.
+                              ,'900'       -- First Choice error number.
+                              ,dbms_utility.format_error_stack
+                              ,v_parameters
+                              );
+
+  END Get_Timezone_Datetime;
+  */
+
+BEGIN
+  -- Initialization
+  NULL;
+  
+end P_DATE_UTILITIES;</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

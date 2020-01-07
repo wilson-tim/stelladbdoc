@@ -1,0 +1,217 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="uk%252Fco%252Ffirstchoice%252Futil%252FDBManager/report.js" type="text/javascript"></script>
+<link href="uk%252Fco%252Ffirstchoice%252Futil%252FDBManager/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">uk/co/firstchoice/util/DBManager</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Source</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Policies</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>NAME</td>
+<td>uk/co/firstchoice/util/DBManager</td>
+</tr>
+<tr>
+<td>TYPE</td>
+<td>JAVA&nbsp;CLASS</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.38</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>19-JAN-18&nbsp;14.20.24</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<pre>
+/*
+ * DBManager.java
+ *
+ * Created on 08 October 2002, 11:07
+ */
+
+package uk.co.firstchoice.util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+
+/** DBManager
+ *
+ * Manages a database connection for use within the main application.
+ * The manager first  tries to connect to the internal connection
+ * (See Oracle 8i Java Stored Procedures Developers Guide page 3-6).
+ * If that connection fails then uses the hardcoded connection
+ * parameters, this is only intended for testing purposes and should
+ * be replaced by command line parameters if this class is reused.
+ * 
+ * @author rbryer
+ */
+public class DBManager {
+
+    // connection defining variables
+    private static String dbUrl    ;
+    private static String dbDriver ;
+    private static String dbUser   ;
+    private static String dbPass   ;
+
+    // Connection items 
+    private Connection connection;
+    
+    /** 
+     * Creates a new instance of DBManager with the specifed connection
+     * parametes
+     */
+    public DBManager(String dbUrl, String dbDriver, String dbUser, String dbPass) {
+        this.dbUrl    = dbUrl;
+        this.dbDriver = dbDriver;
+        this.dbUser   = dbUser;
+        this.dbPass   = dbPass;
+    }
+    
+    /**
+     * Creates a DBManager with no connection parameters
+     * this is used only when the internal oracle connection is to be used.
+     */
+    public DBManager() {
+    }
+    
+    /** 
+     * Connect to the database. As this class is intended for uses within
+     * an Oracle Java Stored Procedure it first assume that the class is
+     * running within the database JServer and tries to connect to the
+     * default internal session, this has the lowest overhead.
+     *
+     * Failing this it connects using the database parameters set in the constructor,
+     *
+     * @return the access mode of the resulting connection
+     */    
+    public AccessMode connect(){   
+        AccessMode accessMode;
+        
+        // first try and connect to internal connection
+        System.out.println("Info    :Connecting to default internal conection " + dbUrl);
+        try {
+            connection = DriverManager.getConnection("jdbc:default:connection");
+            System.out.println("Info    :Connected to " + dbUrl);
+            accessMode = AccessMode.JSERVER;
+            return accessMode;
+        }
+        catch (SQLException sqlex) {
+            System.out.println("Warning :Unable to connect to internal oracle connection.");
+        }
+        
+        // internal connection failed try external connection
+        System.out.println("Info    :Connecting to database " + dbUrl);
+        // Load the database driver and connect to database
+        try {
+            Class.forName(dbDriver);
+            connection = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+            System.out.println("Info    :Connected to " + dbUrl);
+            accessMode = AccessMode.CLIENT;
+        }
+        catch (ClassNotFoundException cnfex) {
+            System.out.println("Error   :Failed to load driver " + dbDriver);
+            cnfex.printStackTrace();
+            accessMode = AccessMode.FAILED;
+        }
+        catch (SQLException sqlex) {
+            System.out.println("Error   :Unable to connect to " + dbUrl + " as user " + dbUser + " with driver " + dbDriver);
+            sqlex.printStackTrace();
+            accessMode = AccessMode.FAILED;
+        }
+        
+        return accessMode;
+    }
+    
+    /** 
+     * Shut down the DataManager 
+     */
+    public void shutDown() {
+        try {
+            connection.close();
+        }
+        catch ( SQLException sqlex) {
+            System.out.println("Error   :Unable to disconnect");
+            sqlex.printStackTrace();
+        }
+    }
+    
+    /** Getter for property connection.
+     * @return Value of property connection.
+     */
+    public Connection getConnection() {
+        return connection;
+    }
+    
+    /** Setter for property connection.
+     * @param connection New value of property connection.
+     */
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+    
+}
+</pre>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>KIND</th>
+<th>GRANTEE_NAME</th>
+<th>TYPE_SCHEMA</th>
+<th>TYPE_NAME</th>
+<th>NAME</th>
+<th>ACTION</th>
+<th>ENABLED</th>
+<th>SEQ</th>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

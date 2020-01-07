@@ -1,0 +1,406 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="APP_UTIL/report.js" type="text/javascript"></script>
+<link href="APP_UTIL/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">APP_UTIL</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P> Author  : LASHTON</P><HR><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#app_get_registry_property">app_get_registry_property</A></B>( p_parameter_key CHAR ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pl/sql java wrapper to retrieve items in the application_registry table </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#app_set_registry">app_set_registry</A></B>( p_program_name CHAR , p_run_mode CHAR , p_user CHAR ) RETURN NUMBER ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pl/sql java wrapper to update items in the application_registry table </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#calc_season">calc_season</A></B>( p_in_date DATE , p_length NUMBER ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pl/sql java wrapper to calculate the business season based on a date e.g. departure date<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  e.g. does 1-apr-2002 fall in W2002 or S2002?<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  pass a length of 3 to get W03, pass 5 to get W2003 </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#calc_season">calc_season</A></B>( p_in_date DATE , p_length NUMBER , p_seasontype VARCHAR2 ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This is added by Jyoti on 30/09/04 </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#create_run_id">create_run_id</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; be used as part of the primary key in the app_log table</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#end_logging">end_logging</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close any file logging that is going on in that session </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#file_log">file_log</A></B>( p_statement IN NUMBER , p_text IN CHAR ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proc to log to a file the progress of the job - used only for performance tuning/debugging </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#file_log">file_log</A></B>( p_text IN CHAR ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; overloaded so can be used without all the performance monitoring stats</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_parameter_value">get_parameter_value</A></B>( p_appkey IN application_registry . application_key % TYPE , p_paramkey IN application_registry . parameter_key % TYPE ) RETURN application_registry . parameter_value % TYPE ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function to retrieve values set up in application registry</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_registry_property">get_registry_property</A></B>( p_application_key CHAR , p_application_mode CHAR , p_user_key CHAR , p_parameter_key CHAR ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pl/sql version of above to retrieve items in the application_registry table </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#is_number">is_number</A></B>( p_in_string CHAR ) RETURN BOOLEAN ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; returns true if string passed contains valid number (number can be of any type)</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#log">log</A></B>( p_app_key CHAR , p_run_id IN CHAR , p_log_seq IN OUT NUMBER , p_event_period CHAR , p_event_type CHAR , p_event_level CHAR , p_event_summary CHAR , p_event_detail CHAR ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; note that inserts in an autonomous transaction</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#next_log_number">next_log_number</A></B>( p_appkey IN application_log . application_key % TYPE , p_runid IN application_log . run_id % TYPE ) RETURN application_log . log_sequence % TYPE ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function to get next number is sequence for application_log table</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#send_email">send_email</A></B>( p_host IN VARCHAR2 , p_send IN VARCHAR2 , p_recp IN VARCHAR2 , p_subject IN VARCHAR2 , p_message IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purpose : General application utilities for sending email</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#send_email_attachment">send_email_attachment</A></B>( p_appkey IN application_registry . application_key % TYPE , p_paramkey IN application_registry . parameter_key % TYPE , p_fileloc IN VARCHAR2 , p_filenm IN VARCHAR2 , p_host IN VARCHAR2 DEFAULT 'slo-dwstdby' , p_sender IN VARCHAR2 , p_subject IN VARCHAR2 DEFAULT ' E mail Subject is missing ' ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purpose : General application utilities for sending email with attachment</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#send_header">send_header</A></B>( NAME IN VARCHAR2 , header IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#set_registry_property">set_registry_property</A></B>( p_application_key application_registry . application_key % TYPE , p_application_mode application_registry . application_mode % TYPE , p_user_key application_registry . user_key % TYPE , p_parameter_key application_registry . parameter_key % TYPE , p_parameter_type application_registry . parameter_type % TYPE , p_parameter_value application_registry . parameter_value % TYPE ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; author : Jyoti Renganathan<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Created : 01/07/2004<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Purpose : Pl/sql version of above to set items in the application registry table<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#setup_logging">setup_logging</A></B>( p_application_key CHAR , p_run_mode CHAR , p_in_user CHAR ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  set up global variables for logging (to file or console)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  according to settings in application_registry table</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#store_end_time">store_end_time</A></B>( p_key IN CHAR , p_runid IN CHAR ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; primary key.  The last (log_sequence) is calculated by the procedure</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#store_start_time">store_start_time</A></B>( p_key IN CHAR , p_runid IN CHAR ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; primary key.  The last (log_sequence) is calculated by the procedure</TD></TR>
+</TABLE>
+<P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="app_get_registry_property"></A>
+<H3>app_get_registry_property</H3><PRE>          <B>app_get_registry_property</B>( p_parameter_key CHAR ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pl/sql java wrapper to retrieve items in the application_registry table <DD><DL></DL></DD></DL><HR><A NAME="app_set_registry"></A>
+<H3>app_set_registry</H3><PRE>          <B>app_set_registry</B>( p_program_name CHAR , p_run_mode CHAR , p_user CHAR ) RETURN NUMBER ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pl/sql java wrapper to update items in the application_registry table <DD><DL></DL></DD></DL><HR><A NAME="calc_season"></A>
+<H3>calc_season</H3><PRE>          <B>calc_season</B>( p_in_date DATE , p_length NUMBER ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pl/sql java wrapper to calculate the business season based on a date e.g. departure date<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  e.g. does 1-apr-2002 fall in W2002 or S2002?<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  pass a length of 3 to get W03, pass 5 to get W2003 <DD><DL></DL></DD></DL><HR><A NAME="calc_season"></A>
+<H3>calc_season</H3><PRE>          <B>calc_season</B>( p_in_date DATE , p_length NUMBER , p_seasontype VARCHAR2 ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; This is added by Jyoti on 30/09/04 <DD><DL></DL></DD></DL><HR><A NAME="create_run_id"></A>
+<H3>create_run_id</H3><PRE>          <B>create_run_id</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; be used as part of the primary key in the app_log table<DD><DL></DL></DD></DL><HR><A NAME="end_logging"></A>
+<H3>end_logging</H3><PRE>          <B>end_logging</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; close any file logging that is going on in that session <DD><DL></DL></DD></DL><HR><A NAME="file_log"></A>
+<H3>file_log</H3><PRE>          <B>file_log</B>( p_statement IN NUMBER , p_text IN CHAR ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;proc to log to a file the progress of the job - used only for performance tuning/debugging <DD><DL></DL></DD></DL><HR><A NAME="file_log"></A>
+<H3>file_log</H3><PRE>          <B>file_log</B>( p_text IN CHAR ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; overloaded so can be used without all the performance monitoring stats<DD><DL></DL></DD></DL><HR><A NAME="get_parameter_value"></A>
+<H3>get_parameter_value</H3><PRE>          <B>get_parameter_value</B>( p_appkey IN application_registry . application_key % TYPE , p_paramkey IN application_registry . parameter_key % TYPE ) RETURN application_registry . parameter_value % TYPE ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function to retrieve values set up in application registry<DD><DL></DL></DD></DL><HR><A NAME="get_registry_property"></A>
+<H3>get_registry_property</H3><PRE>          <B>get_registry_property</B>( p_application_key CHAR , p_application_mode CHAR , p_user_key CHAR , p_parameter_key CHAR ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; pl/sql version of above to retrieve items in the application_registry table <DD><DL></DL></DD></DL><HR><A NAME="is_number"></A>
+<H3>is_number</H3><PRE>          <B>is_number</B>( p_in_string CHAR ) RETURN BOOLEAN ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; returns true if string passed contains valid number (number can be of any type)<DD><DL></DL></DD></DL><HR><A NAME="log"></A>
+<H3>log</H3><PRE>          <B>log</B>( p_app_key CHAR , p_run_id IN CHAR , p_log_seq IN OUT NUMBER , p_event_period CHAR , p_event_type CHAR , p_event_level CHAR , p_event_summary CHAR , p_event_detail CHAR ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; note that inserts in an autonomous transaction<DD><DL></DL></DD></DL><HR><A NAME="next_log_number"></A>
+<H3>next_log_number</H3><PRE>          <B>next_log_number</B>( p_appkey IN application_log . application_key % TYPE , p_runid IN application_log . run_id % TYPE ) RETURN application_log . log_sequence % TYPE ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function to get next number is sequence for application_log table<DD><DL></DL></DD></DL><HR><A NAME="send_email"></A>
+<H3>send_email</H3><PRE>          <B>send_email</B>( p_host IN VARCHAR2 , p_send IN VARCHAR2 , p_recp IN VARCHAR2 , p_subject IN VARCHAR2 , p_message IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purpose : General application utilities for sending email<DD><DL></DL></DD></DL><HR><A NAME="send_email_attachment"></A>
+<H3>send_email_attachment</H3><PRE>          <B>send_email_attachment</B>( p_appkey IN application_registry . application_key % TYPE , p_paramkey IN application_registry . parameter_key % TYPE , p_fileloc IN VARCHAR2 , p_filenm IN VARCHAR2 , p_host IN VARCHAR2 DEFAULT 'slo-dwstdby' , p_sender IN VARCHAR2 , p_subject IN VARCHAR2 DEFAULT ' E mail Subject is missing ' ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purpose : General application utilities for sending email with attachment<DD><DL></DL></DD></DL><HR><A NAME="send_header"></A>
+<H3>send_header</H3><PRE>          <B>send_header</B>( NAME IN VARCHAR2 , header IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="set_registry_property"></A>
+<H3>set_registry_property</H3><PRE>          <B>set_registry_property</B>( p_application_key application_registry . application_key % TYPE , p_application_mode application_registry . application_mode % TYPE , p_user_key application_registry . user_key % TYPE , p_parameter_key application_registry . parameter_key % TYPE , p_parameter_type application_registry . parameter_type % TYPE , p_parameter_value application_registry . parameter_value % TYPE ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; author : Jyoti Renganathan<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Created : 01/07/2004<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Purpose : Pl/sql version of above to set items in the application registry table<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="setup_logging"></A>
+<H3>setup_logging</H3><PRE>          <B>setup_logging</B>( p_application_key CHAR , p_run_mode CHAR , p_in_user CHAR ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  set up global variables for logging (to file or console)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  according to settings in application_registry table<DD><DL></DL></DD></DL><HR><A NAME="store_end_time"></A>
+<H3>store_end_time</H3><PRE>          <B>store_end_time</B>( p_key IN CHAR , p_runid IN CHAR ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; primary key.  The last (log_sequence) is calculated by the procedure<DD><DL></DL></DD></DL><HR><A NAME="store_start_time"></A>
+<H3>store_start_time</H3><PRE>          <B>store_start_time</B>( p_key IN CHAR , p_runid IN CHAR ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; primary key.  The last (log_sequence) is calculated by the procedure<DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>APP_UTIL</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516216</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.32</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>16-JAN-18&nbsp;16.22.33</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2009-06-16:14:36:33</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 0)" class="currentrow">
+<td class="currentcell">EXECUTE</td>
+<td class="currentcell">PUBLIC</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">JUTIL</td>
+<td class="currentcell">APP_UTIL</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE app_util IS
+
+  -- Author  : LASHTON
+  -- Created : 23/01/03 11:50:05
+  -- Purpose : generic utility package containing common application code that can be re-used
+
+
+  g_file_log        utl_file.file_type;
+  g_file_logging    BOOLEAN := FALSE;
+  g_run_date        DATE := SYSDATE; -- used to store start of run
+  g_application_key jutil.application_log.application_key%TYPE;
+  g_package_name    VARCHAR2(30) := 'app_util';
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+
+  /* pl/sql java wrapper to calculate the business season based on a date e.g. departure date
+  e.g. does 1-apr-2002 fall in W2002 or S2002?
+  pass a length of 3 to get W03, pass 5 to get W2003 */
+
+  FUNCTION calc_season(p_in_date DATE,
+                       p_length  NUMBER) RETURN VARCHAR2;
+
+  ----------------------------------------------------------------------------------------------
+  /* Created Over loaded Function of calc_season as above , For Stella air load  season type is always Y
+  for entire year,So no need to calculate S or W */
+  /* This is added by Jyoti on 30/09/04 */
+
+  FUNCTION calc_season(p_in_date    DATE,
+                       p_length     NUMBER,
+                       p_seasontype VARCHAR2) RETURN VARCHAR2;
+
+
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+
+  /* pl/sql java wrapper to update items in the application_registry table */
+  FUNCTION app_set_registry(p_program_name CHAR,
+                            p_run_mode     CHAR,
+                            p_user         CHAR
+                            
+                            ) RETURN NUMBER;
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  /* author : Jyoti Renganathan
+     Created : 01/07/2004
+     Purpose : Pl/sql version of above to set items in the application registry table
+  */
+  PROCEDURE set_registry_property(p_application_key  application_registry.application_key%TYPE,
+                                  p_application_mode application_registry.application_mode%TYPE,
+                                  p_user_key         application_registry.user_key%TYPE,
+                                  p_parameter_key    application_registry.parameter_key%TYPE,
+                                  p_parameter_type   application_registry.parameter_type%TYPE,
+                                  p_parameter_value  application_registry.parameter_value%TYPE);
+
+  /* pl/sql java wrapper to retrieve items in the application_registry table */
+  FUNCTION app_get_registry_property(p_parameter_key CHAR
+                                     
+                                     ) RETURN VARCHAR2;
+
+  /* pl/sql version of above to retrieve items in the application_registry table */
+  FUNCTION get_registry_property(p_application_key  CHAR,
+                                 p_application_mode CHAR,
+                                 p_user_key         CHAR,
+                                 p_parameter_key    CHAR) RETURN VARCHAR2;
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  /*  set up global variables for logging (to file or console)
+  according to settings in application_registry table*/
+
+  PROCEDURE setup_logging(p_application_key CHAR,
+                          p_run_mode        CHAR,
+                          p_in_user         CHAR);
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  /* close any file logging that is going on in that session */
+  PROCEDURE end_logging;
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  /*proc to log to a file the progress of the job - used only for performance tuning/debugging */
+  PROCEDURE file_log(p_statement IN NUMBER,
+                     p_text      IN CHAR);
+  ----------------------------------------------------------------------------------------------
+  -- overloaded so can be used without all the performance monitoring stats
+  PROCEDURE file_log(p_text IN CHAR);
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  /* log an event to logging table */
+  /* r bryer dec 2002 - originally in app_util
+  early version of log table logger -- used in gums extract routine*/
+
+
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+
+  /* log an event to logging table */
+  -- note that inserts in an autonomous transaction
+  PROCEDURE log(
+                
+                p_app_key       CHAR, --                          application key
+                p_run_id        IN CHAR, --(30)                       Identifier for this run pof the application
+                p_log_seq       IN OUT NUMBER, --(4)                      Sequence of the log message within run
+                p_event_period  CHAR, --VARCHAR2(10)                   The period the meggage relates to i.g W2003 or ALL
+                p_event_type    CHAR, --VARCHAR2(20)                   The event type
+                p_event_level   CHAR, --VARCHAR2(15)                   The level i.e. WARNING, INFO, SEVERE, FATAL
+                p_event_summary CHAR, --VARCHAR2(50)                   Summary message
+                p_event_detail  CHAR --VARCHAR2(200) Y                Detailed message
+                );
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+
+  -- Function to create a run_id based on current date & time which can
+  -- be used as part of the primary key in the app_log table
+  FUNCTION create_run_id RETURN CHAR;
+
+  -- Procedure to create a row in the app_log table that stores the start time
+  -- of an application
+  -- The two parameters passed are the first two elements of the app_log table
+  -- primary key.  The last (log_sequence) is calculated by the procedure
+  PROCEDURE store_start_time(p_key   IN CHAR,
+                             p_runid IN CHAR);
+
+  -- Procedure to create a row in the app_log table that stores the end time
+  -- of an application
+  -- The two parameters passed are the first two elements of the app_log table
+  -- primary key.  The last (log_sequence) is calculated by the procedure
+  PROCEDURE store_end_time(p_key   IN CHAR,
+                           p_runid IN CHAR);
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  -- function to validate any string to test for numeracy
+  -- returns true if string passed contains valid number (number can be of any type)
+  FUNCTION is_number(p_in_string CHAR) RETURN BOOLEAN;
+
+  --  Author  : Dyanesh Badve
+  -- Created : 30-JAN-03 10:06:00
+  -- Purpose : General application utilities for sending email
+
+  PROCEDURE send_email(p_host    IN VARCHAR2,
+                       p_send    IN VARCHAR2,
+                       p_recp    IN VARCHAR2,
+                       p_subject IN VARCHAR2,
+                       p_message IN VARCHAR2);
+
+  PROCEDURE send_header(NAME   IN VARCHAR2,
+                        header IN VARCHAR2);
+
+
+  -- Function to get next number is sequence for application_log table
+  FUNCTION next_log_number(p_appkey IN application_log.application_key%TYPE,
+                           p_runid  IN application_log.run_id%TYPE)
+    RETURN application_log.log_sequence%TYPE;
+
+  -- Function to retrieve values set up in application registry
+  FUNCTION get_parameter_value(p_appkey   IN application_registry.application_key%TYPE,
+                               p_paramkey IN application_registry.parameter_key%TYPE)
+    RETURN application_registry.parameter_value%TYPE;
+
+
+  --  Author  : Jyoti
+  -- Created : 24-Jan-2008
+  -- Purpose : General application utilities for sending email with attachment
+  PROCEDURE send_email_attachment(p_appkey   IN application_registry.application_key%TYPE,
+                                  p_paramkey IN application_registry.parameter_key%TYPE,
+                                  p_fileloc  IN VARCHAR2,
+                                  p_filenm   IN VARCHAR2,
+                                  p_host     IN VARCHAR2 DEFAULT 'slo-dwstdby',
+                                  p_sender   IN VARCHAR2,
+                                  p_subject  IN VARCHAR2 DEFAULT ' E mail Subject is missing ');
+
+
+
+
+END app_util;
+
+ </pre>
+</div>
+</div>
+</div>
+</body>
+</html>

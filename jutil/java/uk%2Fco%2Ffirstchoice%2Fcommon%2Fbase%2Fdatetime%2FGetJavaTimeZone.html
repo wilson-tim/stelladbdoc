@@ -1,0 +1,173 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="uk%252Fco%252Ffirstchoice%252Fcommon%252Fbase%252Fdatetime%252FGetJavaTimeZone/report.js" type="text/javascript"></script>
+<link href="uk%252Fco%252Ffirstchoice%252Fcommon%252Fbase%252Fdatetime%252FGetJavaTimeZone/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">uk/co/firstchoice/common/base/datetime/GetJavaTimeZone</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Source</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Policies</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>NAME</td>
+<td>uk/co/firstchoice/common/base/datetime/GetJavaTimeZone</td>
+</tr>
+<tr>
+<td>TYPE</td>
+<td>JAVA&nbsp;CLASS</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.38</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>19-JAN-18&nbsp;14.20.25</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<pre>
+package uk.co.firstchoice.common.base.datetime;
+import java.sql.*;
+import java.util.*;
+
+public class GetJavaTimeZone {
+  public static int GetTZOffset (String tzName, String eraName, int year, int month, int dayNum, String dayName, int timeInMsecs)
+                    throws SQLException                             
+   {
+    /* ***************************************************************************** *
+
+       Returns the offset to GMT in milliseconds for the time zone for the date. 
+
+       History
+       -------
+
+                                                                            
+       Date      By          Description                                         Version
+       --------  ----------- --------------------------------------------------- -------
+       29/11/05  A.James     Initial version.                                      001
+       14/02/06  A.James     Moved to the datetime package instead of a class on   002
+                             its own.
+                             
+    * ***************************************************************************** */
+    System.out.println("Parameters: ");
+    System.out.println("Time zone name: " + tzName);
+    System.out.println("Era name: " + eraName);
+    System.out.println("Year: " + year);
+    System.out.println("Month: " + month);
+    System.out.println("Day number: " + dayNum);
+    System.out.println("Day name: " + dayName);
+    System.out.println("Time in milliseconds: " + timeInMsecs);
+
+    int dayNameInt = -9999;
+    int era = -9999;
+    String trimDayName = dayName.trim().toUpperCase();
+    String trimEraName = eraName.trim();
+
+    TimeZone tz = TimeZone.getTimeZone(tzName);
+    /*
+      See if time zone id returned is GMT. This indicates the time zone isn't recognised and so
+      the default of GMT has been used.
+      
+      N.B. cater for the time zone being passed actually being GMT which is valid.
+    */
+    String tzID = tz.getID();
+    System.out.println("Time zone Id.: " + tzID);
+    if (tzID.equals("GMT")&!tzName.equals("GMT")) {
+            System.out.println("Throwing Time Zone cannot be found exception...");
+            throw new SQLException("Time Zone " + tzName + " cannot be found...");
+    }
+
+    System.out.println("Time Zone has been found...");
+    // int offset = tz.getOffset(java.util.GregorianCalendar.AD,2005,11,22,java.util.Calendar.WEDNESDAY,1000);
+        
+    if (trimEraName.equals("AD")) {
+        era = GregorianCalendar.AD;
+    } else if (trimEraName.equals("BC")) {
+        era = GregorianCalendar.BC;
+    }
+    
+    if (trimDayName.equals("MONDAY")) {
+        dayNameInt = Calendar.MONDAY;
+    } else if (trimDayName.equals("TUESDAY")) {
+        dayNameInt = java.util.Calendar.TUESDAY;
+    } else if (trimDayName.equals("WEDNESDAY")) {
+        dayNameInt = java.util.Calendar.WEDNESDAY;
+    } else if (trimDayName.equals("THURSDAY")) {
+        dayNameInt = java.util.Calendar.THURSDAY;
+    } else if (trimDayName.equals("FRIDAY")) {
+        dayNameInt = java.util.Calendar.FRIDAY;
+    } else if (trimDayName.equals("SATURDAY")) {
+        dayNameInt = java.util.Calendar.SATURDAY;
+    } else if (trimDayName.equals("SUNDAY")) {
+        dayNameInt = java.util.Calendar.SUNDAY;
+    }
+
+    // month is 0 - based, e.g. January = 0, december = 11; so subtract 1.
+    //int offset = tz.getOffset(era,year,month -1,dayNum,dayNameInt,timeInMsecs);
+    int offset = tz.getOffset(era,year,month - 1,dayNum,dayNameInt,timeInMsecs);
+
+    System.out.println("Time zone offset.: " + offset);
+
+    return offset;
+  }
+}
+</pre>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>KIND</th>
+<th>GRANTEE_NAME</th>
+<th>TYPE_SCHEMA</th>
+<th>TYPE_NAME</th>
+<th>NAME</th>
+<th>ACTION</th>
+<th>ENABLED</th>
+<th>SEQ</th>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

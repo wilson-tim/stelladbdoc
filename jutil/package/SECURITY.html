@@ -1,0 +1,333 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="SECURITY/report.js" type="text/javascript"></script>
+<link href="SECURITY/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">SECURITY</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P> Author  : leigh ashton</P><HR><P></P><A NAME="type_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Type Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#return_refcursor">return_refcursor</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Public type declarations</TD></TR>
+</TABLE><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#decrypt_password">decrypt_password</A></B>( p_input_string IN CHAR ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return an decrypted version of a passed string , used for hiding password from<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  people selecting security details from sql </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#delete_user">delete_user</A></B>( p_user_name IN CHAR ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; delete a single user PLUS all allocated roles </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#delete_user_location">delete_user_location</A></B>( p_user_name IN CHAR ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; delete all location assignments for a given (resort)user </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#delete_user_role">delete_user_role</A></B>( p_user_name IN CHAR , p_user_role IN CHAR , p_application_key IN CHAR ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; delete either:<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            a single role from a user's role allocation<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            all roles for a specific application<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            all roles for user<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#encrypt_password">encrypt_password</A></B>( p_input_string IN CHAR ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return an encrypted version of a passed string , used for hiding password from<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  people selecting security details from sql </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_all_locations_for_user">get_all_locations_for_user</A></B>( p_user_name IN CHAR ) RETURN return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return all locations that are assigned to a certain (resort)user </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_all_user_details">get_all_user_details</A></B>( p_application_key IN CHAR ) RETURN return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return all users that are assigned a role that belongs to that application </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_all_users_by_role">get_all_users_by_role</A></B>( p_role IN CHAR ) RETURN return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return all users that are assigned p_role </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_app_security_roles">get_app_security_roles</A></B>( p_application_key IN CHAR ) RETURN security . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return cursor/result set of all roles that are available to be allocated to a user</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_application_list">get_application_list</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return cursor/result set of all applications</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_single_user_details">get_single_user_details</A></B>( p_user_name CHAR ) RETURN return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return resultset of a single users security details  </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_user_security_roles">get_user_security_roles</A></B>( p_user_name IN CHAR , p_application_key IN CHAR ) RETURN security . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if p_application_key is null, then every role in all applications that have been assigned to this user are returned</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#insert_user_location">insert_user_location</A></B>( p_user_name IN CHAR , p_user_location IN CHAR ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; insert location assignment for a given (resort)user </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#insert_user_role">insert_user_role</A></B>( p_user_name IN CHAR , p_user_role IN CHAR ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; returns null if successful, or 'Error.....' if not</TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#set_password">set_password</A></B>( p_user_name IN CHAR , p_new_password IN CHAR , p_old_password IN CHAR ) RETURN VARCHAR2 ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; update the password of a particular user, <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  password is automatically encrypted </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#update_user_details">update_user_details</A></B>( p_user_name CHAR , p_initials CHAR , p_password CHAR , p_disabled_ind CHAR ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update or insert user security details    </TD></TR>
+</TABLE>
+<P></P><A NAME="type_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Type Detail</B></FONT></TD></TABLE><A NAME="return_refcursor"></A>
+<H3>return_refcursor</H3><PRE>          <B>return_refcursor</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Public type declarations<DD><DL></DL></DD></DL><HR><P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="decrypt_password"></A>
+<H3>decrypt_password</H3><PRE>          <B>decrypt_password</B>( p_input_string IN CHAR ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return an decrypted version of a passed string , used for hiding password from<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  people selecting security details from sql <DD><DL></DL></DD></DL><HR><A NAME="delete_user"></A>
+<H3>delete_user</H3><PRE>          <B>delete_user</B>( p_user_name IN CHAR ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; delete a single user PLUS all allocated roles <DD><DL></DL></DD></DL><HR><A NAME="delete_user_location"></A>
+<H3>delete_user_location</H3><PRE>          <B>delete_user_location</B>( p_user_name IN CHAR ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; delete all location assignments for a given (resort)user <DD><DL></DL></DD></DL><HR><A NAME="delete_user_role"></A>
+<H3>delete_user_role</H3><PRE>          <B>delete_user_role</B>( p_user_name IN CHAR , p_user_role IN CHAR , p_application_key IN CHAR ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; delete either:<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            a single role from a user's role allocation<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            all roles for a specific application<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            all roles for user<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="encrypt_password"></A>
+<H3>encrypt_password</H3><PRE>          <B>encrypt_password</B>( p_input_string IN CHAR ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return an encrypted version of a passed string , used for hiding password from<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  people selecting security details from sql <DD><DL></DL></DD></DL><HR><A NAME="get_all_locations_for_user"></A>
+<H3>get_all_locations_for_user</H3><PRE>          <B>get_all_locations_for_user</B>( p_user_name IN CHAR ) RETURN return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return all locations that are assigned to a certain (resort)user <DD><DL></DL></DD></DL><HR><A NAME="get_all_user_details"></A>
+<H3>get_all_user_details</H3><PRE>          <B>get_all_user_details</B>( p_application_key IN CHAR ) RETURN return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return all users that are assigned a role that belongs to that application <DD><DL></DL></DD></DL><HR><A NAME="get_all_users_by_role"></A>
+<H3>get_all_users_by_role</H3><PRE>          <B>get_all_users_by_role</B>( p_role IN CHAR ) RETURN return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return all users that are assigned p_role <DD><DL></DL></DD></DL><HR><A NAME="get_app_security_roles"></A>
+<H3>get_app_security_roles</H3><PRE>          <B>get_app_security_roles</B>( p_application_key IN CHAR ) RETURN security . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return cursor/result set of all roles that are available to be allocated to a user<DD><DL></DL></DD></DL><HR><A NAME="get_application_list"></A>
+<H3>get_application_list</H3><PRE>          <B>get_application_list</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return cursor/result set of all applications<DD><DL></DL></DD></DL><HR><A NAME="get_single_user_details"></A>
+<H3>get_single_user_details</H3><PRE>          <B>get_single_user_details</B>( p_user_name CHAR ) RETURN return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return resultset of a single users security details  <DD><DL></DL></DD></DL><HR><A NAME="get_user_security_roles"></A>
+<H3>get_user_security_roles</H3><PRE>          <B>get_user_security_roles</B>( p_user_name IN CHAR , p_application_key IN CHAR ) RETURN security . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if p_application_key is null, then every role in all applications that have been assigned to this user are returned<DD><DL></DL></DD></DL><HR><A NAME="insert_user_location"></A>
+<H3>insert_user_location</H3><PRE>          <B>insert_user_location</B>( p_user_name IN CHAR , p_user_location IN CHAR ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; insert location assignment for a given (resort)user <DD><DL></DL></DD></DL><HR><A NAME="insert_user_role"></A>
+<H3>insert_user_role</H3><PRE>          <B>insert_user_role</B>( p_user_name IN CHAR , p_user_role IN CHAR ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; returns null if successful, or 'Error.....' if not<DD><DL></DL></DD></DL><HR><A NAME="set_password"></A>
+<H3>set_password</H3><PRE>          <B>set_password</B>( p_user_name IN CHAR , p_new_password IN CHAR , p_old_password IN CHAR ) RETURN VARCHAR2 ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; update the password of a particular user, <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  password is automatically encrypted <DD><DL></DL></DD></DL><HR><A NAME="update_user_details"></A>
+<H3>update_user_details</H3><PRE>          <B>update_user_details</B>( p_user_name CHAR , p_initials CHAR , p_password CHAR , p_disabled_ind CHAR ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update or insert user security details    <DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>SECURITY</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516233</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.33</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>16-JAN-18&nbsp;16.22.33</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2009-06-12:10:30:34</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE security AS
+
+  -- Author  : leigh ashton
+  -- Created : 03/03/03
+  -- Purpose : Defines the procedures and functions for the security system
+  --         : used by on-line applications e.g. Stella.  
+  --         
+
+  -- Public type declarations
+  TYPE return_refcursor IS REF CURSOR;
+
+  g_statement       NUMBER := 0;
+  g_sqlerrm         VARCHAR2(500);
+  g_sqlcode         CHAR(20);
+  g_error_statement VARCHAR2(150) := '';
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  /* return resultset of a single users security details  */
+  FUNCTION get_single_user_details(p_user_name CHAR) RETURN return_refcursor;
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+
+  /* return resultset of all users security details 
+  or restrict it to one application if that parameter passed */
+  /* p_application_key is not mandatory */
+  /* return all users that are assigned a role that belongs to that application */
+  FUNCTION get_all_user_details(p_application_key IN CHAR)
+    RETURN return_refcursor;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  /*update or insert user security details    */
+  FUNCTION update_user_details(p_user_name    CHAR,
+                               p_initials     CHAR,
+                               p_password     CHAR,
+                               p_disabled_ind CHAR) RETURN CHAR;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------    
+  /* return an encrypted version of a passed string , used for hiding password from
+  people selecting security details from sql */
+  FUNCTION encrypt_password(p_input_string IN CHAR) RETURN VARCHAR2;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  /* return an decrypted version of a passed string , used for hiding password from
+  people selecting security details from sql */
+
+  FUNCTION decrypt_password(p_input_string IN CHAR) RETURN VARCHAR2;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  /* update the password of a particular user, 
+  password is automatically encrypted */
+  FUNCTION set_password(p_user_name    IN CHAR,
+                        p_new_password IN CHAR,
+                        p_old_password IN CHAR) RETURN VARCHAR2;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  /* delete a single user PLUS all allocated roles */
+  FUNCTION delete_user(p_user_name IN CHAR) RETURN VARCHAR2;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  -- returns cursor/result set of all roles that are allocated to a user
+  -- p_user_name is mandatory, p_application_key can be null
+  -- if p_application_key is supplied, then only roles associated with that user 
+  -- within a particular application are returned
+  --if p_application_key is null, then every role in all applications that have been assigned to this user are returned
+  FUNCTION get_user_security_roles(p_user_name       IN CHAR,
+                                   p_application_key IN CHAR)
+    RETURN security.return_refcursor;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  -- return cursor/result set of all roles that are available to be allocated to a user
+  FUNCTION get_app_security_roles(p_application_key IN CHAR)
+    RETURN security.return_refcursor;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  -- return cursor/result set of all applications
+  FUNCTION get_application_list RETURN security.return_refcursor;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  -- allocate a user to a role
+  -- returns null if successful, or 'Error.....' if not
+  FUNCTION insert_user_role(p_user_name IN CHAR,
+                            p_user_role IN CHAR) RETURN CHAR;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  /* delete either:
+            a single role from a user's role allocation
+            all roles for a specific application
+            all roles for user
+  */
+  FUNCTION delete_user_role(p_user_name       IN CHAR,
+                            p_user_role       IN CHAR,
+                            p_application_key IN CHAR) RETURN CHAR;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  /* return all users that are assigned p_role */
+  FUNCTION get_all_users_by_role(p_role IN CHAR) RETURN return_refcursor;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  /* return all locations that are assigned to a certain (resort)user */
+  FUNCTION get_all_locations_for_user(p_user_name IN CHAR)
+    RETURN return_refcursor;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  /* delete all location assignments for a given (resort)user */
+  FUNCTION delete_user_location(p_user_name IN CHAR) RETURN CHAR;
+
+  ----------------------------------------------------------
+  ----------------------------------------------------------
+  /* insert location assignment for a given (resort)user */
+  FUNCTION insert_user_location(p_user_name     IN CHAR,
+                                p_user_location IN CHAR) RETURN CHAR;
+
+END security;
+
+ </pre>
+</div>
+</div>
+</div>
+</body>
+</html>

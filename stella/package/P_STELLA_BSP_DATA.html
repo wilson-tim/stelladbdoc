@@ -1,0 +1,285 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_STELLA_BSP_DATA/report.js" type="text/javascript"></script>
+<link href="P_STELLA_BSP_DATA/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_STELLA_BSP_DATA</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P> Author  : leigh ashton</P><HR><P></P><A NAME="type_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Type Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#return_refcursor">return_refcursor</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nov 03 Leigh added breakdown of tax fields</TD></TR>
+</TABLE><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#get_bsp_tran_details">get_bsp_tran_details</A></B>( p_ticket_no NUMBER , p_refund_document_no NUMBER , p_bsp_trans_id NUMBER ) RETURN p_stella_bsp_data . return_refcursor ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; params are mutually exclusive, but one must be passed </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#insert_transaction">insert_transaction</A></B>( p_ticket_no IN NUMBER , p_transaction_code IN CHAR , p_bsp_filename IN CHAR , p_bsp_date IN DATE , p_crs_code IN CHAR , p_airline_num IN NUMBER , p_iata_num IN NUMBER , p_commissionable_amt IN NUMBER , p_commission_amt IN NUMBER , p_tax_amt IN NUMBER , p_net_fare_amt IN NUMBER , p_ccy_code IN CHAR , p_net_remit_ind IN CHAR , p_conjunction_ind IN CHAR , p_airline_penalty_amt IN NUMBER , p_balance_payable_amt IN NUMBER , p_ub_tax_amt IN NUMBER , p_gb_tax_amt IN NUMBER , p_remaining_tax_amt IN NUMBER ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--------------------------------------------------------------                      </TD></TR>
+<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#run_bsp_load">run_bsp_load</A></B>( driverClass VARCHAR2 , connectionURL VARCHAR2 , dbUserID VARCHAR2 , dbUserPwd VARCHAR2 , singleFileName VARCHAR2 , runMode VARCHAR2 ) RETURN CHAR ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is configured via the application registry (JUTIL.APPLICATION_REGISTRY)  </TD></TR>
+</TABLE>
+<P></P><A NAME="type_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Type Detail</B></FONT></TD></TABLE><A NAME="return_refcursor"></A>
+<H3>return_refcursor</H3><PRE>          <B>return_refcursor</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; nov 03 Leigh added breakdown of tax fields<DD><DL></DL></DD></DL><HR><P></P><A NAME="method_detail"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Detail</B></FONT></TD></TABLE><A NAME="get_bsp_tran_details"></A>
+<H3>get_bsp_tran_details</H3><PRE>          <B>get_bsp_tran_details</B>( p_ticket_no NUMBER , p_refund_document_no NUMBER , p_bsp_trans_id NUMBER ) RETURN p_stella_bsp_data . return_refcursor ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; params are mutually exclusive, but one must be passed <DD><DL></DL></DD></DL><HR><A NAME="insert_transaction"></A>
+<H3>insert_transaction</H3><PRE>          <B>insert_transaction</B>( p_ticket_no IN NUMBER , p_transaction_code IN CHAR , p_bsp_filename IN CHAR , p_bsp_date IN DATE , p_crs_code IN CHAR , p_airline_num IN NUMBER , p_iata_num IN NUMBER , p_commissionable_amt IN NUMBER , p_commission_amt IN NUMBER , p_tax_amt IN NUMBER , p_net_fare_amt IN NUMBER , p_ccy_code IN CHAR , p_net_remit_ind IN CHAR , p_conjunction_ind IN CHAR , p_airline_penalty_amt IN NUMBER , p_balance_payable_amt IN NUMBER , p_ub_tax_amt IN NUMBER , p_gb_tax_amt IN NUMBER , p_remaining_tax_amt IN NUMBER ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--------------------------------------------------------------                      <DD><DL></DL></DD></DL><HR><A NAME="run_bsp_load"></A>
+<H3>run_bsp_load</H3><PRE>          <B>run_bsp_load</B>( driverClass VARCHAR2 , connectionURL VARCHAR2 , dbUserID VARCHAR2 , dbUserPwd VARCHAR2 , singleFileName VARCHAR2 , runMode VARCHAR2 ) RETURN CHAR ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; is configured via the application registry (JUTIL.APPLICATION_REGISTRY)  <DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>STELLA</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_STELLA_BSP_DATA</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516777</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;17.30.44</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>13-NOV-19&nbsp;11.55.15</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2019-06-04:13:23:55</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>1</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 0)" class="currentrow">
+<td class="currentcell">EXECUTE</td>
+<td class="currentcell">SECTOR_APEX</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">STELLA</td>
+<td class="currentcell">P_STELLA_BSP_DATA</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 1)">
+<td>EXECUTE</td>
+<td>STELLAINTRANET</td>
+<td>NO</td>
+<td>STELLA</td>
+<td>P_STELLA_BSP_DATA</td>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 2)">
+<td>DEBUG</td>
+<td>STELLAINTRANET</td>
+<td>NO</td>
+<td>STELLA</td>
+<td>P_STELLA_BSP_DATA</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE P_STELLA_BSP_DATA IS
+  -- Author  : leigh ashton
+  -- Created : 03/01/03
+  -- Purpose : Defines the procedures and functions for the Stella system
+  --         : data extracts. These stored procedures / functions are used by java programs to 
+  --         : read data from Oracle
+
+
+  -- Public type declarations
+  
+--  amended:
+-- nov 03 Leigh added breakdown of tax fields
+
+  
+  
+  TYPE return_refcursor IS REF CURSOR;
+
+
+  g_version NUMBER:= 1.06;
+  g_statement NUMBER := 0;
+  g_sqlerrm VARCHAR2(500);
+  g_sqlcode CHAR(20);
+  g_package_name     CONSTANT VARCHAR2(100) := 'STLBSPGD';
+  g_debug BOOLEAN := FALSE;
+  g_log_sequence jutil.application_log.log_sequence%TYPE;     
+
+  
+  
+----------------------------------------------------------------
+----------------------------------------------------------------                      
+-- run_bsp_load is the call specification/wrapper to the java Stored procedure
+  -- uk.co.firstchoice.stella.StellaBSPLoad.runBSPLoad
+  -- It loads transactions from source files in file system
+  -- The routine
+  -- is configured via the application registry (JUTIL.APPLICATION_REGISTRY)  
+FUNCTION run_bsp_load(driverClass       VARCHAR2,
+                       connectionURL   VARCHAR2,
+                       dbUserID   VARCHAR2,
+                       dbUserPwd VARCHAR2,
+                       singleFileName VARCHAR2,
+                       runMode   VARCHAR2
+                       )
+                       RETURN CHAR;
+
+----------------------------------------------------------------
+----------------------------------------------------------------                      
+                       
+                       
+FUNCTION insert_transaction (
+         p_ticket_no IN NUMBER,
+         p_transaction_code IN CHAR,
+         p_bsp_filename IN CHAR,
+         p_bsp_date IN DATE,
+         p_crs_code IN CHAR,
+         p_airline_num IN NUMBER,
+         p_iata_num IN NUMBER,
+         p_commissionable_amt IN NUMBER,
+         p_commission_amt IN NUMBER,
+         p_tax_amt IN NUMBER, -- tax total
+         p_net_fare_amt IN NUMBER,
+         p_ccy_code IN CHAR,
+         p_net_remit_ind IN CHAR,
+         p_conjunction_ind IN CHAR,
+         p_airline_penalty_amt IN NUMBER,
+         p_balance_payable_amt IN NUMBER,
+         p_ub_tax_amt IN NUMBER,
+         p_gb_tax_amt IN NUMBER,
+         p_remaining_tax_amt IN NUMBER
+                           ) RETURN CHAR;
+----------------------------------------------------------------
+----------------------------------------------------------------                      
+
+
+  
+ /* return all bsp related details for all linked bsp transactions as a result set 
+   -- may return more than one row if mor than one bsp transaction for a ticket / refund doc  */                    
+ /* params are mutually exclusive, but one must be passed */
+  FUNCTION get_bsp_tran_details (p_ticket_no NUMBER, p_refund_document_no NUMBER, p_bsp_trans_id NUMBER)
+                               
+                      RETURN p_stella_bsp_data.return_refcursor;
+----------------------------------------------------------------
+----------------------------------------------------------------          
+
+
+
+end P_STELLA_BSP_DATA;   -- end of package HEADER</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

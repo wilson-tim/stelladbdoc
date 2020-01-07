@@ -1,0 +1,866 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_BOOKING_EXTRACT/report.js" type="text/javascript"></script>
+<link href="P_BOOKING_EXTRACT/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_BOOKING_EXTRACT</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P></P><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_BOOKING_EXTRACT</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516265</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE&nbsp;BODY</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.38</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>13-MAY-19&nbsp;10.42.53</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2019-05-13:10:42:53</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>INVALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE BODY p_Booking_Extract IS
+
+  g_new_line            CONSTANT  VARCHAR2(2) := chr(10);
+
+  /*
+  *****************************************************************************
+  * Check_Parameters                                                          *  
+  *****************************************************************************
+  */
+  PROCEDURE Check_Parameters (p_CompanyCode   IN     VARCHAR2,
+                              p_BookingRef    IN     VARCHAR2,
+                              p_SeasonType    IN     VARCHAR2,
+                              p_SeasonYear    IN     INTEGER,
+                              p_OraErrorCode  IN OUT INTEGER,
+                              p_AppErrorCode  IN OUT VARCHAR2,
+                              p_ErrorMessage  IN OUT VARCHAR2) IS
+
+    v_count            NUMBER(10);
+    v_status           char(4);   --booking.booking_status_code%TYPE;
+    v_status2          tlinkw.tl_w_bookings.booking_status%TYPE;
+    
+    v_param_record     P_ERROR.g_param_record;
+    v_param_tab        P_ERROR.g_param_t := P_ERROR.g_param_t();
+    
+  BEGIN
+    -- Set returning variables to NULL
+    p_OraErrorCode := NULL;
+    p_AppErrorCode := NULL;
+    p_ErrorMessage := NULL;
+    
+    -- Set up parameter record for generic error messaging
+    v_param_tab.EXTEND(4);
+  
+    v_param_record.param_name := 'val_companycode';
+    v_param_record.param_value := p_CompanyCode;  
+    v_param_tab(1)  := v_param_record;
+
+    v_param_record.param_name := 'val_bookingref';
+    v_param_record.param_value := p_BookingRef;  
+    v_param_tab(2)  := v_param_record;
+
+    v_param_record.param_name := 'val_seasontype';
+    v_param_record.param_value := p_SeasonType;  
+    v_param_tab(3)  := v_param_record;
+
+    v_param_record.param_name := 'val_seasonyear';
+    v_param_record.param_value := p_SeasonYear;  
+    v_param_tab(4)  := v_param_record;
+    
+    
+    -- Check the Company Code
+    IF p_CompanyCode IS NULL THEN
+      -- Company Code is not one of the prescribed so set Error Details
+      p_OraErrorCode := '-20100';
+      p_AppErrorCode := 'MR001';
+      p_ErrorMessage := p_error.get_error_message('BKGENQ.MR001.001','Missing Company Code',v_param_tab,'X');
+    ELSIF p_CompanyCode NOT IN ('MS','TL') THEN
+      -- Company Code is not one of the prescribed so set Error Details
+      p_OraErrorCode := '-20100';
+      p_AppErrorCode := 'MR001';
+      p_ErrorMessage := p_error.get_error_message('BKGENQ.MR001.002','Invalid Company Code',v_param_tab,'X');
+    END IF;   
+
+    -- Check that the booking reference is not null
+    IF p_BookingRef IS NULL THEN
+      p_OraErrorCode := '-20100';
+      p_AppErrorCode := 'MR001';
+      p_ErrorMessage := p_error.get_error_message('BKGENQ.MR001.010','Missing Booking Reference',v_param_tab,'X');    
+    END IF;
+          
+    IF p_OraErrorCode IS NULL THEN  
+/*      IF p_CompanyCode = 'MS' THEN
+        -- Handle validation for Main Stream
+        -- 1) Check Valid Season Type
+        IF p_SeasonType IS NULL THEN
+          p_OraErrorCode := '-20100';
+          p_AppErrorCode := 'MR001';
+          p_ErrorMessage := p_error.get_error_message('BKGENQ.MR001.003','Missing Season Type',v_param_tab,'X');
+        ELSIF p_SeasonType NOT IN ('S','W') THEN
+          p_OraErrorCode := '-20100';
+          p_AppErrorCode := 'MR001';
+          p_ErrorMessage := p_error.get_error_message('BKGENQ.MR001.004','Invalid Season Type',v_param_tab,'X');
+        END IF;
+      
+        -- 2) Check Valid Year - Must be four digit number
+        IF p_SeasonYear IS NULL THEN
+          p_OraErrorCode := '-20100';
+          p_AppErrorCode := 'MR001';
+          IF p_ErrorMessage IS NOT NULL THEN
+            p_ErrorMessage := p_ErrorMessage||', ';
+          END IF;
+          p_ErrorMessage := p_ErrorMessage||p_error.get_error_message('BKGENQ.MR001.005','Missing Season Year',v_param_tab,'X');          
+        ELSIF (p_SeasonYear &lt; 1990 OR p_SeasonYear > 2100) THEN
+          p_OraErrorCode := '-20100';
+          p_AppErrorCode := 'MR001';
+          IF p_ErrorMessage IS NOT NULL THEN
+            p_ErrorMessage := p_ErrorMessage||', ';
+          END IF;
+          p_ErrorMessage := p_ErrorMessage||p_error.get_error_message('BKGENQ.MR001.006','Invalid Season Year',v_param_tab,'X');
+        END IF;
+
+        -- 3) Check that Booking Reference is a number
+        BEGIN
+          SELECT to_number(p_BookingRef)
+          INTO   v_count
+          FROM   dual;
+        
+          EXCEPTION
+          WHEN OTHERS THEN
+            p_OraErrorCode := '-20100';
+            p_AppErrorCode := 'MR001';          
+            IF p_ErrorMessage IS NOT NULL THEN
+              p_ErrorMessage := p_ErrorMessage||', ';
+            END IF;
+            p_ErrorMessage := p_ErrorMessage||p_error.get_error_message('BKGENQ.MR001.007','Company Code must have numeric Booking Reference',v_param_tab,'X');
+        END;
+      
+        -- 4) Check booking reference exists for season type / year combination
+        --    But only if we haven't hit an error already
+        IF p_OraErrorCode IS NULL THEN
+        
+          BEGIN
+            SELECT b.booking_status_code
+            INTO   v_status
+            FROM   booking b
+            WHERE  b.season_year          = p_SeasonYear
+            AND    b.season_type          = p_SeasonType
+            AND    b.booking_reference_no = p_BookingRef;
+          
+            EXCEPTION
+            WHEN no_data_found THEN
+              v_status := NULL;
+          END;  
+        
+          -- Booking Reference does not exist so return an error
+          IF v_status IS NULL THEN
+            p_OraErrorCode := '-20000';
+            p_AppErrorCode := 'BL001';
+            p_ErrorMessage := p_error.get_error_message('BKGENQ.BL001.001','Booking Reference does not exist',v_param_tab,'X');          
+          ELSIF v_status = 'CNX' THEN
+            p_OraErrorCode := '-20000';
+            p_AppErrorCode := 'BL002';
+            p_ErrorMessage :=  p_error.get_error_message('BKGENQ.BL001.002','Booking Reference is cancelled',v_param_tab,'X');
+          END IF;
+        END IF;
+      */
+      IF p_CompanyCode = 'TL' THEN
+
+        IF (p_SeasonType IS NOT NULL) THEN
+          p_OraErrorCode := '-20100';
+          p_AppErrorCode := 'MR001';
+          p_ErrorMessage :=  p_error.get_error_message('BKGENQ.MR001.008','Season Type is not required',v_param_tab,'X');
+        END IF;
+        IF (p_SeasonYear IS NOT NULL) THEN
+          p_OraErrorCode := '-20100';
+          p_AppErrorCode := 'MR001';
+          IF p_ErrorMessage IS NOT NULL THEN
+            p_ErrorMessage := p_ErrorMessage||', ';
+          END IF;
+          p_ErrorMessage := p_ErrorMessage||p_error.get_error_message('BKGENQ.MR001.009','Season Year is not required',v_param_tab,'X');
+        END IF;
+      
+        IF p_OraErrorCode IS NULL THEN
+          BEGIN
+            SELECT t.booking_status
+            INTO   v_status2
+            FROM   tlinkw.tl_w_bookings t
+            WHERE  t.booking_ref = p_BookingRef
+            AND    t.amendment_order = 0;
+        
+            EXCEPTION
+            WHEN no_data_found THEN
+              v_status2 := NULL;
+          END;    
+      
+          -- Booking Reference does not exist so return an error
+          IF v_status2 IS NULL THEN
+            p_OraErrorCode := '-20000';
+            p_AppErrorCode := 'BL001';
+            p_ErrorMessage := p_error.get_error_message('BKGENQ.BL001.001','Booking Reference does not exist',v_param_tab,'X');          
+          ELSIF TRIM(Upper(v_status2)) = 'CANCELLED' THEN
+            p_OraErrorCode := '-20000';
+            p_AppErrorCode := 'BL002';
+            p_ErrorMessage :=  p_error.get_error_message('BKGENQ.BL001.002','Booking Reference is cancelled',v_param_tab,'X');
+          END IF;
+          
+        END IF;  
+      END IF;  
+    END IF;
+    
+  END Check_Parameters;
+
+
+
+  /*
+  *****************************************************************************
+  * Get_Main_Tlink_Brand                                                      *  
+  *****************************************************************************
+  
+  This function returns the most common product code from the accommodation table
+  */
+  
+  FUNCTION Get_Main_Tlink_Brand (p_BookingRef      IN VARCHAR2)
+  RETURN tlinkw.tl_w_bookedaccommodation.product%TYPE IS
+  
+    v_Brand                tlinkw.tl_w_bookedaccommodation.product%TYPE;
+    
+    v_Count                INTEGER(10);
+    
+    
+    CURSOR Cur_Brand (c_BookRef IN tlinkw.tl_w_bookedaccommodation.booking_ref%TYPE) IS
+    SELECT ba.product,
+           COUNT(*)
+    FROM   tlinkw.tl_w_bookedaccommodation ba
+    WHERE  ba.booking_ref     = c_BookRef
+    AND    ba.amendment_order = 0
+    GROUP BY ba.product
+    ORDER BY COUNT(*) DESC;
+    
+  BEGIN
+    -- Get main Product (most common)
+    OPEN Cur_Brand(p_BookingRef);
+    
+    FETCH Cur_Brand INTO v_Brand, v_Count;
+    
+    IF Cur_Brand%NOTFOUND THEN
+      v_Brand := 'UNKNOWN';
+    ELSE 
+      CLOSE Cur_Brand;
+    END IF;
+      
+    RETURN(v_Brand);
+  END Get_Main_Tlink_Brand;
+
+
+
+  /*
+  *****************************************************************************
+  * Extract_MainStream_Accom                                                  *  
+  *****************************************************************************
+  
+  This function returns a cursor containing all the accommodations that a Mainstream
+  Booking stays at
+  */
+ /* FUNCTION Extract_MainStream_Accom (p_BookingRef    IN VARCHAR2,
+                                     p_SeasonType    IN VARCHAR2,
+                                     p_SeasonYear    IN VARCHAR2)
+  RETURN return_refcursor IS
+  
+    v_result               return_refcursor;
+    
+  BEGIN
+    -- Create returning ref cursor
+    OPEN v_result FOR
+    SELECT b.booking_reference_no                 AS Booking_Reference_No,
+           b.season_type                          AS Season_Type,
+           b.season_year                          AS Season_Year,
+           'MS'                                   AS Company_Code,
+           nvl(ad.otop_accom_desc,'UNKNOWN')      AS Accom_Name,
+           nvl(r.resort_desc,'UNKNOWN')           AS Resort_Name,
+           nvl(rl.resort_location_desc,'UNKNOWN') AS Resort_Location,
+           nvl(oas.otop_accom_code,'UNKNOWN')     AS Accommodation_Code
+    FROM   booking b,
+           otop_accom_sale oas,
+           accom_detail ad,
+           resort r,
+           resort_location rl
+    WHERE  b.season_year              = p_SeasonYear
+    AND    b.season_type              = p_SeasonType
+    AND    b.booking_reference_no     = p_BookingRef
+    AND    b.season_year              = oas.season_year
+    AND    b.season_type              = oas.season_type
+    AND    b.booking_reference_no     = oas.booking_reference_no
+    AND    b.amended_date             = oas.details_updated_date
+    AND    oas.season_year            = ad.season_year
+    AND    oas.season_type            = ad.season_type
+    AND    oas.otop_accom_code        = ad.otop_accom_code
+    AND    ad.season_year             = r.season_year
+    AND    ad.season_type             = r.season_type
+    AND    ad.resort_code             = r.resort_code
+    AND    ad.resort_location_code    = r.resort_location_code
+    AND    r.season_year              = rl.season_year
+    AND    r.season_type              = rl.season_type
+    AND    r.resort_location_code     = rl.resort_location_code;
+
+    RETURN (v_result);
+  END Extract_MainStream_Accom;
+
+*/
+
+  /*
+  *****************************************************************************
+  * Extract_TravelLink_Accom                                                  *  
+  *****************************************************************************
+  
+  This function returns a cursor containing all the accommodations that a TravelLink
+  Booking stays at
+  */
+  FUNCTION Extract_TravelLink_Accom (p_BookingRef    IN VARCHAR2)
+  RETURN return_refcursor IS
+  
+    v_result               return_refcursor;
+    
+  BEGIN
+    -- Create returning ref cursor
+    OPEN v_result FOR
+    SELECT b.booking_ref                         AS Booking_Reference_No,
+           NULL                                  AS Season_Type,
+           NULL                                  AS Season_Year,
+           'TL'                                  AS Company_Code,
+           nvl(ba.NAME,'UNKNOWN')                AS Accom_Name,
+           nvl(ba.resort,'UNKNOWN')              AS Resort_Name,
+           'UNKNOWN'                             AS Resort_Location,  -- Not used in TravelLink but cursors need to match
+           nvl(to_char(ba.booked_accom_key),'UNKNOWN') AS Accommodation_Code
+    FROM   tlinkw.tl_w_bookings b,
+           tlinkw.tl_w_bookedaccommodation ba
+    WHERE  b.booking_ref = p_BookingRef
+    AND    b.amendment_order = 0
+    AND    ba.booking_ref = b.booking_ref
+    AND    ba.amendment_order = b.amendment_order;
+
+    RETURN (v_result);
+  END Extract_TravelLink_Accom;
+                              
+                              
+                                    
+  /*
+  *****************************************************************************
+  * Extract_Accom_Details                                                     *  
+  *****************************************************************************
+
+  This function will call the appropriate accommodation extract routine and return
+  the cursor that is passed back from that routine
+  */
+  FUNCTION Extract_Accom_Details (p_CompanyCode   IN VARCHAR2,
+                                  p_BookingRef    IN VARCHAR2,
+                                  p_SeasonType    IN VARCHAR2,
+                                  p_SeasonYear    IN VARCHAR2)
+  RETURN return_refcursor IS
+  
+    v_result               return_refcursor;
+        
+  BEGIN
+   
+/*    IF p_CompanyCode = 'MS' THEN
+      -- Mainstream Booking
+      v_result := Extract_MainStream_Accom(p_BookingRef,
+                                           p_SeasonType,
+                                           p_SeasonYear);
+
+    ELSE 
+    */
+      -- TravelLink Booking
+      v_result := Extract_TravelLink_Accom(p_BookingRef);      
+   -- END IF;
+    
+    
+    RETURN (v_result);
+  END Extract_Accom_Details;
+
+
+
+  /*
+  *****************************************************************************
+  * Extract_MainStream_Flight                                                 *  
+  *****************************************************************************
+
+  This function returns the flights on a Mainstream booking in departure date order
+  */
+  /*FUNCTION Extract_MainStream_Flight (p_BookingRef    IN VARCHAR2,
+                                      p_SeasonType    IN VARCHAR2,
+                                      p_SeasonYear    IN VARCHAR2)
+  RETURN return_refcursor IS
+  
+    v_result               return_refcursor;
+    
+  BEGIN
+  
+    -- Create return cursor
+    OPEN v_result FOR
+    SELECT b.booking_reference_no                   AS Booking_Reference_No,
+           b.season_type                            AS Season_Type,
+           b.season_year                            AS Season_Year,
+           'MS'                                     AS Company_Code,
+           nvl(ts.gateway_code_departure,'UNKNOWN') AS Departure_Gateway,
+           nvl(ts.gateway_code_arrival,'UNKNOWN')   AS Arrival_Gateway,
+           ti.cycle_start_date                      AS Flight_Date,
+           nvl(ti.airline_flight_no,'UNKNOWN')      AS Flight_No,
+           nvl(ts.supplier_code,'UNKNOWN')          AS Airline
+    FROM   booking b,
+           transport_sale ts,
+           transport_inventory ti
+    WHERE  b.season_year              = p_SeasonYear
+    AND    b.season_type              = p_SeasonType
+    AND    b.booking_reference_no     = p_BookingRef
+    AND    ts.season_year             = b.season_year
+    AND    ts.season_type             = b.season_type
+    AND    ts.booking_reference_no    = b.booking_reference_no
+    AND    ts.details_updated_date    = b.amended_date
+    AND    ti.season_year             = ts.season_year
+    AND    ti.season_type             = ts.season_type
+    AND    ti.otop_transport_code     = ts.otop_transport_code
+    AND    ti.gateway_code_departure  = ts.gateway_code_departure
+    AND    ti.gateway_code_arrival    = ts.gateway_code_arrival
+    AND    ti.cycle_start_date        = ts.cycle_start_date
+    ORDER BY ti.transport_departure_datetime;
+    
+
+    RETURN (v_result);
+  END Extract_MainStream_Flight;
+*/
+
+
+  /*
+  *****************************************************************************
+  * Extract_TravelLink_Flight                                                 *  
+  *****************************************************************************
+
+  This function returns the flights on a TravelLink booking
+  */
+  FUNCTION Extract_TravelLink_Flight (p_BookingRef    IN VARCHAR2)
+  RETURN return_refcursor IS
+  
+    v_result               return_refcursor;
+    
+  BEGIN
+      
+    
+    OPEN v_result FOR
+    SELECT b.booking_ref                         AS Booking_Reference_No,
+           NULL                                  AS Season_Type,
+           NULL                                  AS Season_Year,
+           'TL'                                  AS Company_Code,
+           nvl(bf.departure_airport,'UNKNOWN')   AS Departure_Gateway,
+           nvl(bf.arrival_airport,'UNKNOWN')     AS Arrival_Gateway,
+           bf.departure_date                     AS Flight_Date,
+           nvl(bf.flight_number,'UNKNOWN')       AS Flight_No,
+           nvl(bf.airline,'UNKNOWN')             AS Airline
+    FROM   tlinkw.tl_w_bookings b,
+           tlinkw.tl_w_bookedflights bf
+    WHERE  b.booking_ref        = p_BookingRef
+    AND    b.amendment_order    = 0
+    AND    bf.booking_ref       = b.booking_ref
+    AND    bf.amendment_order   = b.amendment_order
+    ORDER BY bf.departure_date,
+             bf.departure_time;
+
+    RETURN (v_result);
+  END Extract_TravelLink_Flight;
+                              
+
+                              
+  /*
+  *****************************************************************************
+  * Extract_Flight_Details                                                     *  
+  *****************************************************************************
+
+  This function calls the relevant Extract_Flight Routine and then returns the 
+  returning cursor
+  
+  */
+  FUNCTION Extract_Flight_Details (p_CompanyCode   IN VARCHAR2,
+                                   p_BookingRef    IN VARCHAR2,
+                                   p_SeasonType    IN VARCHAR2,
+                                   p_SeasonYear    IN VARCHAR2)
+  RETURN return_refcursor IS
+  
+    v_result               return_refcursor;
+    
+    
+  BEGIN
+/*    IF p_CompanyCode = 'MS' THEN
+      v_result := Extract_MainStream_Flight(p_BookingRef,
+                                            p_SeasonType,
+                                            p_SeasonYear);
+
+    ELSE 
+*/    
+      v_result := Extract_TravelLink_Flight(p_BookingRef);      
+ --   END IF;
+       
+    RETURN (v_result);
+  END Extract_Flight_Details;
+
+
+
+  /*
+  *****************************************************************************
+  * Extract_MainStream_Booking                                                *  
+  *****************************************************************************
+  
+  This function returns a cursor that contains booking data
+  */
+/*  FUNCTION Extract_MainStream_Booking (p_BookingRef    IN VARCHAR2,
+                                       p_SeasonType    IN VARCHAR2,
+                                       p_SeasonYear    IN VARCHAR2)
+  RETURN return_refcursor IS
+  
+    v_result               return_refcursor;
+        
+  BEGIN
+  
+    -- Create return cursor
+    OPEN v_result FOR
+    SELECT b.booking_reference_no                      AS Booking_Reference_No,
+           b.season_type                               AS Season_Type,
+           b.season_year                               AS Season_Year,
+           'MS'                                        AS Company_Code,
+           nvl(b.otop_product_code,'UNKNOWN')          AS Brand_Name,
+           nvl(b.gross_revenue,0)                      AS Total_Cost,
+           'GBP'                                       AS Currency_Code,
+           nvl((b.no_of_adults + b.no_of_children),0)  AS Num_Pax,
+           b.booking_date                              AS Booking_Date
+    FROM   booking b
+    WHERE  b.season_year              = p_SeasonYear
+    AND    b.season_type              = p_SeasonType
+    AND    b.booking_reference_no     = p_BookingRef;
+
+    RETURN (v_result);
+  END Extract_MainStream_Booking;
+
+*/
+
+  /*
+  *****************************************************************************
+  * Extract_TravelLink_Flight                                                 *  
+  *****************************************************************************
+
+  This function returns the details of a TravelLink booking
+  */
+  
+  FUNCTION Extract_TravelLink_Booking (p_BookingRef    IN VARCHAR2)
+  RETURN return_refcursor IS
+  
+    v_result               return_refcursor;
+    
+    v_Brand                tlinkw.tl_w_bookedaccommodation.product%TYPE;
+        
+  BEGIN
+      
+    
+    v_Brand := Get_Main_TLink_Brand(p_BookingRef);
+    
+    OPEN v_result FOR
+    SELECT b.booking_ref                               AS Booking_Reference_No,
+           NULL                                        AS Season_Type,
+           NULL                                        AS Season_Year,
+           'TL'                                        AS Company_Code,
+           v_Brand                                     AS Brand_Name,
+           nvl(b.total_revenue,0)                      AS Total_Cost,
+           'GBP'                                       AS Currency_Code,
+           --b.currency                            AS Currency_Code,
+           -- Currency in TravelLink is always in GBP but as the currency column is
+           -- a free hand text entry get all manner of answers so have hard coded in
+           -- currency to ensure we get a sensible answer
+           nvl((b.adults + b.children + b.Infants),0)  AS Num_Pax,
+           b.confirm_date                              AS Booking_Date
+    FROM   tlinkw.tl_w_bookings b
+    WHERE  b.booking_ref     = p_BookingRef
+    AND    b.amendment_order = 0;
+
+    RETURN (v_result);
+  END Extract_TravelLink_Booking;
+                              
+                              
+                                    
+  /*
+  *****************************************************************************
+  * Extract_Booking_Details                                                   *  
+  *****************************************************************************
+
+  This function calls the relevant Extract_Booking Routine and then returns the 
+  returning cursor
+  
+  */
+  FUNCTION Extract_Booking_Details (p_CompanyCode   IN VARCHAR2,
+                                    p_BookingRef    IN VARCHAR2,
+                                    p_SeasonType    IN VARCHAR2,
+                                    p_SeasonYear    IN VARCHAR2)
+  RETURN return_refcursor IS
+  
+    v_result               return_refcursor;
+    
+    
+  BEGIN
+/*    IF p_CompanyCode = 'MS' THEN
+      v_result := Extract_MainStream_Booking(p_BookingRef,
+                                             p_SeasonType,
+                                             p_SeasonYear);
+
+    ELSE 
+    */
+      v_result := Extract_TravelLink_Booking(p_BookingRef);      
+--    END IF;
+       
+    RETURN (v_result);
+  END Extract_Booking_Details;
+                                    
+  /*
+  *****************************************************************************
+  * Extract_Details                                                           *  
+  *****************************************************************************
+  
+  This is the main procedure, it checks the validity of the parameters and then calls
+  the flight and accommodation extract functions.
+  
+  The returning cursors from the extract functions are stored as the IN/OUT paramters
+  so they can be passed back to the calling system
+  */
+  PROCEDURE Extract_Details (p_CompanyCode   IN VARCHAR2,
+                             p_BookingRef    IN VARCHAR2,
+                             p_SeasonType    IN VARCHAR2,
+                             p_SeasonYear    IN VARCHAR2,
+                             p_BookingCur    IN OUT return_refcursor,
+                             p_FlightCur     IN OUT return_refcursor,
+                             p_AccomCur      IN OUT return_refcursor) IS
+                             
+    v_OraErrorCode           INTEGER(10);
+    v_AppErrorCode           VARCHAR2(10);
+    v_ErrorMessage           VARCHAR2(512);
+
+    Validation_Exception     EXCEPTION;                                 
+    
+  BEGIN
+  
+    -- Switch on the Standard Pipe Logging
+    p_Standard_Logging.Init_Logging('BOOK_ENQ','Extract');
+  
+    BEGIN
+    
+      p_Standard_Logging.Output_Log_Message('Parameters passed - Company Code : '||p_CompanyCode||g_new_line||
+                                            '                    Booking Ref  : '||p_BookingRef||g_new_line||
+                                            '                    Season Type  : '||p_SeasonType||g_new_line||
+                                            '                    Season Year  : '||p_SeasonYear,
+                                            p_Standard_Logging.g_DebugLevel);
+                                                     
+      Check_Parameters (p_CompanyCode,
+                        p_BookingRef,
+                        p_SeasonType,
+                        p_SeasonYear,
+                        v_OraErrorCode,
+                        v_AppErrorCode,
+                        v_ErrorMessage);
+                      
+      IF v_OraErrorCode IS NOT NULL THEN
+        RAISE Validation_Exception;
+      END IF;                    
+    
+      -- As we have got to here we know that all parameters pass validation
+      -- and we have a valid booking reference so we can continue with extract of data
+      --/*
+      p_BookingCur := Extract_Booking_Details(p_CompanyCode,
+                                              p_BookingRef,
+                                              p_SeasonType,
+                                              p_SeasonYear);
+
+      p_FlightCur := Extract_Flight_Details(p_CompanyCode,
+                                            p_BookingRef,
+                                            p_SeasonType,
+                                            p_SeasonYear);
+      --*/
+      /*
+      p_FlightCur := Extract_Flight_Details_All(p_CompanyCode,
+                                                p_BookingRef,
+                                                p_SeasonType,
+                                                p_SeasonYear);
+      */                                                                                          
+      
+      p_AccomCur := Extract_Accom_Details(p_CompanyCode,
+                                          p_BookingRef,
+                                          p_SeasonType,
+                                          p_SeasonYear);
+    
+      EXCEPTION
+      WHEN Validation_Exception THEN
+        p_Standard_Logging.Output_Log_Message(v_OraErrorCode,
+                                              p_Standard_Logging.g_ErrorLevel);
+        p_Standard_Logging.Output_Log_Message(v_ErrorMessage,
+                                              p_Standard_Logging.g_ErrorLevel);
+
+
+        -- Now use the standard handle error procedures to pass back error
+        p_common.handle_error('p_AON_Interface',
+                              NULL,
+                              NULL,
+                              v_Start_ErrCode||v_AppErrorCode||v_End_ErrCode||
+                              v_Start_Errm||v_ErrorMessage||v_End_Errm,
+                              NULL,
+                              v_OraErrorCode);
+    END;      
+  END Extract_Details;
+                               
+BEGIN 
+  -- Initialization
+  NULL;
+END p_Booking_Extract;
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

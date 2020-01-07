@@ -1,0 +1,417 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_MIS_UTILS/report.js" type="text/javascript"></script>
+<link href="P_MIS_UTILS/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_MIS_UTILS</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P></P><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_MIS_UTILS</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516252</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE&nbsp;BODY</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.36</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>17-JAN-18&nbsp;11.04.53</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2018-01-17:11:04:53</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+<tr onclick="table_onSelectMasterRow(this, 1, 0)" class="currentrow">
+<td class="currentcell">EXECUTE</td>
+<td class="currentcell">PUBLIC</td>
+<td class="currentcell">NO</td>
+<td class="currentcell">JUTIL</td>
+<td class="currentcell">P_MIS_UTILS</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE BODY P_MIS_UTILS IS
+
+  FUNCTION F_HAS_LOAD_COMPLETED (
+-- NAME: f_has_load_completed
+-- PURPOSE: to identify if a Warehouse event type such as 'Load' has completed, 
+--          This function will return either Y or N
+--
+--         BUGS: None at this point in development
+--
+--         USAGE EXAMPLE :
+--                       SELECT F_HAS_LOAD_COMPLETED('AIMSLOAD','AIMS ETL',trunc(sysdate))
+--                       FROM dual
+--
+-- MODIFICATION HISTORY
+-- PERSON       DATE       COMMENTS
+-- ----------   ---------- ------------------------------------------
+-- Denise Day   11/10/05    initial development
+--===================================================================
+--
+                               p_application_key IN VARCHAR2,
+                               p_event CHAR,
+                               p_load_date IN DATE) RETURN CHAR IS                               
+     v_load_complete CHAR := 'N';   
+                        
+    BEGIN
+       FOR Load_loop IN ( SELECT upper(al.event_type) AS event_type
+                          FROM jutil.application_log al
+                          WHERE UPPER(al.application_key) = UPPER(p_application_key)
+                          AND TRUNC(al.event_date) = trunc(p_load_date)
+                          AND upper(al.event_summary) = upper(p_event)
+                          ORDER BY 1 DESC) LOOP
+          
+          IF Load_loop.event_type = 'END'
+          THEN v_load_complete:= 'Y';
+          END IF;
+       END LOOP;
+    RETURN v_load_complete;
+  
+  END F_HAS_LOAD_COMPLETED;
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+  FUNCTION F_FORMAT_HHMM(
+-- NAME: F_FORMAT_HHMM
+-- PURPOSE: to convert a whole number of inutes into the formatt HH:MM
+--
+--         BUGS: None at this point in development
+--
+--         USAGE EXAMPLE :
+--                       SELECT F_FORMAT_HHMM(200)
+--                       FROM dual
+--
+-- MODIFICATION HISTORY
+-- PERSON       DATE       COMMENTS
+-- ----------   ---------- ------------------------------------------
+-- Denise Day   11/10/05    initial incorporation into package
+--===================================================================
+--
+                       p_value IN NUMBER) RETURN VARCHAR2 IS
+                       
+   v_parameters VARCHAR2(80) := substr(('Number in : ' || p_value ),1,79);
+   v_code_loc   VARCHAR2(5);
+   v_return    VARCHAR2(60) ;
+   v_hours  NUMBER;
+   v_mins NUMBER;
+   v_sign NUMBER := sign(p_value); 
+   ex_invalid_number_big EXCEPTION;
+   ex_invalid_number_small EXCEPTION;   
+  
+ BEGIN
+
+  v_code_loc := '001';
+  p_common.debug_message('F_FORMAT_HHMM parameters: ' ||
+                       v_parameters||'  Code Location:   ' ||v_code_loc);
+                
+   IF p_value >= 60000 THEN
+    --RAISE ex_invalid_number_big;
+    v_return:= '> 999:59';
+   END IF;
+   IF p_value &lt;= -60000 THEN
+    --RAISE ex_invalid_number_small;
+    v_return:= '&lt; -999:59';
+   END IF;
+   
+  v_code_loc := '002.0';
+
+   IF v_sign = -1 AND p_value BETWEEN -59999 AND 59999
+   THEN v_mins := trunc(MOD(p_value*-1,60),2);
+     v_hours := trunc((p_value*-1)/60);
+     v_return :=  REPLACE('-'|| to_char(v_hours,'000')||':' ||  rtrim(to_char(v_mins,'00')),' ');
+   END IF;
+   IF v_sign &lt;> -1 AND p_value BETWEEN -59999 AND 59999
+    THEN v_code_loc := '002.1';
+    v_hours := trunc(p_value/60);
+    v_mins := trunc(MOD(p_value,60),2);
+    v_return :=  replace(rtrim(to_char(v_hours,'000'))||':' ||  rtrim(to_char(v_mins,'00')),' ');
+   END IF;
+  
+   IF v_sign = -1 AND p_value BETWEEN -5999 AND 5999
+   THEN v_mins := trunc(MOD(p_value*-1,60),2);
+     v_hours := trunc((p_value*-1)/60);
+     v_return :=  REPLACE('-'|| to_char(v_hours,'00')||':' ||  rtrim(to_char(v_mins,'00')),' ');
+   END IF;
+   IF v_sign &lt;> -1 AND p_value BETWEEN -5999 AND 5999
+    THEN v_code_loc := '002.1';
+    v_hours := trunc(p_value/60);
+    v_mins := trunc(MOD(p_value,60),2);
+    v_return :=  replace(rtrim(to_char(v_hours,'00'))||':' ||  rtrim(to_char(v_mins,'00')),' ');
+   END IF;
+  v_code_loc := '003';
+
+ RETURN v_return;
+
+ EXCEPTION
+  WHEN ex_invalid_number_big THEN
+  
+   p_common.handle_error('.F_FORMAT_HHMM',
+                         v_code_loc -- Code location.
+                        ,
+                         '1000' -- First Choice error number.
+                        ,
+                          'An error was encountered - invalid value,value must be less than 59999 to convert to HHH:MM',
+                        v_parameters);
+  
+    WHEN ex_invalid_number_small THEN
+  
+    p_common.handle_error('.F_FORMAT_HHMM',
+                         v_code_loc -- Code location.
+                        ,
+                         '1000' -- First Choice error number.
+                        ,
+                          'An error was encountered - invalid value,value must be bigger than -59999 to convert to HHH:MM',
+                        v_parameters);
+  
+ WHEN OTHERS THEN
+  
+   raise_application_error(-20001,'An error was encountered - '||SQLCODE||' -ERROR- '||SQLERRM);
+
+END F_FORMAT_HHMM;    
+--------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------            
+/*
+FUNCTION f_handle_osprey_conv_exception(
+-- NAME: f_handle_osprey_conv_exception
+-- PURPOSE: to prevent a report from erroring because a single row cannot be converted using the 
+--          P_Osprey.Convert_Unit_Type function to convert a quantity from one unit type to another.
+--         BUGS: It is known that P_common .Handle_error uses -200000 to manage other exceptions - therefore all exception 
+--               errors will be returned from the  P_Osprey.Convert_Unit_Type and converted to a null
+--               This will need to be managed in future releases of P_COMMON.Handle_Error
+--
+--         USAGE EXAMPLE :
+--                       SELECT f_handle_osprey_conv_exception( 200 [qty],1 [KG],4 [NM])
+--                       FROM dual;
+--   converting Kilograms to Nautical Miles is not possible so this would normally stop a report
+--   dead IN its tracks this way  NULL IS RETURN
+--
+-- MODIFICATION HISTORY
+-- PERSON       DATE       COMMENTS
+-- ----------   ---------- ------------------------------------------
+-- Denise Day   12/10/05    initial development
+--===================================================================
+--
+                             p_in_quantity       IN osprey.financial_movement.financial_movement_quantity%TYPE,
+                             p_in_from_unit_type IN osprey.unit_type.untyp_id%TYPE,
+                             p_in_to_unit_type   IN osprey.unit_type.untyp_id%TYPE) 
+                             
+  RETURN osprey.financial_movement.financial_movement_quantity%TYPE  is
+  v_result  osprey.financial_movement.financial_movement_quantity%TYPE ;
+  v_parameters VARCHAR2(80) := substr(('Values in : qty: ' || p_in_quantity||' From Unit : '||p_in_from_unit_type||' To Unit Type : '||p_in_to_unit_type ),1,79);
+  conversion_error EXCEPTION;
+  PRAGMA EXCEPTION_INIT (conversion_error,-20000);
+  
+    BEGIN
+       BEGIN 
+       v_result := P_Osprey.Convert_Unit_Type(p_in_quantity,p_in_from_unit_type,p_in_to_unit_type);
+       END;
+    RETURN v_result;
+    
+  EXCEPTION 
+  
+     WHEN conversion_error THEN 
+     v_result := NULL;
+     RETURN v_result;  
+     
+     WHEN OTHERS THEN 
+     p_common.Handle_Error('f_handle_osprey_conv_exception','001','900',dbms_utility.format_error_stack,v_parameters);
+
+END f_handle_osprey_conv_exception;     
+-------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------
+FUNCTION f_handle_osprey_cur_conv_error(
+-- NAME: f_handle_osprey_cur_conv_error
+-- PURPOSE: to prevent a report from erroring because a single row cannot be converted to a currency using the 
+--          P_Osprey.Convert_Currency function to convert an amount from one currency to another.
+--         BUGS: It is known that P_common .Handle_error uses -200000 to manage other exceptions - therefore all exception 
+--               errors will be returned from the  P_Osprey.Convert_Currency and converted to a null
+--               This will need to be managed in future releases of P_COMMON.Handle_Error
+--
+--         USAGE EXAMPLE :
+--                       SELECT f_handle_osprey_cur_conv_error( 200 [amt],'USD' [From currency],'EUR' [to Currency]],sysdate [conversion date],'IN HOUSE' [Conv Type])
+--                       FROM dual;
+--   converting 200USD to EUR at todays rate date, using InHouse b=not Spot rate if conversion rate between USD and EUR for sysdate  and InHouse does not exist the report
+--   would stop dead in its tracks this way  NULL IS RETURNED
+--
+-- MODIFICATION HISTORY
+-- PERSON       DATE       COMMENTS
+-- ----------   ---------- ------------------------------------------
+-- Denise Day   21/10/05    initial development
+--===================================================================
+--
+                             p_amount       IN osprey.financial_movement.financial_movement_amt%TYPE,
+                             p_from_currency IN OSPREY.FINANCIAL_MOVEMENT.CURRENCY_CODE%TYPE,
+                             p_to_currency   IN OSPREY.FINANCIAL_MOVEMENT.CURRENCY_CODE%TYPE,
+                             p_convert_date IN DATE,
+                             p_convert_type IN VARCHAR2)
+                             
+  RETURN osprey.financial_movement.financial_movement_amt%TYPE  IS
+  
+  v_result  osprey.financial_movement.financial_movement_amt%TYPE ;
+  v_parameters VARCHAR2(80) := 
+              substr(('Values in : Amt: ' || p_amount||' From: '||p_from_currency||' To : '||p_to_currency||'As At : '||p_convert_date||'Using Rate type : '||p_convert_type ),1,79);
+  conversion_error EXCEPTION;
+  PRAGMA EXCEPTION_INIT (conversion_error,-20000);
+  
+    BEGIN
+       BEGIN 
+       v_result := P_Osprey.Convert_currency(p_amount,p_from_currency,p_to_currency,p_convert_date,p_convert_type);
+       END;
+    RETURN v_result;
+    
+  EXCEPTION 
+  
+     WHEN conversion_error THEN 
+     v_result := NULL;
+     RETURN v_result;  
+     
+     WHEN OTHERS THEN 
+     p_common.Handle_Error('f_handle_osprey_cur_conv_except','001','900',dbms_utility.format_error_stack,v_parameters);
+
+END f_handle_osprey_cur_conv_error;       
+*/
+END P_MIS_UTILS;</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

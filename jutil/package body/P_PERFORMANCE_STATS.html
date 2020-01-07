@@ -1,0 +1,534 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_PERFORMANCE_STATS/report.js" type="text/javascript"></script>
+<link href="P_PERFORMANCE_STATS/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_PERFORMANCE_STATS</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P> Author  : Leigh Ashton</P><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>JUTIL</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_PERFORMANCE_STATS</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>2516264</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE&nbsp;BODY</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>16-JAN-18&nbsp;16.22.38</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>13-MAY-19&nbsp;10.42.52</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2019-05-13:10:42:52</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>INVALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE BODY p_performance_stats IS
+
+  -- Author  : Leigh Ashton
+  -- Created : may 2004
+  -- Purpose : track oracle performance stats
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION store_long_running_sql(p_elapsed_time_criteria IN NUMBER,
+                                  p_num_to_store          IN NUMBER,
+                                  p_current_load          IN NUMBER DEFAULT NULL,
+                                  p_sort_by_disk_reads    IN CHAR DEFAULT 'N')
+    RETURN NUMBER IS
+  
+    v_stmnt_ctr NUMBER(3);
+    v_wrt1      NUMBER(3);
+    v_big_sql   CLOB;
+  
+    CURSOR curs1 IS
+      SELECT sql_text,
+             sharable_mem,
+             persistent_mem,
+             runtime_mem,
+             sorts,
+             version_count,
+             loaded_versions,
+             open_versions,
+             users_opening,
+             fetches,
+             executions,
+             users_executing,
+             loads,
+             first_load_time,
+             invalidations,
+             parse_calls,
+             disk_reads,
+             buffer_gets,
+             rows_processed,
+             command_type,
+             optimizer_mode,
+             parsing_user_id,
+             parsing_schema_id,
+             kept_versions,
+             address,
+             hash_value,
+             module,
+             module_hash,
+             action,
+             action_hash,
+             serializable_aborts,
+             cpu_time,
+             elapsed_time,
+             is_obsolete,
+             child_latch,
+             d.username
+      
+        FROM v$sqlarea v, all_users d
+       WHERE v.elapsed_time >= p_elapsed_time_criteria AND
+             d.user_id = v.parsing_user_id AND
+             d.username NOT IN ('ORACLE', 'SYSTEM', 'SYS')
+       ORDER BY /* sort by execution time to get n most longest running queries, 
+                                                                                                                           or sort by disk i/o to get n most i/o intensive operations */
+                decode(p_sort_by_disk_reads,
+                       'Y',
+                       disk_reads / decode(executions, 0, 1, executions),
+                       elapsed_time) DESC;
+    v_run_date    DATE := SYSDATE;
+    v_global_name VARCHAR2(30);
+    v_parameters  VARCHAR2(3000) := p_elapsed_time_criteria || ',' ||
+                                    p_num_to_store;
+  
+  BEGIN
+  
+    g_statement := 0;
+    --dbms_output.enable(100000);
+    v_stmnt_ctr := 0;
+  
+    p_common.debug_message('Started:' ||
+                           to_char(v_run_date, 'yy-mon-dd hh24:mi:ss'));
+    p_common.debug_message('Parms:' || v_parameters);
+  
+    SELECT substr(global_name, 1, 30) INTO v_global_name FROM global_name;
+  
+    g_statement := 20;
+  
+    FOR inrec IN curs1 LOOP
+      g_statement := 30;
+      v_stmnt_ctr := v_stmnt_ctr + 1;
+      IF v_stmnt_ctr > p_num_to_store THEN
+        EXIT;
+      END IF;
+    
+      p_common.debug_message('hash:' || inrec.hash_value || ' ,add:' ||
+                             inrec.address);
+    
+      --dbms_output.put_line('sqllength:'||length(inrec.sql_text)   );
+    
+      --dbms_output.put_line('biglength:'||length(v_big_sql)   );
+    
+      -- next section displays on log if p_common.debug_message() enabled for session
+    
+      p_common.debug_message('--------------------------------------' ||
+                             '--------------------------------------');
+      p_common.debug_message('SQL Stmnt Number: ' || to_char(v_stmnt_ctr));
+      p_common.debug_message('--------------------------------------' ||
+                             '--------------------------------------');
+      p_common.debug_message('Executions : ' || to_char(inrec.executions));
+      p_common.debug_message('Disk Reads : ' || to_char(inrec.disk_reads) ||
+                             ' Buffer Gets : ' ||
+                             to_char(inrec.buffer_gets));
+      p_common.debug_message('First Load Time: ' || inrec.first_load_time);
+      p_common.debug_message('SQL Statement-------->');
+      v_wrt1      := 1;
+      g_statement := 40;
+    
+      WHILE v_wrt1 &lt;= ceil(length(inrec.sql_text) / 200) LOOP
+        p_common.debug_message('.....' || substr(inrec.sql_text,
+                                                 ((v_wrt1 - 1) * 200) + 1,
+                                                 200));
+        v_wrt1 := v_wrt1 + 1;
+      END LOOP;
+    
+      p_common.debug_message('--------------------------------------' ||
+                             '--------------------------------------');
+      p_common.debug_message(' ');
+    
+      g_statement := 50;
+      -- insert into table
+    
+      /* concat all the sql from v_$sql_text and then split by putting new lines in */
+      SELECT
+      --    p_text_handler.wwrap
+       ((p_text_handler.concat_list(CURSOR
+                                    (SELECT sql_text
+                                       FROM sys.v_$sqltext t
+                                      WHERE t.hash_value = inrec.hash_value AND
+                                            t.address = inrec.address
+                                      ORDER BY piece)))) big_sql
+        INTO v_big_sql
+        FROM dual;
+    
+      g_statement := 55;
+    
+      INSERT INTO sql_performance_history
+        (sql_perf_history_seq,
+         run_date,
+         db_instance,
+         current_load,
+         sql_text,
+         sharable_mem,
+         persistent_mem,
+         runtime_mem,
+         sorts,
+         version_count,
+         loaded_versions,
+         open_versions,
+         users_opening,
+         fetches,
+         executions,
+         users_executing,
+         loads,
+         first_load_time,
+         invalidations,
+         parse_calls,
+         disk_reads,
+         buffer_gets,
+         rows_processed,
+         command_type,
+         optimizer_mode,
+         parsing_user_id,
+         parsing_schema_id,
+         kept_versions,
+         address,
+         hash_value,
+         module,
+         module_hash,
+         action,
+         action_hash,
+         serializable_aborts,
+         cpu_time,
+         elapsed_time,
+         is_obsolete,
+         child_latch,
+         username)
+      VALUES
+        (seq_perf_stat.NEXTVAL,
+         v_run_date,
+         v_global_name,
+         p_current_load, -- same value for all rows in this run
+         v_big_sql,
+         inrec.sharable_mem,
+         inrec.persistent_mem,
+         inrec.runtime_mem,
+         inrec.sorts,
+         inrec.version_count,
+         inrec.loaded_versions,
+         inrec.open_versions,
+         inrec.users_opening,
+         inrec.fetches,
+         inrec.executions,
+         inrec.users_executing,
+         inrec.loads,
+         inrec.first_load_time,
+         inrec.invalidations,
+         inrec.parse_calls,
+         inrec.disk_reads,
+         inrec.buffer_gets,
+         inrec.rows_processed,
+         inrec.command_type,
+         inrec.optimizer_mode,
+         inrec.parsing_user_id,
+         inrec.parsing_schema_id,
+         inrec.kept_versions,
+         inrec.address,
+         inrec.hash_value,
+         inrec.module,
+         inrec.module_hash,
+         inrec.action,
+         inrec.action_hash,
+         inrec.serializable_aborts,
+         inrec.cpu_time,
+         inrec.elapsed_time,
+         inrec.is_obsolete,
+         inrec.child_latch,
+         inrec.username
+         
+         );
+    
+      g_statement := 60;
+    
+    END LOOP;
+  
+    g_statement := 70;
+  
+    p_common.debug_message('');
+    p_common.debug_message(v_stmnt_ctr || ' statements processed.');
+    p_common.debug_message('Ended:' ||
+                           to_char(SYSDATE, 'yy-mon-dd hh24:mi:ss'));
+  
+    RETURN 0;
+  
+  EXCEPTION
+    WHEN OTHERS THEN
+      g_sqlcode := SQLCODE;
+      g_sqlerrm := substr(SQLERRM, 1, 100);
+      p_common.handle_error(g_package_name || '.store_long_running',
+                            g_statement -- Code location.
+                           ,
+                            '900' -- First Choice error number.
+                           ,
+                            SQLERRM,
+                            v_parameters);
+      app_util.file_log(g_statement, 'Gen error' || g_sqlerrm);
+      dbms_output.put_line(g_statement || ' General error' || g_sqlerrm);
+      app_util.end_logging;
+      app_util.log(g_package_name,
+                   NULL,
+                   g_log_sequence,
+                   'ALL',
+                   'GENERROR',
+                   'FATAL',
+                   'Others excp',
+                   substr('General error at:' || g_statement || ',' ||
+                          g_sqlerrm || ' ' || v_parameters,
+                          1,
+                          200));
+    
+      RETURN 1;
+    
+  END;
+
+----------------------------------------------------------------
+----------------------------------------------------------------                      
+PROCEDURE Benchmark_Sql(p_load IN NUMBER)
+
+/* Author : Jyoti Renganathan
+   Created: 21/06/07
+   Purpose: Calculates Executing time for each queries stored  in  benchmark_sql table.
+            p_load : is the average   load on the server while executing this query, passed through shell script
+                     default is 0 , when run through sql plus
+*/
+
+ Is
+
+     
+		li_theCursor      integer default dbms_sql.open_cursor;
+		li_status         integer;
+		l_data            p_dbms_sql_utility.varchar2_table;
+
+		lts_before_time   timestamp;
+		lts_after_time	  timestamp;
+    
+    l_runid           application_log.run_id%TYPE ; 
+    l_seq_runid       benchmark_sql_timing.run_id%TYPE;
+
+		CURSOR c_getSelect  IS
+		   SELECT sql_text,sql_id  
+       FROM benchmark_sql b
+       WHERE b.enable_benchmrk =  'Y';
+
+	   BEGIN
+     
+        l_runid := app_util.Create_Run_Id();
+        app_util.Store_Start_Time('BENCHMRK',l_runid);
+        
+        SELECT  BENCHMARK_RUNID_SEQ.NEXTVAL 
+        INTO l_seq_runid 
+        FROM dual ; 
+        
+        p_common.Set_Debug_Mode('ON');
+        p_common.Debug_Message('LOAD IS  ******** ' || p_load);
+     -- p_common.Debug_Message('l_load ' || l_load);
+
+	       -- Go through each select and store start time and end time
+	       FOR r_getSelect IN  c_getSelect LOOP
+         
+         lts_before_time := systimestamp ;
+	       p_common.Debug_Message('before_time ' ||lts_before_time );
+         
+         -- replace any double quotes by single quotes and parse select into cursor variable li_theCursor
+	       dbms_sql.parse( li_theCursor,replace(r_getSelect.sql_text,'"', ''''),dbms_sql.native );
+
+         -- defines all the columns in the select list
+	       p_dbms_sql_utility.define_all( li_theCursor );
+	       li_status := dbms_sql.execute(li_theCursor);
+
+	       WHILE ( dbms_sql.fetch_rows(li_theCursor) > 0 ) LOOP
+         		   l_data := p_dbms_sql_utility.fetch_row( li_theCursor );
+	       END LOOP;
+
+	       lts_after_time	:= systimestamp ;
+	       p_common.Debug_Message('after time ' ||lts_after_time );
+                  
+         p_common.Debug_Message('Total time : ' || (lts_after_time - lts_before_time));
+         
+         INSERT INTO benchmark_sql_timing
+                   (run_id, 
+                    sql_id,
+                    start_time,
+                    end_time,
+                    current_load)
+         VALUES    (l_seq_runid,
+                    r_getSelect.sql_id,
+                    lts_before_time,
+                    lts_after_time,
+                    p_load ) ;
+                  
+         commit; 
+	       END LOOP ;  -- end of r_getSelect cursor
+         
+
+         app_util.Store_End_Time('BENCHMRK',l_runid);
+
+	   EXCEPTION
+	       WHEN OTHERS THEN
+		      -- EXECUTE IMMEDIATE( 'alter session set nls_date_format=''dd-MON-yy'' ');
+ 		       dbms_output.put_line('error is : ' || sqlcode || sqlerrm );
+		       RAISE;
+
+END Benchmark_Sql;
+
+
+END p_performance_stats;
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>
