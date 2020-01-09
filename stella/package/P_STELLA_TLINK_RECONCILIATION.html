@@ -88,15 +88,15 @@
 </tr>
 <tr>
 <td>CREATED</td>
-<td>16-JAN-18&nbsp;17.30.44</td>
+<td>16-JAN-18</td>
 </tr>
 <tr>
 <td>LAST_DDL_TIME</td>
-<td>16-JAN-18&nbsp;17.30.45</td>
+<td>09-JAN-20</td>
 </tr>
 <tr>
 <td>TIMESTAMP</td>
-<td>2009-11-03:17:37:19</td>
+<td>2020-01-07:15:04:05</td>
 </tr>
 <tr>
 <td>STATUS</td>
@@ -194,13 +194,13 @@ PACKAGE        p_stella_tlink_reconciliation IS
 
   -- Public declarations
   g_version   VARCHAR2(20) := '001';
-  g_app_key   jutil.application_log.application_key%TYPE := 'STLTLR';
+  g_app_key   CHAR(8 BYTE) := 'STLTLR';
   g_statement NUMBER := 0;
   g_sqlerrm   VARCHAR2(500);
   g_sqlcode   CHAR(20);
   g_debug     BOOLEAN := FALSE;
 
-  g_log_sequence jutil.application_log.log_sequence%TYPE;
+  g_log_sequence NUMBER(10,0);
 
   ------------------------------------------------------------------------------
   ------------------------------------------------------------------------------
@@ -277,9 +277,7 @@ PACKAGE        p_stella_tlink_reconciliation IS
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 
-END p_stella_tlink_reconciliation; --end of package
-
- </pre>
+END p_stella_tlink_reconciliation; --end of package</pre>
 </div>
 </div>
 </div>

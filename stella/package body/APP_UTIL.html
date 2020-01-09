@@ -1,0 +1,901 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="APP_UTIL/report.js" type="text/javascript"></script>
+<link href="APP_UTIL/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">APP_UTIL</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P> Author  : LASHTON</P><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>STELLA</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>APP_UTIL</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>3625222</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE&nbsp;BODY</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>08-JAN-20</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>09-JAN-20</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2020-01-09:10:44:39</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE BODY          "APP_UTIL" IS
+
+  -- Author  : LASHTON
+  -- Created : 23/01/03 11:50:05
+  -- Purpose : generic utility package containing common application code that can be re-used
+
+  -- 08/07/05 Paul Butler   Changed send_email:
+  --                        p_recp may contain comma-separated list of email addreses in which case
+  --                        split it and call utl_smtp.rcpt for each one.
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  g_mail_conn utl_smtp.connection;
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  -- Author : Jyoti Renganathan
+  -- Created : 01-07-2004
+  -- Version : 1.0
+  -- Purpose : pl sql version of above,
+  --           For the given parameters , sets up the registry property in the application_registry
+  --           table
+
+  PROCEDURE set_registry_property(p_application_key  application_registry.application_key%TYPE,
+                                  p_application_mode application_registry.application_mode%TYPE,
+                                  p_user_key         application_registry.user_key%TYPE,
+                                  p_parameter_key    application_registry.parameter_key%TYPE,
+                                  p_parameter_type   application_registry.parameter_type%TYPE,
+                                  p_parameter_value  application_registry.parameter_value%TYPE) IS
+
+    ex_no_registry EXCEPTION;
+    v_parms       VARCHAR2(2000);
+    v_updatecount NUMBER;
+
+  BEGIN
+
+    v_parms := p_application_key || ' ' || p_application_mode || ' ' ||
+               p_user_key || ' ' || p_parameter_key || ' ' ||
+               p_parameter_type || ' ' || p_parameter_value;
+
+    UPDATE application_registry
+       SET parameter_value = p_parameter_value
+     WHERE TRIM(upper(application_key)) = TRIM(upper(p_application_key))
+       AND TRIM(upper(application_mode)) = TRIM(upper(p_application_mode))
+       AND TRIM(upper(user_key)) = TRIM(upper(p_user_key))
+       AND TRIM(upper(parameter_key)) = TRIM(upper(p_parameter_key));
+
+    v_updatecount := SQL%ROWCOUNT;
+
+    IF (v_updatecount = 0) THEN
+      dbms_output.put_line('ERROR no registry found for :' || v_parms || ' ' ||
+                           to_char(SYSDATE, 'yy-mon-dd hh24:mi:ss'));
+      p_common.handle_error(g_package_name || '.set_registry_property',
+                            0 -- Code location.
+                           ,
+                            '909' -- First Choice error number.
+                           ,
+                            'Registry setting not found',
+                            v_parms);
+
+      RAISE ex_no_registry;
+    END IF;
+
+  END set_registry_property;
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+
+  FUNCTION get_registry_property(p_application_key  CHAR,
+                                 p_application_mode CHAR,
+                                 p_user_key         CHAR,
+                                 p_parameter_key    CHAR) RETURN VARCHAR2 AS
+
+    v_parameter_value application_registry.parameter_value%TYPE;
+    ex_no_registry EXCEPTION;
+    v_parms VARCHAR2(100);
+  BEGIN
+
+    v_parms := p_application_key || ' ' || p_application_mode || ' ' ||
+               p_user_key || ' ' || p_parameter_key;
+
+    SELECT TRIM(parameter_value)
+      INTO v_parameter_value
+      FROM application_registry
+     WHERE TRIM(application_key) = TRIM(p_application_key)
+       AND TRIM(application_mode) = TRIM(p_application_mode)
+       AND TRIM(user_key) = TRIM(p_user_key)
+       AND TRIM(parameter_key) = TRIM(p_parameter_key);
+
+    RETURN v_parameter_value;
+
+  EXCEPTION
+    WHEN too_many_rows THEN
+      RETURN 'ERROR, too many rows in registry';
+    WHEN no_data_found THEN
+
+      dbms_output.put_line('ERROR no registry found for :' || v_parms || ' ' ||
+                           to_char(SYSDATE, 'yy-mon-dd hh24:mi:ss'));
+      p_common.handle_error(g_package_name || '.get_registry_property',
+                            0 -- Code location.
+                           ,
+                            '909' -- First Choice error number.
+                           ,
+                            'Registry setting not found',
+                            v_parms);
+
+      RAISE ex_no_registry;
+
+      RETURN 'ERROR, registry key not found';
+
+
+  END get_registry_property;
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+
+
+  PROCEDURE setup_logging(p_application_key CHAR,
+                          p_run_mode        CHAR,
+                          p_in_user         CHAR) AS
+
+    v_ind              CHAR(1);
+    v_file_ind         CHAR(1);
+    v_utl_file_log_dir application_registry.parameter_value%TYPE;
+    v_utl_filename     application_registry.parameter_value%TYPE;
+    v_utl_logging_on   application_registry.parameter_value%TYPE;
+    v_debug_mode       application_registry.parameter_value%TYPE;
+    v_result           NUMBER;
+    v_statement        NUMBER := 0;
+
+  BEGIN
+
+    -- v_result:= app_set_registry(p_application_key,p_run_mode,p_in_user);
+
+    v_statement       := 10000;
+    g_run_date        := SYSDATE;
+    g_application_key := p_application_key;
+
+    v_utl_file_log_dir := get_registry_property(p_application_key,
+                                                p_run_mode,
+                                                p_in_user,
+                                                'UTLFileLogDir');
+    v_statement        := 10001;
+    v_utl_filename     := get_registry_property(p_application_key,
+                                                p_run_mode,
+                                                p_in_user,
+                                                'UTLFileName');
+    v_statement        := 10002;
+    v_utl_logging_on   := get_registry_property(p_application_key,
+                                                p_run_mode,
+                                                p_in_user,
+                                                'UTLLoggingFlag'); -- y or n
+    v_statement        := 10003;
+    v_debug_mode       := get_registry_property(p_application_key,
+                                                p_run_mode,
+                                                p_in_user,
+                                                'DebugMode'); -- y or n
+    v_statement        := 10004;
+
+    IF upper(v_debug_mode) = 'Y' THEN
+      -- set session debug mode on in p_common
+      p_common.set_debug_mode('ON');
+    END IF;
+
+    IF upper(v_utl_logging_on) = 'Y' THEN
+      dbms_output.put_line('fildir:' || v_utl_file_log_dir || ' ' ||
+                           v_utl_filename);
+      g_file_log     := utl_file.fopen(v_utl_file_log_dir,
+                                       v_utl_filename,
+                                       'w');
+      g_file_logging := TRUE;
+    END IF;
+
+
+
+
+  EXCEPTION
+    WHEN utl_file.invalid_path THEN
+      dbms_output.put_line(v_statement || 'utlfile.invalid path:' ||
+                           substr(SQLERRM, 1, 100));
+    WHEN utl_file.invalid_mode THEN
+      dbms_output.put_line(v_statement || 'utlfile.invalid mode:' ||
+                           substr(SQLERRM, 1, 100));
+    WHEN utl_file.invalid_filehandle THEN
+      dbms_output.put_line(v_statement || 'utlfile.invalid filehandle:' ||
+                           substr(SQLERRM, 1, 100));
+    WHEN utl_file.invalid_operation THEN
+      dbms_output.put_line(v_statement || 'utlfile.invalid operation:' ||
+                           substr(SQLERRM, 1, 100));
+    WHEN utl_file.read_error THEN
+      dbms_output.put_line(v_statement || 'utlfile.read error:' ||
+                           substr(SQLERRM, 1, 100));
+    WHEN utl_file.write_error THEN
+      dbms_output.put_line(v_statement || 'utlfile.write error:' ||
+                           substr(SQLERRM, 1, 100));
+    WHEN utl_file.internal_error THEN
+      dbms_output.put_line(v_statement || 'utlfile.internal error:' ||
+                           substr(SQLERRM, 1, 100));
+
+    WHEN OTHERS THEN
+      dbms_output.put_line(v_statement || 'error in setup_logging:' ||
+                           substr(SQLERRM, 1, 100));
+      IF SQLERRM = 'User-Defined Exception' THEN
+        dbms_output.put_line('may have something to do with utlfile rights');
+      END IF;
+
+  END setup_logging;
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+
+
+  PROCEDURE end_logging AS
+
+  BEGIN
+    IF g_file_logging THEN
+      utl_file.put_line(g_file_log, '[EOF]');
+
+      utl_file.fclose(g_file_log);
+    END IF;
+
+  END end_logging;
+
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+
+  PROCEDURE file_log(p_statement IN NUMBER,
+                     p_text      IN CHAR) IS
+
+
+
+
+
+    v_secs NUMBER(30);
+
+  BEGIN
+
+    IF g_file_logging THEN
+
+      --SELECT hsecs into v_secs FROM v_$timer;
+      v_secs := dbms_utility.get_time();
+
+      utl_file.put_line(g_file_log,
+                        'S:' || p_statement || ',' ||
+                        rpad(substr(p_text, 1, 150), 150, ' ') || ',' ||
+                        to_char(SYSDATE, 'yy-mon-dd hh24:mi:ss') || ',' ||
+                        v_secs);
+
+    END IF;
+
+  END file_log;
+
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  PROCEDURE file_log(p_text IN CHAR) IS
+
+    -- overloaded from above procedure
+    -- no performance trace needed, just output the text
+
+
+
+  BEGIN
+
+    IF g_file_logging THEN
+
+
+      utl_file.put_line(g_file_log, p_text);
+
+    END IF;
+
+  END file_log;
+
+
+  -----
+  -----
+  -----
+
+
+  PROCEDURE log(
+
+                p_app_key       CHAR, --                          application key
+                p_run_id        IN CHAR, --(30)                       Identifier for this run of the application
+                p_log_seq       IN OUT NUMBER, --(4)                      Sequence of the log message within run
+                p_event_period  CHAR, --VARCHAR2(10)                   The period the meggage relates to i.g W2003 or ALL
+                p_event_type    CHAR, --VARCHAR2(20)                   The event type
+                p_event_level   CHAR, --VARCHAR2(15)                   The level i.e. WARNING, INFO, SEVERE, FATAL
+                p_event_summary CHAR, --VARCHAR2(50)                   Summary message
+                p_event_detail  CHAR --VARCHAR2(200) Y                Detailed message
+                ) AS
+
+
+    PRAGMA AUTONOMOUS_TRANSACTION;
+    v_secs        NUMBER(30);
+    v_string_secs VARCHAR2(100);
+
+
+  BEGIN
+
+    --SELECT hsecs into v_secs FROM v$timer;
+
+    v_secs        := dbms_utility.get_time();
+    v_string_secs := substr(v_secs, length(v_secs) - 3, length(v_secs));
+    v_secs        := to_number(v_string_secs);
+    --dbms_output.put_line(v_secs);
+
+
+    INSERT INTO application_log
+      (application_key, --                 Unique key for the application
+       run_id, --                       Identifier for this run of the application
+       log_sequence, --                      Sequence of the log message within run
+       event_date, --                            The date and time of the event
+       event_period, --                   The period the meggage relates to i.g W2003 or ALL
+       event_type, --                   The event type
+       event_level, --                   The level i.e. WARNING, INFO, SEVERE, FATAL
+       event_summary, --                   Summary message
+       event_detail --               Detailed message
+       )
+    VALUES
+      (substr(p_app_key, 1, 8),
+       substr(nvl(p_run_id, to_char(g_run_date, 'YY-MM-DD HH24:MI:SS')),
+              1,
+              30),
+       decode(p_log_seq, NULL, v_secs, p_log_seq), --p_LOG_SEQUENCE    NUMBER, --(4)                      Sequence of the log message within run
+       SYSDATE,
+       substr(p_event_period, 1, 10),
+       substr(p_event_type, 1, 10),
+       substr(p_event_level, 1, 15),
+       substr(p_event_summary, 1, 50),
+       substr(p_event_detail, 1, 200));
+
+    COMMIT;
+    p_log_seq := p_log_seq + 1;
+
+  END log;
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+
+  FUNCTION create_run_id RETURN CHAR IS
+
+    v_runid VARCHAR2(17);
+
+  BEGIN
+    SELECT to_char(SYSDATE, 'YYYYMMDD HH24:MI:SS') INTO v_runid FROM dual;
+
+    RETURN v_runid;
+  END;
+
+
+  PROCEDURE store_start_time(p_key   IN CHAR,
+                             p_runid IN CHAR) IS
+
+    v_next_seq INTEGER(10) := 0;
+
+  BEGIN
+
+    -- get next available sequence id for the key and run_id supplied
+    -- primary key on table (application_log) is all three
+    BEGIN
+      SELECT nvl(MAX(al.log_sequence), 0)
+        INTO v_next_seq
+        FROM application_log al
+       WHERE al.application_key = p_key
+         AND al.run_id = p_runid;
+
+    EXCEPTION
+      WHEN no_data_found THEN
+        v_next_seq := 0;
+
+    END;
+
+    -- increment highest sequence no
+    v_next_seq := v_next_seq + 1;
+
+    -- create a row in the app_log table which logs the start time
+    log(p_key,
+        p_runid,
+        v_next_seq,
+        'ALL',
+        'START TIME',
+        'INFO',
+        'PROCESS STARTED',
+        '');
+
+  END store_start_time;
+
+
+  PROCEDURE store_end_time(p_key   IN CHAR,
+                           p_runid IN CHAR) IS
+
+    v_next_seq INTEGER(10) := 0;
+
+  BEGIN
+
+    -- get next available sequence id for the key and run_id supplied
+    -- primary key on table (application_log) is all three
+    BEGIN
+      SELECT nvl(MAX(al.log_sequence), 0)
+        INTO v_next_seq
+        FROM application_log al
+       WHERE al.application_key = p_key
+         AND al.run_id = p_runid;
+
+    EXCEPTION
+      WHEN no_data_found THEN
+        v_next_seq := 0;
+
+    END;
+
+    -- increment highest sequence no
+    v_next_seq := v_next_seq + 1;
+
+    -- create a row in the app_log table which logs the end time
+    log(p_key,
+        p_runid,
+        v_next_seq,
+        'ALL',
+        'END TIME',
+        'INFO',
+        'PROCESS ENDED',
+        '');
+
+  END store_end_time;
+
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------------
+
+
+
+  -----------------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------------------
+
+
+  FUNCTION is_number(p_in_string CHAR) RETURN BOOLEAN IS
+
+    x NUMBER := 0;
+
+  BEGIN
+
+    x := p_in_string;
+
+    RETURN TRUE;
+
+  EXCEPTION
+    WHEN value_error THEN
+      RETURN FALSE;
+
+  END is_number;
+
+
+  -----------------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------------------
+
+  /* This procedure is used to send email from oracle.  */
+  -- 08/07/05 Paul Butler   p_recp may contain comma-separated list of email addreses in which case
+  --                        split it and call utl_smtp.rcpt for each one.
+
+  PROCEDURE send_email(p_host    IN VARCHAR2,
+                       p_send    IN VARCHAR2,
+                       p_recp    IN VARCHAR2,
+                       p_subject IN VARCHAR2,
+                       p_message IN VARCHAR2) AS
+
+    -- local variables
+    v_pos   NUMBER;
+    v_start NUMBER := 1;
+
+  BEGIN
+    g_mail_conn := utl_smtp.open_connection(p_host, 25);
+    utl_smtp.helo(g_mail_conn, p_host);
+    utl_smtp.mail(g_mail_conn, p_send);
+
+    -- 07/07/05 Split multiple addresses from p_recp
+    v_pos := instr(p_recp, ',', 1);
+    IF v_pos = 0 THEN
+      -- Only one email address in input parameter
+      utl_smtp.rcpt(g_mail_conn, p_recp);
+    ELSE
+      -- Do first address in list
+      utl_smtp.rcpt(g_mail_conn, substr(p_recp, v_start, v_pos - 1));
+      LOOP
+        -- Multiple email address list, move on to next address in list
+        v_start := v_pos + 1;
+        v_pos   := instr(p_recp, ',', v_start);
+        IF v_pos = 0 THEN
+          -- this is the last email in list
+          utl_smtp.rcpt(g_mail_conn, TRIM(substr(p_recp, v_start)));
+          EXIT;
+        END IF;
+        utl_smtp.rcpt(g_mail_conn,
+                      TRIM(substr(p_recp, v_start, v_pos - v_start)));
+      END LOOP;
+    END IF;
+
+    utl_smtp.open_data(g_mail_conn);
+    send_header('From', p_send);
+    send_header('To', p_recp);
+    send_header('Subject', p_subject);
+    utl_smtp.write_data(g_mail_conn, utl_tcp.crlf || p_message);
+    utl_smtp.close_data(g_mail_conn);
+    utl_smtp.quit(g_mail_conn);
+  EXCEPTION
+    WHEN utl_smtp.transient_error OR utl_smtp.permanent_error THEN
+      utl_smtp.quit(g_mail_conn);
+      raise_application_error(-20000,
+                              'Failed to send mail due to the following error: ' ||
+                              SQLERRM);
+  END send_email; --end of proc
+
+  -----------------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------------------
+
+
+  PROCEDURE send_header(NAME   IN VARCHAR2,
+                        header IN VARCHAR2) AS
+  BEGIN
+    utl_smtp.write_data(g_mail_conn,
+                        NAME || ': ' || header || utl_tcp.crlf);
+  END;
+
+
+  -- **************************************************************
+  -- *  Next_Log_Number                                           *
+  -- **************************************************************
+
+  FUNCTION next_log_number(p_appkey IN application_log.application_key%TYPE,
+                           p_runid  IN application_log.run_id%TYPE)
+    RETURN application_log.log_sequence%TYPE IS
+
+    v_next_seq application_log.log_sequence%TYPE;
+
+  BEGIN
+    BEGIN
+      SELECT nvl(MAX(al.log_sequence), 0)
+        INTO v_next_seq
+        FROM application_log al
+       WHERE al.application_key = p_appkey
+         AND al.run_id = p_runid;
+
+    EXCEPTION
+      WHEN no_data_found THEN
+        v_next_seq := 0;
+    END;
+
+    v_next_seq := v_next_seq + 1;
+
+    RETURN(v_next_seq);
+  END next_log_number;
+
+
+
+  -- **************************************************************
+  -- *  Get Parameter Values                                      *
+  -- **************************************************************
+
+  FUNCTION get_parameter_value(p_appkey   IN application_registry.application_key%TYPE,
+                               p_paramkey IN application_registry.parameter_key%TYPE)
+    RETURN application_registry.parameter_value%TYPE IS
+
+    v_retval application_registry.parameter_value%TYPE;
+
+  BEGIN
+    BEGIN
+      SELECT ar.parameter_value
+        INTO v_retval
+        FROM application_registry ar
+       WHERE upper(ar.application_key) = upper(p_appkey)
+         AND upper(ar.parameter_key) = upper(p_paramkey);
+
+    EXCEPTION
+      WHEN no_data_found THEN
+        v_retval := NULL;
+    END;
+
+    RETURN(v_retval);
+  END;
+
+  -- **************************************************************
+  -- *  Send Email with attachments 
+  --  Author  : Jyoti
+  -- Created : 24-Jan-2008
+  -- Purpose : General application utilities for sending email with attachment
+  -- **************************************************************
+  -- send_email_attachment('CAS_EXTR','MailList','/home/dw/SQL_Output_2','CASfile04012008_113924','slo-dwstdby','CAS Extract&lt;slo-dwstdby@firstchoice.co.uk>','CAS Extract');
+
+  --  p_host IN VARCHAR2, p_send IN VARCHAR2, p_recp IN VARCHAR2, p_subject IN VARCHAR2, p_message IN VARCHAR2
+
+  PROCEDURE send_email_attachment(p_appkey   IN application_registry.application_key%TYPE,
+                                  p_paramkey IN application_registry.parameter_key%TYPE,
+                                  p_fileloc  IN VARCHAR2,
+                                  p_filenm   IN VARCHAR2,
+                                  p_host     IN VARCHAR2,
+                                  p_sender   IN VARCHAR2,
+                                  p_subject  IN VARCHAR2) IS
+
+
+
+
+
+    conn utl_smtp.connection;
+    --:= utl_smtp.open_connection('smtp', 25);
+    --  v_file_name  VARCHAR2(100) := 'CASfile04012008_113924';
+    --  v_directory_name     VARCHAR2(100) := '/home/dw/SQL_Output_2';
+    v_file_handle  utl_file.file_type;
+    v_line         VARCHAR2(1000);
+    mesg           VARCHAR2(32767);
+    crlf           VARCHAR2(2) := chr(13) || chr(10);
+    v_totlines     NUMBER(10) := 0;
+    v_recp_list    VARCHAR2(5000);
+    v_statement_no NUMBER(10);
+
+    boundary            CONSTANT VARCHAR2(256) := '-----7D81B75CCC90D2974F7A1CBD';
+    multipart_mime_type CONSTANT VARCHAR2(256) := 'multipart/mixed; boundary="' ||
+                                                  boundary || '"';
+
+
+  BEGIN
+
+    v_statement_no := 1;
+    -- Get list of users who would receive e mails
+    SELECT parameter_value
+      INTO v_recp_list
+      FROM application_registry ar
+     WHERE ar.application_key = p_appkey
+       AND ar.parameter_key = p_paramkey;
+
+    -- Steps 1)  begin attachment   
+    --       2) write date
+    --       3) attach text
+
+    v_statement_no := 2;
+    conn           := send_mail.begin_mail(sender     => p_sender,
+                                                 recipients => v_recp_list,
+                                                 --recipients => 'Jyoti 1 &lt;jyoti.renganathan@firstchoice.co.uk>',
+                                                 --'"Paul Butler"&lt;paul.g.butler@firstchoice.co.uk>',
+                                                 --v_recp_list,
+                                                 --'Jyoti1&lt;jyoti.renganathan@firstchoice.co.uk>,Jyoti2&lt;jyoti.renganathan@firstchoice.co.uk>',
+                                                 subject   => p_host || ' - ' ||
+                                                              p_subject,
+                                                 mime_type => multipart_mime_type);
+
+    v_statement_no := 3;
+    send_mail.begin_attachment(conn         => conn,
+                                     mime_type    => 'text/plain',
+                                     inline       => FALSE,
+                                     filename     => p_filenm,
+                                     transfer_enc => '7 bit');
+
+
+
+    BEGIN
+
+
+      v_statement_no := 4;
+      v_file_handle  := utl_file.fopen(p_fileloc, p_filenm, 'r');
+      LOOP
+        v_statement_no := 5;
+        utl_file.get_line(v_file_handle, v_line);
+        mesg := v_line || crlf;
+        --dbms_output.put_line(mesg);
+        IF (length(TRIM(mesg)) > 0) THEN
+          send_mail.write_text(conn => conn, message => mesg);
+          v_totlines := v_totlines + 1;
+        END IF;
+      END LOOP;
+    EXCEPTION
+      WHEN OTHERS THEN
+        NULL; -- when end of file it will reach here
+    END;
+    utl_file.fclose(v_file_handle);
+
+    dbms_output.put_line('v_totlines' || v_totlines);
+
+    v_statement_no := 6;
+    send_mail.end_attachment(conn => conn);
+
+
+    v_statement_no := 7;
+    send_mail.end_mail(conn => conn);
+
+
+  EXCEPTION
+    WHEN utl_file.invalid_path THEN
+
+      dbms_output.put_line('  Error at statement no.  = ' ||
+                           v_statement_no ||
+                           ' in app_util.send_email_attachment ');
+
+      dbms_output.put_line('Error - Invalid Path ');
+
+    WHEN utl_file.invalid_mode THEN
+
+      dbms_output.put_line('  Error at statement no.  = ' ||
+                           v_statement_no ||
+                           ' in app_util.send_email_attachment ');
+
+      dbms_output.put_line('Error - Invalid Mode ');
+
+    WHEN utl_file.invalid_operation THEN
+
+      dbms_output.put_line('  Error at statement no.  = ' ||
+                           v_statement_no ||
+                           ' in app_util.send_email_attachment ');
+
+      dbms_output.put_line('Error - Invalid Operation ');
+
+    WHEN no_data_found THEN
+
+      utl_file.fclose(v_file_handle);
+      --    utl_file.fclose(v_exc_file_handle);
+
+
+      dbms_output.put_line('  Error at statement no.  = ' ||
+                           v_statement_no ||
+                           ' in app_util.send_email_attachment ');
+
+      dbms_output.put_line(SQLCODE || ' :' || SQLERRM);
+
+  END send_email_attachment;
+
+END app_util;</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

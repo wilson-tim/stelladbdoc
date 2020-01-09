@@ -1,0 +1,864 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_COMMON/report.js" type="text/javascript"></script>
+<link href="P_COMMON/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_COMMON</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P>                                                                                <BR><BR>    Purpose<BR>    -------<BR>    Common procedures and functions for First Choice (e.g. error processing, generic<BR>    insert) used at First Choice.<BR><BR>    History<BR>    -------<BR><BR>                                                                              Version<BR>    Date      By          Description                                         Hdr Bdy<BR>    ----      ----------- --------------------------------------------------- --- ---<BR>    02/09/02  A.James     Initial version.                                    001 001<BR>    07/11/02  A.James     Add procedure to dynamically execute passed SQL.    002 002<BR>    25/11/02  A.James     Handle buffer overflow in debug messages.           002 003<BR>    12/12/02  A.James     Do_Insert modified to only insert missing rows into 002 004<BR>                          target table.<BR>    06/09/04  L.Ashton    Changed debug_mesage to only display line number under certain conditions<BR>    13/05/05  A.James     Output full error message in error handling         002 005<BR>                          procedure if running in debug mode.<BR>    29/06/05  A.James     Add pipelined function to split a comma separated   003 006<BR>                          list into its elements.<BR>    01/10/05  J.Durnford  Added list element position to Get_Separated_List   003 007<BR>                          function<BR>    27/6/06   Jyoti       value_exists_inlist new function<BR><BR>                                                                                  </P><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>STELLA</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_COMMON</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>3625239</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE&nbsp;BODY</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>08-JAN-20</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>09-JAN-20</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2020-01-08:13:34:11</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE BODY          "P_COMMON" IS
+
+  /* ***************************************************************************** *
+
+    Purpose
+    -------
+    Common procedures and functions for First Choice (e.g. error processing, generic
+    insert) used at First Choice.
+
+    History
+    -------
+
+                                                                              Version
+    Date      By          Description                                         Hdr Bdy
+    ----      ----------- --------------------------------------------------- --- ---
+    02/09/02  A.James     Initial version.                                    001 001
+    07/11/02  A.James     Add procedure to dynamically execute passed SQL.    002 002
+    25/11/02  A.James     Handle buffer overflow in debug messages.           002 003
+    12/12/02  A.James     Do_Insert modified to only insert missing rows into 002 004
+                          target table.
+    06/09/04  L.Ashton    Changed debug_mesage to only display line number under certain conditions
+    13/05/05  A.James     Output full error message in error handling         002 005
+                          procedure if running in debug mode.
+    29/06/05  A.James     Add pipelined function to split a comma separated   003 006
+                          list into its elements.
+    01/10/05  J.Durnford  Added list element position to Get_Separated_List   003 007
+                          function
+    27/6/06   Jyoti       value_exists_inlist new function
+
+  * ***************************************************************************** */
+  -- Private global variables.
+  g_debug_mode                 BOOLEAN;
+  g_debug_display_line_numbers BOOLEAN := TRUE;
+
+  FUNCTION version RETURN VARCHAR2
+  /* ***************************************************************************** *
+                                                                              Version
+    Date      By          Description                                         Hdr Bdy
+    ----      ----------- --------------------------------------------------- --- ---
+    02/09/02  A.James     Initial version.                                    001 001
+
+    * ***************************************************************************** */
+   IS
+  BEGIN
+    RETURN 'Package: ' || g_package_name || '; Version: ' || g_version;
+  END version;
+
+  PROCEDURE handle_error(p_in_name       IN VARCHAR2,
+                         p_in_loc_stmt   IN VARCHAR2,
+                         p_in_err_code   IN VARCHAR2,
+                         p_in_err_msg    IN VARCHAR2,
+                         p_in_params     IN VARCHAR2 DEFAULT NULL,
+                         p_in_ora_err_no IN INTEGER DEFAULT -20000)
+  /* ***************************************************************************** *
+                                                                              Version
+    Date      By          Description                                         Hdr Bdy
+    ----      ----------- --------------------------------------------------- --- ---
+    02/09/02  A.James     Initial version.                                    001 001
+    25/11/02  A.James     Handle buffer overflow in debug messages.           002 003
+    13/05/05  A.James     Output full error message in error handling         002 005
+                          procedure if running in debug mode.
+    * ***************************************************************************** */
+   IS
+    raise_failure EXCEPTION;
+    v_output VARCHAR2(2000);
+    v_err_no INTEGER;
+  BEGIN
+
+    /*
+      Output full error message if running in debug mode. Enables full error to be viewed
+      if required rather than the truncated version.
+    */
+    p_common.debug_message('Full error message: ' || p_in_err_msg);
+    /*
+      Check error number in range -20000 to -20999.
+    */
+    IF (p_in_ora_err_no > -20000 OR p_in_ora_err_no &lt; -20999) THEN
+      raise_application_error(-20999,
+                              'Invalid ORA error number ' ||
+                              p_in_ora_err_no ||
+                              ' passed to P_COMMON.Handle_Error by ' ||
+                              p_in_name || '. ' ||
+                              'Value must be between -20000 and -20999. ' ||
+                              'Error cannot be reported properly.');
+    END IF;
+
+    v_err_no := p_in_ora_err_no;
+    v_output := substr('Error Raised at statement: ' || p_in_loc_stmt ||
+                       ' in ' || p_in_name,
+                       1,
+                       200);
+
+    v_output := v_output || chr(10); -- Add carriage retrun to get a newline.
+
+    v_output := v_output ||
+                substr('FCE-' || p_in_err_code || ': ' || p_in_err_msg,
+                       1,
+                       200);
+
+    v_output := v_output || chr(10); -- Add carriage retrun to get a newline.
+
+    IF p_in_params IS NOT NULL THEN
+      v_output := v_output || substr('Parameters: ' || p_in_params, 1, 200);
+    ELSE
+      v_output := v_output || ' No Parameters';
+    END IF;
+
+    raise_application_error(v_err_no,
+                            substr('First Choice handled error: ' ||
+                                   chr(10) || v_output || chr(10),
+                                   1,
+                                   2000));
+
+  END handle_error;
+
+  PROCEDURE create_copy_table(p_in_table_name      IN VARCHAR2,
+                              p_in_tablespace_name IN VARCHAR2,
+                              p_in_copy_table_name IN VARCHAR2)
+  /* ***************************************************************************** *
+                                                                              Version
+    Date      By          Description                                         Hdr Bdy
+    ----      ----------- --------------------------------------------------- --- ---
+    02/09/02  A.James     Initial version.                                    001 001
+
+    * ***************************************************************************** */
+   IS
+    /*
+     Create copy version of a table based upon the definition of an
+     existing table. The table will be created as an empty table.
+    */
+    v_sql VARCHAR2(2000);
+
+  BEGIN
+    v_sql := 'create table ' || p_in_table_name || ' ' || 'tablespace ' ||
+             p_in_tablespace_name || ' as select * from ' ||
+             p_in_copy_table_name || ' where 1 = 0';
+
+    -- Execute the table create.
+    EXECUTE IMMEDIATE v_sql;
+
+  EXCEPTION
+    WHEN OTHERS THEN
+      p_common.handle_error('retail_temp_tab.sql',
+                            '001' -- Code location.
+                           ,
+                            '902' -- First Choice error number.
+                           ,
+                            SQLERRM,
+                            v_sql,
+                            -20101);
+  END create_copy_table;
+
+  PROCEDURE do_insert(p_in_target_table_name IN VARCHAR2,
+                      p_in_source_table_name IN VARCHAR2,
+                      p_in_where_clause      IN VARCHAR2 DEFAULT NULL,
+                      p_in_target_owner      IN VARCHAR2 DEFAULT NULL,
+                      p_in_source_owner      IN VARCHAR2 DEFAULT NULL,
+                      p_in_large_rbs_name    IN VARCHAR2 DEFAULT NULL,
+                      p_out_insert_count     OUT INTEGER)
+  /* ***************************************************************************** *
+                                                                              Version
+    Date      By          Description                                         Hdr Bdy
+    ----      ----------- --------------------------------------------------- --- ---
+    02/09/02  A.James     Initial version.                                    001 001
+    12/12/02  A.James     Do_Insert modified to only insert missing rows into 002 004
+                          target table.
+
+    * ***************************************************************************** */
+   IS
+    /*
+       Builds the dynamic SQL to insert the data from the source table into
+      the target table.
+
+      Notes
+      -----
+      1.Only copies columns that match on both tables.
+      2.Target table must have a primary key constraint to ensure only missing records are
+        inserted. Also, primary key columns must match on both target and source tables.
+
+      N.B. It does not do a COMMIT. That is up to the calling environment.
+    */
+    v_parameters VARCHAR2(200) := substr('Target table:' ||
+                                         p_in_target_table_name ||
+                                         ', Source table:' ||
+                                         p_in_source_table_name ||
+                                         ',Target owner:' ||
+                                         p_in_target_owner ||
+                                         ',Source owner:' ||
+                                         p_in_source_owner || ',RBS name:' ||
+                                         p_in_large_rbs_name || ',WHERE:' ||
+                                         p_in_where_clause,
+                                         1,
+                                         200);
+
+    CURSOR c_colnames IS
+      SELECT column_name
+        FROM all_tab_columns
+       WHERE table_name = upper(p_in_target_table_name)
+         AND (owner = upper(p_in_target_owner) OR p_in_target_owner IS NULL)
+      INTERSECT
+      SELECT column_name
+        FROM all_tab_columns
+       WHERE table_name = upper(p_in_source_table_name)
+         AND (owner = upper(p_in_source_owner) OR p_in_source_owner IS NULL)
+       ORDER BY 1;
+
+    CURSOR c_pk IS
+      SELECT column_name
+        FROM all_cons_columns c, all_constraints p
+       WHERE p.owner = c.owner
+         AND p.table_name = c.table_name
+         AND p.constraint_name = c.constraint_name
+         AND p.constraint_type = 'P'
+         AND p.table_name = upper(p_in_target_table_name)
+       ORDER BY c.position;
+
+    v_sql_insert   VARCHAR2(8000);
+    v_sql_select   VARCHAR2(8000);
+    v_insert_count INTEGER;
+
+    v_first_time BOOLEAN := TRUE;
+    v_comma      VARCHAR2(1);
+
+    v_recs_found BOOLEAN := FALSE;
+    no_records EXCEPTION;
+    no_primary_key EXCEPTION;
+
+    v_target_owner VARCHAR2(31);
+    v_source_owner VARCHAR2(31);
+
+  BEGIN
+
+    IF p_in_large_rbs_name IS NOT NULL THEN
+      dbms_transaction.use_rollback_segment(p_in_large_rbs_name);
+    END IF;
+
+    IF p_in_target_owner IS NULL THEN
+      v_target_owner := NULL;
+    ELSE
+      v_target_owner := p_in_target_owner || '.';
+    END IF;
+
+    IF p_in_source_owner IS NULL THEN
+      v_source_owner := NULL;
+    ELSE
+      v_source_owner := p_in_source_owner || '.';
+    END IF;
+
+    v_sql_insert := 'insert into ' || v_target_owner ||
+                    p_in_target_table_name || ' (';
+
+    v_sql_select := ' select ';
+
+    v_recs_found := FALSE;
+    v_comma      := NULL;
+    v_first_time := TRUE;
+
+    FOR c_rec IN c_colnames LOOP
+      v_recs_found := TRUE;
+      v_sql_insert := v_sql_insert || v_comma || c_rec.column_name;
+      v_sql_select := v_sql_select || v_comma || c_rec.column_name;
+      v_comma      := ','; -- First time thru' comma would be null.
+    END LOOP;
+
+    IF NOT v_recs_found THEN
+      RAISE no_records;
+    END IF;
+
+    /*
+      Add final bits to insert part of dynamic SQL.
+    */
+    v_sql_insert := v_sql_insert || ') ';
+
+    /*
+      Set up select part of dynamic SQL.
+    */
+    v_sql_select := v_sql_select || ' from ' || v_source_owner ||
+                    p_in_source_table_name || ' t ' || ' where 1=1 ' -- Standard where clause.
+     ;
+
+    -- Append 'where' clause if there is one.
+    IF p_in_where_clause IS NOT NULL THEN
+      v_sql_select := v_sql_select || ' and ' || p_in_where_clause;
+    END IF;
+
+    -- Make sure only missing records are inserted.
+    v_sql_select := v_sql_select || ' and not exists (select null from ' ||
+                    p_in_target_table_name || ' s ';
+
+    v_recs_found := FALSE;
+    v_first_time := TRUE;
+
+    FOR c_pk_rec IN c_pk LOOP
+      v_recs_found := TRUE;
+      IF v_first_time THEN
+        v_first_time := FALSE;
+        v_sql_select := v_sql_select || ' where ';
+      ELSE
+        v_sql_select := v_sql_select || ' and ';
+
+      END IF;
+      v_sql_select := v_sql_select || ' s.' || c_pk_rec.column_name ||
+                      ' = ' || ' t.' || c_pk_rec.column_name;
+    END LOOP;
+
+    /*
+      Add final bits to select part of dynamic SQL.
+    */
+    v_sql_select := v_sql_select || ') ';
+
+    IF NOT v_recs_found THEN
+      RAISE no_primary_key;
+    END IF;
+
+    p_common.debug_message('Insert: ' || v_sql_insert || v_sql_select);
+
+    EXECUTE IMMEDIATE v_sql_insert || ' ' || v_sql_select;
+    v_insert_count := SQL%ROWCOUNT;
+
+    p_common.debug_message('Insert count: ' || v_insert_count);
+
+    p_out_insert_count := v_insert_count;
+
+  EXCEPTION
+    WHEN no_records THEN
+      p_common.handle_error(g_package_name || '.Do_Insert',
+                            '001' -- Code location.
+                           ,
+                            '903' -- First Choice error number.
+                           ,
+                            'Invalid table names or no matching columns on tables...',
+                            v_parameters);
+
+    WHEN no_primary_key THEN
+      p_common.handle_error(g_package_name || '.Do_Insert',
+                            '002' -- Code location.
+                           ,
+                            '903' -- First Choice error number.
+                           ,
+                            'No primary key can be found for target table...',
+                            v_parameters);
+
+    WHEN OTHERS THEN
+      p_common.handle_error(g_package_name || '.Do_Insert',
+                            '002' -- Code location.
+                           ,
+                            '903' -- First Choice error number.
+                           ,
+                            SQLERRM,
+                            v_parameters);
+  END do_insert;
+
+  PROCEDURE set_debug_mode(p_in_mode           IN VARCHAR2 DEFAULT 'OFF',
+                           p_line_num_required IN VARCHAR2 DEFAULT 'Y')
+  /* ***************************************************************************** *
+                                                                              Version
+    Date      By          Description                                         Hdr Bdy
+    ----      ----------- --------------------------------------------------- --- ---
+    02/09/02  A.James     Initial version.                                    001 001
+    06/09/04  L.Ashton    added switch to turn line numbering off
+    24/01/08  Jyoti       commented dbms output line in else.    
+    * ***************************************************************************** */
+   IS
+  BEGIN
+    IF upper(p_in_mode) = 'ON' THEN
+      g_debug_mode := TRUE;
+      dbms_output.enable(1000000); -- Set buffer to the maximum.
+      dbms_output.put_line('--- DEBUG ON ---');
+    ELSE
+      g_debug_mode := FALSE;
+      --     dbms_output.put_line('--- DEBUG OFF ---');
+    END IF;
+
+    IF upper(p_line_num_required) = 'Y' THEN
+      g_debug_display_line_numbers := TRUE;
+    ELSE
+      g_debug_display_line_numbers := FALSE;
+    END IF;
+
+
+  END set_debug_mode;
+
+  FUNCTION debug_on RETURN BOOLEAN IS
+  BEGIN
+    RETURN g_debug_mode;
+  END debug_on;
+
+  PROCEDURE debug_message(p_in_msg IN VARCHAR2)
+  /* ***************************************************************************** *
+                                                                              Version
+    Date      By          Description                                         Hdr Bdy
+    ----      ----------- --------------------------------------------------- --- ---
+    02/09/02  A.James     Initial version.                                    001 001
+    25/11/02  A.James     Handle buffer overflow in debug messages.           002 003
+    29/01/04  L Ashton    Increased line size to 250 to prevent split of lines too often
+    06/09/04  L Ashton    Added switch to turn line numbers off
+    * ***************************************************************************** */
+   IS
+    /*
+      If debug is on output the debug message split into chunks to avoid
+      buffer overflow in dbms_output.
+    */
+    v_line      INTEGER := 1;
+    v_msg_len   INTEGER := length(p_in_msg) + 1;
+    v_curr_posn INTEGER := 1;
+    v_chunk_len CONSTANT INTEGER := 250; -- was 100 LA, limit is 255
+
+    v_err_code NUMBER;
+    v_err_msg  VARCHAR2(2000);
+
+  BEGIN
+    IF debug_on THEN
+      dbms_output.put_line('DEBUG');
+
+      WHILE v_curr_posn &lt; v_msg_len LOOP
+
+        dbms_output.put_line(
+
+                             CASE WHEN g_debug_display_line_numbers = TRUE THEN
+                             v_line || ': ' ELSE ''
+                             END ||
+
+                             substr(p_in_msg,
+                                    v_curr_posn,
+                                    least(v_chunk_len,
+                                          v_msg_len - v_curr_posn)));
+        v_curr_posn := v_curr_posn + v_chunk_len;
+        v_line      := v_line + 1;
+      END LOOP;
+    END IF;
+  EXCEPTION
+    WHEN OTHERS THEN
+      v_err_code := SQLCODE;
+      v_err_msg  := SQLERRM;
+
+      IF (v_err_code = -20000 AND instr(v_err_msg, 'ORU-10027') > 0 -- Handle buffer overflow so job isn't
+         ) -- aborted by debug messages.
+       THEN
+        dbms_output.disable; -- Clear buffer.
+        dbms_output.enable(1000000); -- Set buffer to the maximum.
+        dbms_output.put_line('Buffer overflow; buffer cleared...');
+        dbms_output.put_line('All previous output lost...');
+      ELSE
+        RAISE;
+      END IF;
+
+  END debug_message;
+
+  PROCEDURE exec_sql(p_in_sql IN VARCHAR2)
+  /* ***************************************************************************** *
+                                                                              Version
+    Date      By          Description                                         Hdr Bdy
+    ----      ----------- --------------------------------------------------- --- ---
+    07/11/02  A.James     Initial version.                                    002 002
+
+    * ***************************************************************************** */
+   IS
+    v_parameters VARCHAR2(200) := substr('SQL:' || p_in_sql, 1, 200);
+
+  BEGIN
+    p_common.debug_message('SQL: ' || p_in_sql);
+    EXECUTE IMMEDIATE (p_in_sql);
+  EXCEPTION
+    WHEN OTHERS THEN
+      p_common.handle_error(g_package_name || '.Exec_SQL',
+                            '001' -- Code location.
+                           ,
+                            '903' -- First Choice error number.
+                           ,
+                            SQLERRM,
+                            v_parameters);
+  END exec_sql;
+
+  FUNCTION get_separated_list(p_in_list           IN VARCHAR2,
+                              p_in_list_separator IN VARCHAR2 DEFAULT ',',
+                              p_in_debug_mode     IN VARCHAR2 DEFAULT 'OFF')
+    RETURN g_list_tab_t
+    PIPELINED
+  /* ***************************************************************************** *
+                                                                              Version
+    Date      By          Description                                         Hdr Bdy
+    ----      ----------- --------------------------------------------------- --- ---
+    29/06/05  A.James     Initial version.                                    003 006
+    01/10/05  J.Durnford  Added list element position to Get_Separated_List   003 007
+
+    * ***************************************************************************** */
+   IS
+
+    v_parameters VARCHAR2(200) := substr('List:' || p_in_list ||
+                                         ', Separator: ' ||
+                                         p_in_list_separator || ', debug: ' ||
+                                         p_in_debug_mode,
+                                         1,
+                                         200);
+    v_code_loc   VARCHAR2(3);
+
+    v_length      INTEGER;
+    v_start_posn  INTEGER;
+    v_end_posn    INTEGER;
+    v_element_pos INTEGER := 0;
+
+    v_list         VARCHAR2(32000);
+    v_list_element g_list_element_type;
+
+    list_too_long EXCEPTION;
+    list_element_too_long EXCEPTION;
+
+  BEGIN
+
+    v_code_loc := '001';
+    IF p_in_debug_mode = 'ON' THEN
+
+      v_code_loc := '002';
+      p_common.set_debug_mode('ON');
+      v_code_loc := '003';
+
+    ELSE
+
+      v_code_loc := '004';
+      p_common.set_debug_mode('OFF');
+
+    END IF;
+
+    v_code_loc := '005';
+    v_length   := length(p_in_list);
+
+    p_common.debug_message('Length: ' || v_length);
+
+    IF v_length > g_max_list_length THEN
+
+      v_code_loc := '006';
+      RAISE list_too_long;
+
+    END IF;
+
+    v_code_loc := '007';
+    v_list     := p_in_list;
+
+    v_start_posn := 0;
+
+    WHILE v_start_posn &lt; v_length LOOP
+
+      v_code_loc   := '008';
+      v_start_posn := v_start_posn + 1;
+      v_end_posn   := instr(v_list, p_in_list_separator, v_start_posn);
+
+      IF v_end_posn = 0 THEN
+        -- Implies end of string.
+
+        v_code_loc := '009';
+        p_common.debug_message('Start posn: ' || v_start_posn);
+        p_common.debug_message('End posn: ' || v_end_posn);
+
+        -- Check last element won't be too long for output.
+        IF ((v_length - v_start_posn) + 1) > g_max_list_item_length THEN
+
+          v_code_loc := '010';
+          RAISE list_element_too_long;
+
+        END IF;
+
+        -- Output last part of string
+        v_code_loc                           := '011';
+        v_element_pos                        := v_element_pos + 1;
+        v_list_element.list_element          := substr(v_list,
+                                                       v_start_posn,
+                                                       (v_length -
+                                                       v_start_posn) + 1);
+        v_list_element.list_element_length   := length(v_list_element.list_element);
+        v_list_element.list_element_position := v_element_pos;
+
+        p_common.debug_message('Last list element: ' ||
+                               v_list_element.list_element);
+
+        PIPE ROW(v_list_element);
+        v_code_loc := '012';
+
+        EXIT;
+
+      END IF;
+
+      v_code_loc := '013';
+      -- Check element won't be too long for output.
+      IF (v_end_posn - v_start_posn) > g_max_list_item_length THEN
+
+        v_code_loc := '014';
+        RAISE list_element_too_long;
+
+      END IF;
+
+      v_element_pos                        := v_element_pos + 1;
+      v_list_element.list_element          := substr(v_list,
+                                                     v_start_posn,
+                                                     (v_end_posn -
+                                                     v_start_posn));
+      v_list_element.list_element_length   := length(v_list_element.list_element);
+      v_list_element.list_element_position := v_element_pos;
+
+      p_common.debug_message('List element: ' ||
+                             v_list_element.list_element);
+      PIPE ROW(v_list_element);
+      v_code_loc := '015';
+
+      v_start_posn := v_end_posn;
+
+    END LOOP;
+
+    v_code_loc := '020';
+    RETURN;
+
+  EXCEPTION
+    WHEN list_too_long THEN
+      p_common.handle_error(g_package_name || '.Get_Separated_List',
+                            v_code_loc -- Code location.
+                           ,
+                            '900' -- First Choice error number.
+                           ,
+                            'Comma-separated list too large; maximum size of list is ' ||
+                            g_max_list_length || ' characters.',
+                            v_parameters);
+
+    WHEN list_element_too_long THEN
+      p_common.handle_error(g_package_name || '.Get_Separated_List',
+                            v_code_loc -- Code location.
+                           ,
+                            '900' -- First Choice error number.
+                           ,
+                            'Comma-separated contains an element that is too large; maximum size of a list element is ' ||
+                            g_max_list_item_length || ' characters.',
+                            v_parameters);
+
+    WHEN OTHERS THEN
+      p_common.handle_error(g_package_name || '.Get_Separated_List',
+                            v_code_loc -- Code location.
+                           ,
+                            '903' -- First Choice error number.
+                           ,
+                            SQLERRM,
+                            v_parameters);
+
+  END get_separated_list;
+  FUNCTION value_exists_inlist(p_value          IN VARCHAR2,
+                               p_list           IN VARCHAR2,
+                               p_list_seperator IN VARCHAR2)
+
+
+   RETURN CHAR
+
+    /* ***************************************************************************** *
+                                                                                            Version
+        Date      By                    Description                                         Hdr Bdy
+        ----      -----------           --------------------------------------------------- --- ---
+        14/06/06  Jyoti Renganathan     Initial version.                                    001 001
+
+
+
+    *************************************************************************************************/
+
+   IS
+    v_result CHAR;
+
+    v_dummy VARCHAR2(200);
+
+  BEGIN
+
+    BEGIN
+
+      /*
+        See if value exists in list. No data found exception means value not found.
+      */
+      SELECT 'value exists in list'
+        INTO v_dummy
+        FROM dual
+       WHERE p_value IN
+             (SELECT t.list_element
+                FROM TABLE(p_common.get_separated_list(p_list,
+                                                       p_list_seperator,
+                                                       'OFF')) t);
+      -- Value found in list so set to TRUE.
+      v_result := 'Y';
+    EXCEPTION
+      WHEN no_data_found THEN
+        -- Value not found in list so set to FALSE.
+        v_result := 'N';
+    END;
+
+    RETURN v_result;
+
+  END;
+BEGIN
+  -- Initialization
+  NULL;
+END p_common;
+
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

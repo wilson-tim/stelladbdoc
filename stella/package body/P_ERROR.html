@@ -1,0 +1,433 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="P_ERROR/report.js" type="text/javascript"></script>
+<link href="P_ERROR/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">P_ERROR</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P>                                                                                <BR><BR>  Purpose<BR>  -------<BR>  Procedures and functions for rerurning a user-friendly error message.<BR><BR>  History<BR>  -------<BR><BR>                                                                            Version<BR>  Date      By          Description                                         Hdr Bdy<BR>  ----      ----------- --------------------------------------------------- --- ---<BR>  10/01/03  A.James     Initial version.                                    001 001<BR><BR>                                                                                </P><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>STELLA</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>P_ERROR</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>3625237</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE&nbsp;BODY</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>08-JAN-20</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>09-JAN-20</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2020-01-08:13:33:26</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE BODY          "P_ERROR" IS
+
+/* ***************************************************************************** *
+
+  Purpose
+  -------
+  Procedures and functions for rerurning a user-friendly error message.
+
+  History
+  -------
+
+                                                                            Version
+  Date      By          Description                                         Hdr Bdy
+  ----      ----------- --------------------------------------------------- --- ---
+  10/01/03  A.James     Initial version.                                    001 001
+
+* ***************************************************************************** */
+
+  g_quote              CONSTANT   VARCHAR2(4) := '''';
+
+  g_param_start_id     CONSTANT   VARCHAR2(4) := '%';
+  g_param_end_id       CONSTANT   VARCHAR2(4) := '%';
+  g_msg_len            INTEGER;
+
+
+  FUNCTION Get_Error_Message(p_in_err_id    IN error_text.error_msg%TYPE
+                            ,p_in_err_msg   IN error_text.user_text%TYPE
+                            ,p_in_param_tab IN g_param_t DEFAULT NULL
+                            ,p_in_update_type IN CHAR -- D for delete, U for update/insert
+                            )
+  RETURN error_text.user_text%TYPE
+  /* ***************************************************************************** *
+
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  10/01/03  A.James     Initial version.                                      001
+
+  * ***************************************************************************** */
+  IS
+    v_code_loc            VARCHAR2(3);
+    v_parameters          VARCHAR2(200) := substr('Error msg: '
+                                                ||p_in_err_msg||','||p_in_update_type
+                                                ||', parameter table passed...'
+                                                 ,1
+                                                 ,200
+                                                 );
+
+    v_param_tab           g_param_t := g_param_t();
+    v_child_record_Text   error_text.child_record_text%TYPE;
+    v_update_Text         error_text.child_record_text%TYPE;
+    v_return              VARCHAR2(32000);
+
+  BEGIN
+
+    v_code_loc := '001';
+    p_common.debug_message('Get Error Message: '||v_parameters);
+
+    IF p_in_param_tab IS NULL THEN
+       v_param_tab := g_param_t();
+    ELSE
+       v_param_tab := p_in_param_tab;
+    END IF;
+
+    DECLARE
+      v_i      PLS_INTEGER;
+    BEGIN
+
+      v_code_loc := '002';
+
+      SELECT user_text, child_record_text
+      INTO v_update_text, v_child_record_Text
+      FROM error_text
+      WHERE error_msg = p_in_err_id;
+
+
+      IF p_in_update_type = 'D' THEN
+        v_return := v_child_record_text;
+      ELSE
+        v_return := v_update_text;
+      END IF;
+      p_common.debug_message('Text to be displayed is:'||nvl(v_return,'NULL'));
+      -- User friendly message found. Now substitute parameters.
+      IF v_return IS NOT NULL THEN
+        v_i := v_param_tab.FIRST;
+
+        v_code_loc := '003';
+
+        WHILE v_i IS NOT NULL LOOP
+
+              v_code_loc := '004';
+              p_common.debug_message('Param.Name: '||v_param_tab(v_i).param_name);
+              p_common.debug_message('Param.Value: '||v_param_tab(v_i).param_value);
+
+              v_return := REPLACE(v_return
+                                 ,g_param_start_id
+                                ||v_param_tab(v_i).param_name
+                                ||g_param_end_id
+                                 ,v_param_tab(v_i).param_value
+                                 );
+              p_common.debug_message('Length Return Message: '||length(v_return));
+              v_i := v_param_tab.NEXT(v_i);
+        END LOOP;
+
+      END IF; -- if v_return null
+
+    EXCEPTION
+       WHEN no_data_found THEN
+            p_common.debug_message('No error_text found');
+            v_return := p_in_err_msg;        -- Return message unchanged.
+    END;
+
+    v_code_loc := '005';
+    RETURN substr(v_return,1,g_msg_len);
+
+
+  EXCEPTION
+    WHEN OTHERS THEN
+         p_common.handle_error(g_package_name||'.Get_Error_Message'
+                              ,v_code_loc       -- Code location.
+                              ,'900'       -- First Choice error number.
+                              ,SQLERRM
+                              ,v_parameters
+                              );
+
+  END Get_Error_Message;
+
+  FUNCTION Get_Constraint_Error(p_in_err_msg   IN error_text.user_text%TYPE
+                               ,p_in_param_tab IN g_param_t DEFAULT NULL)
+  RETURN error_text.user_text%TYPE
+  /* ***************************************************************************** *
+
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  10/01/03  A.James     Initial version.                                      001
+
+  * ***************************************************************************** */
+  IS
+    v_code_loc            VARCHAR2(3);
+    v_parameters          VARCHAR2(200) := substr('Error msg: '
+                                                ||p_in_err_msg
+                                                ||', no parameter table passed...'
+                                                 ,1
+                                                 ,200
+                                                 );
+
+    v_start               NUMBER;
+    v_end                 NUMBER;
+    v_constraint_name     error_text.error_msg%TYPE;
+
+    v_return              error_text.user_text%TYPE;
+    v_child_record_error  NUMBER;
+
+  BEGIN
+
+    v_code_loc := '001';
+    p_common.debug_message('Get constraint error: '||v_parameters);
+
+    p_common.debug_message('Original Message: '||p_in_err_msg);
+    v_child_record_error := instr(p_in_err_msg,'child record found');
+
+    v_start := instr(p_in_err_msg, '(');
+    v_end   := instr(p_in_err_msg,')');
+    -- pull out the bit that tells us which foreign key had the error
+    v_constraint_name := substr(p_in_err_msg,v_start+1,v_end-(v_start+1));
+    p_common.debug_message('Constraint name: '||v_constraint_name);
+
+    IF v_child_record_error > 0 THEN     
+        -- must be deleting, but error raised because a child record exists
+        p_common.debug_message('Child record error: '||v_constraint_name);
+        v_return := nvl(Get_Error_Message(v_constraint_name,p_in_err_msg,p_in_param_tab,'D'),'Cannot delete. Linked (child) data records exist - delete those first.('||v_constraint_name||')');
+    ELSE 
+        -- must be inserting/updating
+        v_return := Get_Error_Message(v_constraint_name,p_in_err_msg,p_in_param_tab,'U');
+    END IF;
+
+    p_common.debug_message('Modified Message: '||v_return);
+
+    RETURN v_return;
+
+  EXCEPTION
+    WHEN OTHERS THEN
+         p_common.handle_error(g_package_name||'.Get_Error_Message'
+                              ,v_code_loc       -- Code location.
+                              ,'900'       -- First Choice error number.
+                              ,SQLERRM
+                              ,v_parameters
+                              );
+
+  END Get_Constraint_Error;
+
+  PROCEDURE Add_Error_Parameter(p_in_out_param_tab   IN OUT g_param_t
+                               ,p_in_param_name  IN VARCHAR2
+                               ,p_in_param_value IN VARCHAR2)
+  /* ***************************************************************************** *
+
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  10/01/03  A.James     Initial version.                                      001
+
+  * ***************************************************************************** */
+  IS
+    v_code_loc            VARCHAR2(3);
+    v_parameters          VARCHAR2(200) := substr('Param name: '
+                                                ||p_in_param_name
+                                                ||'Param value: '
+                                                ||p_in_param_value
+                                                 ,1
+                                                 ,200
+                                                 );
+
+    v_param_tab           g_param_t := g_param_t();
+
+    v_return              error_text.user_text%TYPE;
+
+  BEGIN
+
+    v_code_loc := '001';
+    p_common.debug_message('Add Error Parameter: '||v_parameters);
+    IF p_in_out_param_tab IS NULL THEN
+       p_in_out_param_tab := g_param_t();
+    END IF;
+
+    p_in_out_param_tab.EXTEND;         -- Add an element
+    p_in_out_param_tab(p_in_out_param_tab.LAST).param_name := p_in_param_name;
+    p_in_out_param_tab(p_in_out_param_tab.LAST).param_value := p_in_param_value;
+
+  EXCEPTION
+    WHEN OTHERS THEN
+         p_common.handle_error(g_package_name||'.Add_Error_Parameter'
+                              ,v_code_loc       -- Code location.
+                              ,'900'       -- First Choice error number.
+                              ,SQLERRM
+                              ,v_parameters
+                              );
+
+  END Add_Error_Parameter;
+
+  FUNCTION version
+  RETURN VARCHAR2
+  /* ***************************************************************************** *
+
+  Date      By          Description                                         Version
+  ----      ----------- --------------------------------------------------- -------
+  10/01/03  A.James     Initial version.                                      001
+
+  * ***************************************************************************** */
+  IS
+  BEGIN
+    RETURN 'Package: '||g_package_name||'; Version: '||g_version;
+  END Version;
+
+  BEGIN
+    /*
+      Get maximmum length allowed for error message to be returned.
+    */
+    SELECT data_length
+    INTO g_msg_len
+    FROM all_tab_columns
+    WHERE table_name = 'ERROR_TEXT'
+    AND   column_name = 'USER_TEXT';
+
+END P_Error;
+
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>

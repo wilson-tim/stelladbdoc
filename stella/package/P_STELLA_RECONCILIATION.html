@@ -106,15 +106,15 @@
 </tr>
 <tr>
 <td>CREATED</td>
-<td>16-JAN-18&nbsp;17.30.44</td>
+<td>16-JAN-18</td>
 </tr>
 <tr>
 <td>LAST_DDL_TIME</td>
-<td>14-DEC-19&nbsp;14.49.20</td>
+<td>09-JAN-20</td>
 </tr>
 <tr>
 <td>TIMESTAMP</td>
-<td>2009-08-05:13:56:16</td>
+<td>2020-01-07:15:01:02</td>
 </tr>
 <tr>
 <td>STATUS</td>
@@ -236,7 +236,7 @@ PACKAGE p_stella_reconciliation IS
   g_sqlcode   CHAR(20);
   g_debug     BOOLEAN := FALSE;
 
-  g_log_sequence jutil.application_log.log_sequence%TYPE;
+  g_log_sequence NUMBER(10,0);
 
 
   /* calculate the total scheduled flight tax of a gemini booking
@@ -399,9 +399,7 @@ PACKAGE p_stella_reconciliation IS
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 
-END p_stella_reconciliation; --end of package
-
- </pre>
+END p_stella_reconciliation; --end of package</pre>
 </div>
 </div>
 </div>

@@ -81,15 +81,15 @@
 </tr>
 <tr>
 <td>CREATED</td>
-<td>16-JAN-18&nbsp;17.30.46</td>
+<td>16-JAN-18</td>
 </tr>
 <tr>
 <td>LAST_DDL_TIME</td>
-<td>06-JAN-20&nbsp;16.03.59</td>
+<td>09-JAN-20</td>
 </tr>
 <tr>
 <td>TIMESTAMP</td>
-<td>2020-01-06:16:03:59</td>
+<td>2020-01-09:10:08:27</td>
 </tr>
 <tr>
 <td>STATUS</td>
@@ -392,7 +392,7 @@ PACKAGE BODY        p_stella_get_data IS
              a.description application_desc,
              r.prompt_refund_letter_ind
 
-        FROM reason r, jutil.application a
+        FROM reason r, application a
        WHERE a.application_key = r.application_key
        ORDER BY r.reason_code;
 
@@ -1422,10 +1422,19 @@ PACKAGE BODY        p_stella_get_data IS
         -- departure date can be null for a void ticket
         -- season type should be Y for Airs
         IF (p_doc_type_code = 'AMA' OR p_source_ind = 'AL') THEN
-          v_season := app_util.calc_season(SYSDATE, 5, 'Y');
+--          v_season := app_util.calc_season(SYSDATE, 5, 'Y');
+          v_season := 'Y' || TO_CHAR(TO_NUMBER(TO_CHAR(SYSDATE,'YYYY')));
         ELSE
           --  MIR Load
-          v_season := app_util.calc_season(p_departure_date, 5);
+--          v_season := app_util.calc_season(p_departure_date, 5);
+          v_season := CASE WHEN TO_NUMBER(TO_CHAR(p_departure_date,'MM')) &lt; 4
+                                        THEN 'W' || TO_CHAR(TO_NUMBER(TO_CHAR(p_departure_date,'YYYY')) - 1) -- winter of previous year
+                                    WHEN TO_NUMBER(TO_CHAR(p_departure_date,'MM')) >= 4 
+                                        AND TO_NUMBER(TO_CHAR(p_departure_date,'MM')) &lt;= 9
+                                        THEN 'S' || TO_CHAR(p_departure_date,'YYYY') -- summer of current year
+                                    WHEN TO_NUMBER(TO_CHAR(p_departure_date,'MM')) > 9
+                                        THEN 'W' || TO_CHAR(p_departure_date,'YYYY') -- winter of current year
+                                    END;
         END IF;
       ELSE
         -- don't change season in pnr table if tickets are voided from air
@@ -1447,14 +1456,16 @@ PACKAGE BODY        p_stella_get_data IS
                AND t.ticket_no = p_ticket_no;
 
           ELSE
-            v_season := app_util.calc_season(SYSDATE, 5);
+--            v_season := app_util.calc_season(SYSDATE, 5);
+            v_season := 'Y' || TO_CHAR(TO_NUMBER(TO_CHAR(SYSDATE,'YYYY')));
 
           END IF;
 
         ELSE
           -- it should never go into this else
           -- so assign the season as the current one
-          v_season := app_util.calc_season(SYSDATE, 5);
+--          v_season := app_util.calc_season(SYSDATE, 5);
+          v_season := 'Y' || TO_CHAR(TO_NUMBER(TO_CHAR(SYSDATE,'YYYY')));
         END IF;
       END IF;
       v_season_type := substr(v_season, 1, 1);
@@ -2807,7 +2818,7 @@ PACKAGE BODY        p_stella_get_data IS
 
   FUNCTION get_office_address RETURN VARCHAR2 IS
 
-    v_address jutil.application_registry.parameter_value%TYPE;
+    v_address application_registry.parameter_value%TYPE;
 
   BEGIN
 

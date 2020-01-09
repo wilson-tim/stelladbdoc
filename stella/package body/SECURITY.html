@@ -1,0 +1,879 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Cp1252" />
+<script src="SECURITY/report.js" type="text/javascript"></script>
+<link href="SECURITY/report.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div class="banner">
+<table width="98%"><tr>
+<td><h2 class="banner">SECURITY</h2></td>
+</tr></table></div>
+<div id="maintabs">
+<div class="currentmaintab" onclick="onSelectMainTab(this, 0)">
+<div>
+<p>Doc</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 1)">
+<div>
+<p>Details</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 2)">
+<div>
+<p>Grants</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 3)">
+<div>
+<p>References</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 4)">
+<div>
+<p>Dependencies</p>
+</div>
+</div>
+<div class="maintab" onclick="onSelectMainTab(this, 5)">
+<div>
+<p>Code</p>
+</div>
+</div>
+</div>
+<br/>
+<div id="masterreports">
+<div id="Master.0">
+<div class="currentmasterreport">
+<TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P>--------------------------------------------------------------</P><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE></div>
+</div>
+<div id="Master.1">
+<div class="masterreport">
+<table id="Table.0" cellpadding="0" cellspacing="0" summary="">
+<th>NAME</th>
+<th>VALUE</th>
+</tr>
+<tr>
+<td>OWNER</td>
+<td>STELLA</td>
+</tr>
+<tr>
+<td>OBJECT_NAME</td>
+<td>SECURITY</td>
+</tr>
+<tr>
+<td>SUBOBJECT_NAME</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_ID</td>
+<td>3625229</td>
+</tr>
+<tr>
+<td>DATA_OBJECT_ID</td>
+<td>null</td>
+</tr>
+<tr>
+<td>OBJECT_TYPE</td>
+<td>PACKAGE&nbsp;BODY</td>
+</tr>
+<tr>
+<td>CREATED</td>
+<td>08-JAN-20</td>
+</tr>
+<tr>
+<td>LAST_DDL_TIME</td>
+<td>09-JAN-20</td>
+</tr>
+<tr>
+<td>TIMESTAMP</td>
+<td>2020-01-08:13:28:18</td>
+</tr>
+<tr>
+<td>STATUS</td>
+<td>VALID</td>
+</tr>
+<tr>
+<td>TEMPORARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>GENERATED</td>
+<td>N</td>
+</tr>
+<tr>
+<td>SECONDARY</td>
+<td>N</td>
+</tr>
+<tr>
+<td>NAMESPACE</td>
+<td>2</td>
+</tr>
+<tr>
+<td>EDITION_NAME</td>
+<td>null</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.2">
+<div class="masterreport">
+<table id="Table.1" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>PRIVILEGE</th>
+<th>GRANTEE</th>
+<th>GRANTABLE</th>
+<th>GRANTOR</th>
+<th>OBJECT_NAME</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.3">
+<div class="masterreport">
+<table id="Table.2" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.4">
+<div class="masterreport">
+<table id="Table.3" cellpadding="0" cellspacing="0" summary="">
+<tr>
+<th>NAME</th>
+<th>OWNER</th>
+<th>TYPE</th>
+<th>OBJECT_ID</th>
+<th>STATUS</th>
+<th>TYPE_LINK</th>
+</tr>
+</table>
+</div>
+</div>
+<div id="Master.5">
+<div class="masterreport">
+<pre>
+PACKAGE BODY          "SECURITY" AS
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION is_password_valid(p_user_name    CHAR,
+                             p_old_password CHAR) RETURN BOOLEAN IS
+  
+    v_old_password VARCHAR2(30);
+
+  BEGIN
+
+    BEGIN
+
+      SELECT decrypt_password(password)
+        INTO v_old_password
+        FROM security_user
+       WHERE user_name = p_user_name;
+
+    EXCEPTION
+      WHEN no_data_found THEN
+        RETURN FALSE;
+    END;
+
+    IF v_old_password = p_old_password THEN
+      RETURN TRUE;
+    ELSE
+      RETURN FALSE;
+    END IF;
+
+  END is_password_valid;
+
+  FUNCTION set_password(p_user_name    IN CHAR,
+                        p_new_password IN CHAR,
+                        p_old_password IN CHAR) RETURN VARCHAR2 IS
+
+    v_new_password VARCHAR2(30);
+
+  BEGIN
+
+    IF p_new_password IS NULL THEN
+      RETURN 'Error, blank new password passed';
+    END IF;
+
+    IF p_old_password IS NULL THEN
+      RETURN 'Error, blank old password passed';
+    END IF;
+
+    IF NOT is_password_valid(p_user_name, p_old_password) THEN
+      RETURN 'Error, old password is not valid for that user';
+    END IF;
+
+    IF length(p_new_password) &lt; 5 OR length(p_new_password) > 16 THEN
+      RETURN 'Error, password must be more than 5 chars, but less than 17';
+    END IF;
+
+    v_new_password := encrypt_password(p_new_password);
+
+    UPDATE security_user a
+       SET password          = v_new_password,
+           a.amended_date    = SYSDATE,
+           a.amended_user_id = USER
+     WHERE a.user_name = p_user_name;
+
+    dbms_output.put_line(SQL%ROWCOUNT);
+
+    IF SQL%ROWCOUNT = 0 THEN
+      RETURN 'Error, Username not found';
+    END IF;
+
+    RETURN NULL;
+
+  EXCEPTION
+
+    WHEN OTHERS THEN
+
+      g_sqlerrm := substr(SQLERRM, 1, 150);
+      g_sqlcode := SQLCODE;
+      ROLLBACK;
+      dbms_output.put_line('Excp others, state:' || g_statement);
+
+      g_error_statement := ' Statement:' || to_number(g_statement) ||
+                           g_sqlerrm;
+      dbms_output.put_line(g_error_statement);
+      dbms_output.put_line(g_sqlcode);
+
+      RETURN 'Error, ' || g_error_statement;
+
+  END set_password;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION update_user_details(p_user_name    CHAR,
+                               p_initials     CHAR,
+                               p_password     CHAR,
+                               p_disabled_ind CHAR) RETURN CHAR IS
+
+    v_encrypted_password VARCHAR2(20);
+
+  BEGIN
+    g_statement := 10;
+    dbms_output.put_line(p_user_name || ',' || p_initials || ',' ||
+                         p_password || ',' || p_disabled_ind);
+
+    IF p_user_name IS NULL THEN
+      RETURN 'Error, user name cannot be blank/null';
+    END IF;
+
+    IF p_password IS NOT NULL THEN
+      IF length(p_password) > 16 OR length(p_password) &lt; 5 THEN
+        RETURN 'Error, password must be between 6 and 16 characters';
+      END IF;
+    END IF;
+
+    IF p_disabled_ind IS NULL THEN
+      RETURN 'Error, disabled_ind cannot be null, must be Y or N';
+    END IF;
+
+    IF p_disabled_ind NOT IN ('Y', 'N') THEN
+      RETURN 'Error, disabled_ind must be Y or N';
+    END IF;
+
+    g_statement := 20;
+
+    IF p_password IS NOT NULL THEN
+      v_encrypted_password := encrypt_password(p_password);
+      IF substr(v_encrypted_password, 1, 5) = 'Error' THEN
+        RETURN v_encrypted_password;
+      END IF;
+    ELSE
+      v_encrypted_password := 'none'; -- so the insert value is not null, this "none" value will nevere actually go into the database
+    END IF;
+    g_statement := 30;
+    BEGIN
+
+      INSERT INTO security_user su
+        (user_name,
+         initials,
+         amended_date,
+         amended_user_id,
+         password,
+         disabled_ind)
+      VALUES
+        (p_user_name,
+         p_initials,
+         SYSDATE,
+         USER,
+         v_encrypted_password,
+         p_disabled_ind);
+
+      IF p_password IS NULL THEN
+        ROLLBACK;
+        RETURN 'Error, password cannot be null for a new user';
+      END IF;
+
+    EXCEPTION
+      WHEN dup_val_on_index THEN
+
+        g_statement := 30;
+        -- password may not be passed if it is just an update of user details
+        UPDATE security_user su
+           SET initials        = p_initials,
+               amended_date    = SYSDATE,
+               amended_user_id = USER,
+               disabled_ind    = p_disabled_ind
+         WHERE su.user_name = p_user_name;
+
+        g_statement := 40;
+        IF p_password IS NOT NULL THEN
+          g_statement := 50;
+          UPDATE security_user su
+             SET password = v_encrypted_password
+           WHERE su.user_name = p_user_name;
+        END IF;
+
+    END;
+
+    RETURN NULL;
+
+  EXCEPTION
+    WHEN OTHERS THEN
+      g_sqlerrm := substr(SQLERRM, 1, 150);
+      g_sqlcode := SQLCODE;
+      ROLLBACK;
+      dbms_output.put_line('Excp others, state:' || g_statement);
+
+      g_error_statement := ' Statement:' || to_number(g_statement) ||
+                           g_sqlerrm;
+      dbms_output.put_line(g_error_statement);
+      dbms_output.put_line(g_sqlcode);
+
+      RETURN 'Error, ' || g_error_statement;
+
+  END update_user_details;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION get_all_user_details(p_application_key IN CHAR)
+    RETURN return_refcursor IS
+
+    /* p_application_key is not mandatory */
+    /* return all users that are assigned a role that belongs to that application */
+    v_result return_refcursor;
+  BEGIN
+
+    OPEN v_result FOR
+      SELECT *
+        FROM security_user su
+       WHERE (p_application_key IS NOT NULL AND EXISTS
+              (SELECT NULL
+                 FROM security_user_role sur, security_role sr
+                WHERE sur.user_role = sr.user_role AND
+                      sr.application_key = p_application_key AND
+                      sur.user_name = su.user_name)) OR
+             p_application_key IS NULL
+       ORDER BY su.user_name;
+
+    RETURN(v_result);
+
+  END get_all_user_details;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION get_single_user_details(p_user_name CHAR) RETURN return_refcursor IS
+
+    v_result return_refcursor;
+  BEGIN
+
+    OPEN v_result FOR
+      SELECT * FROM security_user WHERE user_name = p_user_name;
+
+    RETURN(v_result);
+
+  END get_single_user_details;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION encrypt_password(p_input_string IN CHAR) RETURN VARCHAR2 IS
+
+    v_result                VARCHAR2(30);
+    raw_input               RAW(128);
+    key_string              VARCHAR2(8) := 'LEIGH111'; -- MUST BE 8 BYTES
+    raw_key                 RAW(128) := utl_raw.cast_to_raw(key_string);
+    wrong_input_string      VARCHAR2(25) := 'not_a_multiple_of_8_bytes';
+    wrong_raw_input         RAW(128) := utl_raw.cast_to_raw(wrong_input_string);
+    wrong_key_string        VARCHAR2(8) := 'scottsco';
+    wrong_raw_key           RAW(128) := utl_raw.cast_to_raw(wrong_key_string);
+    encrypted_raw           RAW(2048);
+    encrypted_string        VARCHAR2(2048);
+    double_encrypted_raw    RAW(2048);
+    double_encrypted_string VARCHAR2(2048);
+    decrypted_raw           RAW(2048);
+    decrypted_string        VARCHAR2(2048);
+    error_in_input_buffer_length EXCEPTION;
+    PRAGMA EXCEPTION_INIT(error_in_input_buffer_length, -28232);
+    input_buffer_length_err_msg VARCHAR2(100) := '*** DES INPUT BUFFER NOT A MULTIPLE OF 8 BYTES - IGNORING EXCEPTION ***';
+    double_encrypt_not_permitted EXCEPTION;
+    PRAGMA EXCEPTION_INIT(double_encrypt_not_permitted, -28233);
+    double_encryption_err_msg VARCHAR2(100) := '*** CANNOT DOUBLE ENCRYPT DATA - IGNORING EXCEPTION ***';
+    v_statement               NUMBER := 0;
+    ex_validation_error EXCEPTION;
+    -- 1. Begin testing raw data encryption and decryption
+  BEGIN
+    v_statement := 900;
+    IF p_input_string IS NULL THEN
+      g_error_statement := 'password cannot be null';
+      RAISE ex_validation_error;
+      RETURN 'Error, ' || g_error_statement;
+    END IF;
+
+    dbms_output.put_line('> ========= BEGIN TEST RAW DATA =========');
+    dbms_output.put_line('> Raw input                        : ' ||
+                         utl_raw.cast_to_varchar2(raw_input));
+    BEGIN
+
+      raw_input   := utl_raw.cast_to_raw(rpad(p_input_string, 16, ' '));
+      v_statement := 920;
+      dbms_obfuscation_toolkit.desencrypt(input          => raw_input,
+                                          key            => raw_key,
+                                          encrypted_data => encrypted_raw);
+
+      dbms_output.put_line('> encrypted hex value              : ' ||
+                           rawtohex(encrypted_raw));
+
+      v_result    := utl_raw.cast_to_varchar2(encrypted_raw);
+      v_statement := 930;
+      RETURN v_result;
+
+    EXCEPTION
+      WHEN error_in_input_buffer_length THEN
+        dbms_output.put_line('> ' || input_buffer_length_err_msg);
+    END;
+    dbms_output.put_line('>  ');
+
+  EXCEPTION
+    WHEN OTHERS THEN
+      g_sqlerrm := substr(SQLERRM, 1, 150);
+      g_sqlcode := SQLCODE;
+      ROLLBACK;
+      dbms_output.put_line('Excp others, state:' || v_statement);
+
+      g_error_statement := ' Statement:' || to_number(v_statement) ||
+                           g_sqlerrm;
+      dbms_output.put_line(g_error_statement);
+      dbms_output.put_line(g_sqlcode);
+
+      RETURN 'Error, ' || g_error_statement;
+
+  END encrypt_password;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION decrypt_password(p_input_string IN CHAR) RETURN VARCHAR2 IS
+
+    v_result                VARCHAR2(30);
+    raw_input               RAW(128);
+    key_string              VARCHAR2(8) := 'LEIGH111'; -- MUST BE 8 BYTES
+    raw_key                 RAW(128) := utl_raw.cast_to_raw(key_string);
+    wrong_input_string      VARCHAR2(25) := 'not_a_multiple_of_8_bytes';
+    wrong_raw_input         RAW(128) := utl_raw.cast_to_raw(wrong_input_string);
+    wrong_key_string        VARCHAR2(8) := 'scottsco';
+    wrong_raw_key           RAW(128) := utl_raw.cast_to_raw(wrong_key_string);
+    encrypted_raw           RAW(2048);
+    encrypted_string        VARCHAR2(2048);
+    double_encrypted_raw    RAW(2048);
+    double_encrypted_string VARCHAR2(2048);
+    decrypted_raw           RAW(2048);
+    decrypted_string        VARCHAR2(2048);
+    error_in_input_buffer_length EXCEPTION;
+    PRAGMA EXCEPTION_INIT(error_in_input_buffer_length, -28232);
+    input_buffer_length_err_msg VARCHAR2(100) := '*** DES INPUT BUFFER NOT A MULTIPLE OF 8 BYTES - IGNORING EXCEPTION ***';
+    double_encrypt_not_permitted EXCEPTION;
+    PRAGMA EXCEPTION_INIT(double_encrypt_not_permitted, -28233);
+    double_encryption_err_msg VARCHAR2(100) := '*** CANNOT DOUBLE ENCRYPT DATA - IGNORING EXCEPTION ***';
+
+    -- 1. Begin testing raw data encryption and decryption
+  BEGIN
+
+    g_statement := 10;
+    dbms_output.put_line('> ========= BEGIN TEST RAW DATA =========');
+    dbms_output.put_line('> Raw input                        : ' ||
+                         utl_raw.cast_to_varchar2(raw_input));
+    BEGIN
+
+      encrypted_raw := utl_raw.cast_to_raw(p_input_string);
+      g_statement   := 20;
+      dbms_obfuscation_toolkit.desdecrypt(input          => encrypted_raw,
+                                          key            => raw_key,
+                                          decrypted_data => decrypted_raw);
+      dbms_output.put_line('> Decrypted raw output             : ' ||
+                           utl_raw.cast_to_varchar2(decrypted_raw));
+      dbms_output.put_line('>  ');
+      g_statement := 30;
+
+      v_result    := TRIM(utl_raw.cast_to_varchar2(decrypted_raw));
+      g_statement := 40;
+      RETURN v_result;
+
+    EXCEPTION
+      WHEN error_in_input_buffer_length THEN
+        dbms_output.put_line('> ' || input_buffer_length_err_msg);
+    END;
+    dbms_output.put_line('>  ');
+
+  EXCEPTION
+    WHEN OTHERS THEN
+      g_sqlerrm := substr(SQLERRM, 1, 150);
+      g_sqlcode := SQLCODE;
+      ROLLBACK;
+      dbms_output.put_line('Excp others, state:' || g_statement);
+
+      g_error_statement := ' Statement:' || to_number(g_statement) ||
+                           g_sqlerrm;
+      dbms_output.put_line(g_error_statement);
+      dbms_output.put_line(g_sqlcode);
+
+      RETURN 'Error, ' || g_error_statement;
+
+  END decrypt_password;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION delete_user(p_user_name IN CHAR) RETURN VARCHAR2 IS
+
+  BEGIN
+
+    g_statement := 10;
+
+    IF p_user_name IS NULL THEN
+      RETURN 'Error, user name cannot be null';
+    END IF;
+
+    DELETE FROM security_user_role sr WHERE sr.user_name = p_user_name;
+
+    g_statement := 15;
+    DELETE FROM stella.airline_user_allocation sr
+     WHERE sr.user_name = p_user_name;
+
+    g_statement := 20;
+
+    DELETE FROM security_user su WHERE su.user_name = p_user_name;
+
+    IF SQL%ROWCOUNT &lt; 1 THEN
+      RETURN 'Error, username ' || p_user_name || ' not found';
+    END IF;
+
+    RETURN NULL;
+
+  EXCEPTION
+    WHEN OTHERS THEN
+      g_sqlerrm := substr(SQLERRM, 1, 150);
+      g_sqlcode := SQLCODE;
+      ROLLBACK;
+      dbms_output.put_line('Excp others, state:' || g_statement);
+
+      g_error_statement := ' Statement:' || to_number(g_statement) ||
+                           g_sqlerrm;
+      dbms_output.put_line(g_error_statement);
+      dbms_output.put_line(g_sqlcode);
+
+      RETURN 'Error, ' || g_error_statement;
+
+  END delete_user;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+  FUNCTION get_user_security_roles(p_user_name       IN CHAR,
+                                   p_application_key IN CHAR)
+    RETURN security.return_refcursor IS
+
+    v_result security.return_refcursor;
+
+  BEGIN
+
+    -- p_application_key is not mandatory
+
+    OPEN v_result FOR
+
+      SELECT sur.user_name,
+             sur.user_role,
+             sr.description,
+             sr.application_key,
+             sr.manager_role_ind
+        FROM security_user_role sur, security_role sr
+       WHERE nvl(p_application_key, sr.application_key) =
+             sr.application_key AND sr.user_role = sur.user_role AND
+             sur.user_name = p_user_name;
+
+    RETURN(v_result);
+
+  END get_user_security_roles;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+  FUNCTION get_app_security_roles(p_application_key IN CHAR)
+    RETURN security.return_refcursor IS
+
+    v_result security.return_refcursor;
+
+  BEGIN
+
+    OPEN v_result FOR
+
+      SELECT *
+        FROM security_role aua
+       WHERE aua.application_key = p_application_key;
+
+    RETURN(v_result);
+
+  END get_app_security_roles;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+  FUNCTION get_application_list RETURN security.return_refcursor IS
+
+    v_result security.return_refcursor;
+
+  BEGIN
+
+    OPEN v_result FOR
+
+      SELECT UNIQUE application_key FROM security_role t ORDER BY 1;
+
+    RETURN(v_result);
+
+  END get_application_list;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+  FUNCTION insert_user_role(p_user_name IN CHAR,
+                            p_user_role IN CHAR) RETURN CHAR IS
+
+  BEGIN
+
+    g_statement := 10;
+    IF p_user_name IS NULL THEN
+      RETURN 'Error, user name cannot be null';
+    END IF;
+    IF p_user_role IS NULL THEN
+      RETURN 'Error, role cannot be null';
+    END IF;
+
+    INSERT INTO security_user_role
+      (user_name, user_role, amended_date, amended_user_id)
+    VALUES
+      (p_user_name, p_user_role, SYSDATE, USER);
+
+    RETURN NULL;
+
+  EXCEPTION
+    WHEN dup_val_on_index THEN
+      RETURN 'Error, user already allocated to that role';
+
+    WHEN OTHERS THEN
+      g_sqlerrm := substr(SQLERRM, 1, 150);
+      g_sqlcode := SQLCODE;
+      ROLLBACK;
+      dbms_output.put_line('Excp others, state:' || g_statement);
+
+      g_error_statement := ' Statement:' || to_number(g_statement) ||
+                           g_sqlerrm;
+      dbms_output.put_line(g_error_statement);
+      dbms_output.put_line(g_sqlcode);
+      IF g_sqlcode = -2291 THEN
+        -- foreign key raised, give decent error message to users
+        g_error_statement := '(fk) ' || g_sqlerrm;
+      END IF;
+
+      RETURN 'Error, ' || g_error_statement;
+
+  END insert_user_role;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+  FUNCTION delete_user_role(p_user_name       IN CHAR,
+                            p_user_role       IN CHAR,
+                            p_application_key IN CHAR) RETURN CHAR IS
+
+  BEGIN
+
+    g_statement := 10;
+    IF p_user_name IS NULL THEN
+      RETURN 'Error, user name cannot be null';
+    END IF;
+
+    DELETE FROM security_user_role s
+     WHERE s.user_name = p_user_name AND
+           (p_user_role IS NULL OR
+           (p_user_role IS NOT NULL AND s.user_role = p_user_role)) AND
+           (p_application_key IS NULL OR
+           (p_application_key IS NOT NULL AND
+           s.user_role IN
+           (SELECT user_role
+                FROM security_role sr
+               WHERE sr.application_key = p_application_key)));
+
+    --   IF p_user_role IS NULL THEN
+    --     -- delete all roles from that user
+    --     g_statement :=20;     
+    --     
+    --     DELETE FROM security_user_role s
+    --      WHERE s.user_name = p_user_name;
+    --   ELSE
+    --     -- be more specific
+    --     g_statement :=25;
+    --     
+    --     DELETE FROM security_user_role s
+    --      WHERE s.user_name = p_user_name
+    --      AND s.user_role = p_user_role;
+    --   END IF;
+
+    g_statement := 30;
+    /*IF sql%rowcount = 0 THEN
+       RETURN 'Error, that user/role not found';
+    END IF;
+    */
+
+    RETURN NULL;
+
+  EXCEPTION
+    WHEN OTHERS THEN
+      g_sqlerrm := substr(SQLERRM, 1, 150);
+      g_sqlcode := SQLCODE;
+      ROLLBACK;
+      dbms_output.put_line('Excp others, state:' || g_statement);
+
+      g_error_statement := ' Statement:' || to_number(g_statement) ||
+                           g_sqlerrm;
+      dbms_output.put_line(g_error_statement);
+      dbms_output.put_line(g_sqlcode);
+
+      RETURN 'Error, ' || g_error_statement;
+
+  END delete_user_role;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION get_all_users_by_role(p_role IN CHAR) RETURN return_refcursor IS
+
+    /* return all users that are assigned p_role */
+    v_result return_refcursor;
+  BEGIN
+
+    OPEN v_result FOR
+      SELECT UNIQUE user_name
+        FROM security_user_role
+       WHERE user_role = p_role
+       ORDER BY user_name;
+
+    RETURN(v_result);
+
+  END get_all_users_by_role;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION get_all_locations_for_user(p_user_name IN CHAR)
+    RETURN return_refcursor IS
+
+    /* return all locations that are assigned to a certain (resort)user */
+    v_result return_refcursor;
+  BEGIN
+
+    OPEN v_result FOR
+      SELECT location_code
+        FROM security_user_location
+       WHERE user_name = p_user_name
+       ORDER BY location_code;
+
+    RETURN(v_result);
+
+  END get_all_locations_for_user;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION delete_user_location(p_user_name IN CHAR) RETURN CHAR IS
+
+    /* delete all location assignments for a given (resort)user */
+
+  BEGIN
+
+    IF p_user_name IS NULL THEN
+      RETURN 'Error, user name cannot be null';
+    END IF;
+
+    DELETE FROM security_user_location s WHERE s.user_name = p_user_name;
+
+    RETURN NULL;
+
+  END delete_user_location;
+
+  ----------------------------------------------------------------
+  ----------------------------------------------------------------                      
+
+  FUNCTION insert_user_location(p_user_name     IN CHAR,
+                                p_user_location IN CHAR) RETURN CHAR IS
+
+  BEGIN
+
+    g_statement := 10;
+    IF p_user_name IS NULL THEN
+      RETURN 'Error, user name cannot be null';
+    END IF;
+    IF p_user_location IS NULL THEN
+      RETURN 'Error, location cannot be null';
+    END IF;
+
+    INSERT INTO security_user_location
+      (user_name, location_code, amended_date_time, amended_user_id)
+    VALUES
+      (p_user_name, p_user_location, SYSDATE, USER);
+
+    RETURN NULL;
+
+  EXCEPTION
+    WHEN dup_val_on_index THEN
+      RETURN 'Error, user already allocated to that location';
+
+    WHEN OTHERS THEN
+      g_sqlerrm := substr(SQLERRM, 1, 150);
+      g_sqlcode := SQLCODE;
+      ROLLBACK;
+      dbms_output.put_line('Excp others, state:' || g_statement);
+
+      g_error_statement := ' Statement:' || to_number(g_statement) ||
+                           g_sqlerrm;
+      dbms_output.put_line(g_error_statement);
+      dbms_output.put_line(g_sqlcode);
+      IF g_sqlcode = -2291 THEN
+        -- foreign key raised, give decent error message to users
+        g_error_statement := '(fk) ' || g_sqlerrm;
+      END IF;
+
+      RETURN 'Error, ' || g_error_statement;
+
+  END insert_user_location;
+
+END security;
+
+</pre>
+</div>
+</div>
+</div>
+</body>
+</html>
