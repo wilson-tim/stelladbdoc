@@ -85,11 +85,11 @@
 </tr>
 <tr>
 <td>LAST_DDL_TIME</td>
-<td>09-JAN-20</td>
+<td>16-JAN-20</td>
 </tr>
 <tr>
 <td>TIMESTAMP</td>
-<td>2020-01-09:10:08:27</td>
+<td>2020-01-16:13:43:18</td>
 </tr>
 <tr>
 <td>STATUS</td>
@@ -202,46 +202,6 @@ PACKAGE BODY        p_stella_get_data IS
   ----------------------------------------------------------------
   ----------------------------------------------------------------
 
-  FUNCTION run_mir_load(driverclass    VARCHAR2,
-                        connectionurl  VARCHAR2,
-                        dbuserid       VARCHAR2,
-                        dbuserpwd      VARCHAR2,
-                        singlefilename VARCHAR2,
-                        runmode        VARCHAR2) RETURN CHAR AS
-    LANGUAGE JAVA NAME 'uk.co.firstchoice.stella.StellaMIRLoad.runLoad(
-     java.lang.String,
-     java.lang.String,
-     java.lang.String,
-     java.lang.String,
-     java.lang.String,
-     java.lang.String
-     )
-     return java.lang.String';
-
-
-  ----------------------------------------------------------------
-  ----------------------------------------------------------------
-  -- new V1.08 JR,  Airload changes
-
-  FUNCTION run_air_load(driverclass    VARCHAR2,
-                        connectionurl  VARCHAR2,
-                        dbuserid       VARCHAR2,
-                        dbuserpwd      VARCHAR2,
-                        singlefilename VARCHAR2,
-                        runmode        VARCHAR2) RETURN CHAR AS
-    LANGUAGE JAVA NAME 'uk.co.firstchoice.stella.StellaAIRLoad.runLoad(
-     java.lang.String,
-     java.lang.String,
-     java.lang.String,
-     java.lang.String,
-     java.lang.String,
-     java.lang.String
-     )
-     return java.lang.String';
-
-
-  ----------------------------------------------------------------
-  ----------------------------------------------------------------
   FUNCTION get_first_departure_date(p_pnr_id IN NUMBER) RETURN DATE IS
 
     v_result DATE;

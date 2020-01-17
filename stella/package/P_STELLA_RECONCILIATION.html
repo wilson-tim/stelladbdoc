@@ -46,7 +46,7 @@
 <div id="Master.0">
 <div class="currentmasterreport">
 <TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
-<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P>                                                                                <BR>  <BR>  Purpose<BR>  -------<BR>  reconciliation processes for bsp stella system<BR>  <BR>  History<BR>  -------<BR>  <BR>  Date      By          Description                                    Version<BR>  ----      ----------- ---------------------------------------------- -------<BR>  21/01/03  L Ashton     Initial version.                                 001<BR>  24/9/03   L Ashton     added new function calc_gemini_flight_tax_amt    006<BR>  27/10/03  L Ashton     reduced dbms_output.put_line(); output to prevent buffer overflow<BR>  20/11/03  L Ashton     changed refund calcs to use selling fare<BR>  11/11/04  Jyoti        Bug Fix -  showing reason code TE even when Seat Variance exists<BR>                                                                                  </P><HR><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#calc_seat_amt">calc_seat_amt</A></B>( p_ticket_no IN NUMBER ) RETURN NUMBER ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; calculate the seat cost only of a ticket , does not take into account refunds</TD></TR>
+<TR><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2">      SUMMARY:  <A HREF="#field_summary">FIELD</A> | <A HREF="#type_summary">TYPE</A> | <A HREF="#method_summary">METHOD</A></FONT></TD><TD CLASS="NavBarRow3" VALIGN="top"><FONT SIZE="-2"></TR></TABLE><HR><P>                                                                                <BR><BR>  Purpose<BR>  -------<BR>  reconciliation processes for bsp stella system<BR><BR>  History<BR>  -------<BR><BR>  Date      By          Description                                    Version<BR>  ----      ----------- ---------------------------------------------- -------<BR>  21/01/03  L Ashton     Initial version.                                 001<BR>  24/9/03   L Ashton     added new function calc_gemini_flight_tax_amt    006<BR>  27/10/03  L Ashton     reduced dbms_output.put_line(); output to prevent buffer overflow<BR>  20/11/03  L Ashton     changed refund calcs to use selling fare<BR>  11/11/04  Jyoti        Bug Fix -  showing reason code TE even when Seat Variance exists<BR>                                                                                  </P><HR><P></P><A NAME="method_summary"></A><TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="3" BORDER="1"><TR CLASS="TableHeadingColor"><TD COLSPAN="2"><FONT SIZE="+2"><B>Method Summary</B></FONT></TD><TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#calc_seat_amt">calc_seat_amt</A></B>( p_ticket_no IN NUMBER ) RETURN NUMBER ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; calculate the seat cost only of a ticket , does not take into account refunds</TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#calc_seat_amt_net_of_refunds">calc_seat_amt_net_of_refunds</A></B>( p_ticket_no IN NUMBER ) RETURN NUMBER ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; calculate the seat amt net of refunds for a particular ticket<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  param mandatory </TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#calc_stella_refund_doc_amts">calc_stella_refund_doc_amts</A></B>( p_refund_document_no IN NUMBER , p_refund_ticket_no IN NUMBER , p_seat_amt OUT NUMBER , p_tax_amt OUT NUMBER , p_valid OUT BOOLEAN ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; loop through each row of refund_ticket table and work out the<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  total refund amt for each ticket in a batch</TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#calc_stella_refund_doc_total">calc_stella_refund_doc_total</A></B>( p_refund_document_no IN NUMBER , p_refund_ticket_no IN NUMBER ) RETURN NUMBER ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; function wrapper to allow calc_stella_refund_doc_amts to be used from sql<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  -- returns seat PLUS tax cost added together </TD></TR>
@@ -54,7 +54,6 @@
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#calc_stella_ticket_cost">calc_stella_ticket_cost</A></B>( p_ticket_no IN NUMBER ) RETURN NUMBER ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; param is mandatory </TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#calc_tax_amt_net_of_refunds">calc_tax_amt_net_of_refunds</A></B>( p_ticket_no IN NUMBER ) RETURN NUMBER ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; calculate the tax amt net of refunds for a particular ticket<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  param mandatory </TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#calc_ticket_tax_total">calc_ticket_tax_total</A></B>( p_ticket_no IN NUMBER ) RETURN NUMBER ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; param is mandatory </TD></TR>
-<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#missing_ticket_report">missing_ticket_report</A></B>( p_iata_no IN NUMBER , p_ticket_no_start IN NUMBER , p_ticket_no_end IN NUMBER , p_sqlerrm OUT CHAR , p_no_of_rows OUT CHAR , p_valid OUT BOOLEAN ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; batch routine to produce a list of ticket missing from database<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  within certain ranges<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  if no parameters are passed then it just uses the stella.ticket_range table<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  to determine the particular ticket range to check </TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#update_recon_history">update_recon_history</A></B>( p_pnr_id IN NUMBER , p_process_code IN CHAR , p_process_date IN DATE , p_reason_code IN CHAR , p_amended_user_id IN CHAR , p_data_warehouse_seat_cost IN NUMBER , p_data_warehouse_tax_cost IN NUMBER , p_stella_seat_cost IN NUMBER , p_stella_tax_cost IN NUMBER , p_unmatched_amt IN NUMBER ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------</TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#update_recon_status">update_recon_status</A></B>( p_pnr_id IN NUMBER , p_reconciled IN BOOLEAN , p_reason_code IN CHAR , p_run_date IN DATE ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------</TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#version">version</A></B></CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------</TD></TR>
@@ -67,8 +66,7 @@
 <H3>calc_stella_ticket_accrual</H3><PRE>          <B>calc_stella_ticket_accrual</B>( p_ticket_no IN NUMBER , p_ub_tax_amt IN NUMBER , p_gb_tax_amt IN NUMBER , p_remain_tax_amt IN NUMBER , p_seat_total IN OUT NUMBER , p_tax_total IN OUT NUMBER , p_valid OUT BOOLEAN ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; calculate the total cost of a ticket AFTER taking into account the<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  refunds linked to that ticket <DD><DL></DL></DD></DL><HR><A NAME="calc_stella_ticket_cost"></A>
 <H3>calc_stella_ticket_cost</H3><PRE>          <B>calc_stella_ticket_cost</B>( p_ticket_no IN NUMBER ) RETURN NUMBER ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; param is mandatory <DD><DL></DL></DD></DL><HR><A NAME="calc_tax_amt_net_of_refunds"></A>
 <H3>calc_tax_amt_net_of_refunds</H3><PRE>          <B>calc_tax_amt_net_of_refunds</B>( p_ticket_no IN NUMBER ) RETURN NUMBER ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; calculate the tax amt net of refunds for a particular ticket<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  param mandatory <DD><DL></DL></DD></DL><HR><A NAME="calc_ticket_tax_total"></A>
-<H3>calc_ticket_tax_total</H3><PRE>          <B>calc_ticket_tax_total</B>( p_ticket_no IN NUMBER ) RETURN NUMBER ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; param is mandatory <DD><DL></DL></DD></DL><HR><A NAME="missing_ticket_report"></A>
-<H3>missing_ticket_report</H3><PRE>          <B>missing_ticket_report</B>( p_iata_no IN NUMBER , p_ticket_no_start IN NUMBER , p_ticket_no_end IN NUMBER , p_sqlerrm OUT CHAR , p_no_of_rows OUT CHAR , p_valid OUT BOOLEAN ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; batch routine to produce a list of ticket missing from database<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  within certain ranges<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  if no parameters are passed then it just uses the stella.ticket_range table<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  to determine the particular ticket range to check <DD><DL></DL></DD></DL><HR><A NAME="update_recon_history"></A>
+<H3>calc_ticket_tax_total</H3><PRE>          <B>calc_ticket_tax_total</B>( p_ticket_no IN NUMBER ) RETURN NUMBER ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; param is mandatory <DD><DL></DL></DD></DL><HR><A NAME="update_recon_history"></A>
 <H3>update_recon_history</H3><PRE>          <B>update_recon_history</B>( p_pnr_id IN NUMBER , p_process_code IN CHAR , p_process_date IN DATE , p_reason_code IN CHAR , p_amended_user_id IN CHAR , p_data_warehouse_seat_cost IN NUMBER , p_data_warehouse_tax_cost IN NUMBER , p_stella_seat_cost IN NUMBER , p_stella_tax_cost IN NUMBER , p_unmatched_amt IN NUMBER ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------<DD><DL></DL></DD></DL><HR><A NAME="update_recon_status"></A>
 <H3>update_recon_status</H3><PRE>          <B>update_recon_status</B>( p_pnr_id IN NUMBER , p_reconciled IN BOOLEAN , p_reason_code IN CHAR , p_run_date IN DATE ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------<DD><DL></DL></DD></DL><HR><A NAME="version"></A>
 <H3>version</H3><PRE>          <B>version</B></PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;----------------------------------------------------------------------------<DD><DL></DL></DD></DL><HR><TABLE CELLSPACING="0" CELLPADDING="1" WIDTH="100%" BORDER="0">
@@ -110,11 +108,11 @@
 </tr>
 <tr>
 <td>LAST_DDL_TIME</td>
-<td>09-JAN-20</td>
+<td>15-JAN-20</td>
 </tr>
 <tr>
 <td>TIMESTAMP</td>
-<td>2020-01-07:15:01:02</td>
+<td>2020-01-13:09:51:42</td>
 </tr>
 <tr>
 <td>STATUS</td>
@@ -208,17 +206,17 @@
 <div id="Master.5">
 <div class="masterreport">
 <pre>
-PACKAGE p_stella_reconciliation IS
+PACKAGE          "P_STELLA_RECONCILIATION" IS
 
   /* ***************************************************************************** *
-  
+
   Purpose
   -------
   reconciliation processes for bsp stella system
-  
+
   History
   -------
-  
+
   Date      By          Description                                    Version
   ----      ----------- ---------------------------------------------- -------
   21/01/03  L Ashton     Initial version.                                 001
@@ -279,7 +277,7 @@ PACKAGE p_stella_reconciliation IS
   -- returns seat PLUS tax cost added together */
   FUNCTION calc_stella_refund_doc_total(p_refund_document_no IN NUMBER, -- mandatory
                                         p_refund_ticket_no   IN NUMBER -- optional
-                                        
+
                                         ) RETURN NUMBER;
 
 
@@ -345,53 +343,33 @@ PACKAGE p_stella_reconciliation IS
   ------------------------------------------------------------------------------
   ------------------------------------------------------------------------------
   ------------------------------------------------------------------------------
-  /* batch routine to produce a list of ticket missing from database
-  within certain ranges
-  if no parameters are passed then it just uses the stella.ticket_range table
-  to determine the particular ticket range to check */
-
-  PROCEDURE missing_ticket_report(p_iata_no         IN NUMBER,
-                                  p_ticket_no_start IN NUMBER,
-                                  p_ticket_no_end   IN NUMBER,
-                                  /* some or all of these params will be passed */
-                                  /* allows flexibilty in design so any level of reconciliation can be started */
-                                  /* -- will do this range of ticket numbers only (inclusive range) */
-                                  p_sqlerrm    OUT CHAR,
-                                  p_no_of_rows OUT CHAR,
-                                  p_valid      OUT BOOLEAN);
-  ------------------------------------------------------------------------------
-  ------------------------------------------------------------------------------
-  ------------------------------------------------------------------------------
-
-
-
   FUNCTION version RETURN VARCHAR2
-  
+
     /* ***************************************************************************** *
-    
+
     Purpose
     -------
     Returns current version of the package.
-    
+
     History
     -------
-    
+
     Date      By          Description                                    Version
     --------  ----------- ---------------------------------------------- -------
     02/09/02  L Ashton     Initial version.                                 001
-    
+
     Parameters
     ----------
     Name             Description                                         Default In/Out
     ---------------- --------------------------------------------------- ------- ------
-    
+
     Notes:
-    
+
     Example Call
     ------------
     SELECT p_stella.reconciliation.version
     FROM dual;
-    
+
     * ***************************************************************************** */
   ;
 
@@ -399,7 +377,9 @@ PACKAGE p_stella_reconciliation IS
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------
 
-END p_stella_reconciliation; --end of package</pre>
+END p_stella_reconciliation; --end of package
+
+</pre>
 </div>
 </div>
 </div>

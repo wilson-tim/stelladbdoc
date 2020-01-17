@@ -85,11 +85,11 @@
 </tr>
 <tr>
 <td>LAST_DDL_TIME</td>
-<td>09-JAN-20</td>
+<td>15-JAN-20</td>
 </tr>
 <tr>
 <td>TIMESTAMP</td>
-<td>2020-01-09:10:44:39</td>
+<td>2020-01-13:12:51:29</td>
 </tr>
 <tr>
 <td>STATUS</td>
@@ -750,148 +750,6 @@ PACKAGE BODY          "APP_UTIL" IS
     RETURN(v_retval);
   END;
 
-  -- **************************************************************
-  -- *  Send Email with attachments 
-  --  Author  : Jyoti
-  -- Created : 24-Jan-2008
-  -- Purpose : General application utilities for sending email with attachment
-  -- **************************************************************
-  -- send_email_attachment('CAS_EXTR','MailList','/home/dw/SQL_Output_2','CASfile04012008_113924','slo-dwstdby','CAS Extract&lt;slo-dwstdby@firstchoice.co.uk>','CAS Extract');
-
-  --  p_host IN VARCHAR2, p_send IN VARCHAR2, p_recp IN VARCHAR2, p_subject IN VARCHAR2, p_message IN VARCHAR2
-
-  PROCEDURE send_email_attachment(p_appkey   IN application_registry.application_key%TYPE,
-                                  p_paramkey IN application_registry.parameter_key%TYPE,
-                                  p_fileloc  IN VARCHAR2,
-                                  p_filenm   IN VARCHAR2,
-                                  p_host     IN VARCHAR2,
-                                  p_sender   IN VARCHAR2,
-                                  p_subject  IN VARCHAR2) IS
-
-
-
-
-
-    conn utl_smtp.connection;
-    --:= utl_smtp.open_connection('smtp', 25);
-    --  v_file_name  VARCHAR2(100) := 'CASfile04012008_113924';
-    --  v_directory_name     VARCHAR2(100) := '/home/dw/SQL_Output_2';
-    v_file_handle  utl_file.file_type;
-    v_line         VARCHAR2(1000);
-    mesg           VARCHAR2(32767);
-    crlf           VARCHAR2(2) := chr(13) || chr(10);
-    v_totlines     NUMBER(10) := 0;
-    v_recp_list    VARCHAR2(5000);
-    v_statement_no NUMBER(10);
-
-    boundary            CONSTANT VARCHAR2(256) := '-----7D81B75CCC90D2974F7A1CBD';
-    multipart_mime_type CONSTANT VARCHAR2(256) := 'multipart/mixed; boundary="' ||
-                                                  boundary || '"';
-
-
-  BEGIN
-
-    v_statement_no := 1;
-    -- Get list of users who would receive e mails
-    SELECT parameter_value
-      INTO v_recp_list
-      FROM application_registry ar
-     WHERE ar.application_key = p_appkey
-       AND ar.parameter_key = p_paramkey;
-
-    -- Steps 1)  begin attachment   
-    --       2) write date
-    --       3) attach text
-
-    v_statement_no := 2;
-    conn           := send_mail.begin_mail(sender     => p_sender,
-                                                 recipients => v_recp_list,
-                                                 --recipients => 'Jyoti 1 &lt;jyoti.renganathan@firstchoice.co.uk>',
-                                                 --'"Paul Butler"&lt;paul.g.butler@firstchoice.co.uk>',
-                                                 --v_recp_list,
-                                                 --'Jyoti1&lt;jyoti.renganathan@firstchoice.co.uk>,Jyoti2&lt;jyoti.renganathan@firstchoice.co.uk>',
-                                                 subject   => p_host || ' - ' ||
-                                                              p_subject,
-                                                 mime_type => multipart_mime_type);
-
-    v_statement_no := 3;
-    send_mail.begin_attachment(conn         => conn,
-                                     mime_type    => 'text/plain',
-                                     inline       => FALSE,
-                                     filename     => p_filenm,
-                                     transfer_enc => '7 bit');
-
-
-
-    BEGIN
-
-
-      v_statement_no := 4;
-      v_file_handle  := utl_file.fopen(p_fileloc, p_filenm, 'r');
-      LOOP
-        v_statement_no := 5;
-        utl_file.get_line(v_file_handle, v_line);
-        mesg := v_line || crlf;
-        --dbms_output.put_line(mesg);
-        IF (length(TRIM(mesg)) > 0) THEN
-          send_mail.write_text(conn => conn, message => mesg);
-          v_totlines := v_totlines + 1;
-        END IF;
-      END LOOP;
-    EXCEPTION
-      WHEN OTHERS THEN
-        NULL; -- when end of file it will reach here
-    END;
-    utl_file.fclose(v_file_handle);
-
-    dbms_output.put_line('v_totlines' || v_totlines);
-
-    v_statement_no := 6;
-    send_mail.end_attachment(conn => conn);
-
-
-    v_statement_no := 7;
-    send_mail.end_mail(conn => conn);
-
-
-  EXCEPTION
-    WHEN utl_file.invalid_path THEN
-
-      dbms_output.put_line('  Error at statement no.  = ' ||
-                           v_statement_no ||
-                           ' in app_util.send_email_attachment ');
-
-      dbms_output.put_line('Error - Invalid Path ');
-
-    WHEN utl_file.invalid_mode THEN
-
-      dbms_output.put_line('  Error at statement no.  = ' ||
-                           v_statement_no ||
-                           ' in app_util.send_email_attachment ');
-
-      dbms_output.put_line('Error - Invalid Mode ');
-
-    WHEN utl_file.invalid_operation THEN
-
-      dbms_output.put_line('  Error at statement no.  = ' ||
-                           v_statement_no ||
-                           ' in app_util.send_email_attachment ');
-
-      dbms_output.put_line('Error - Invalid Operation ');
-
-    WHEN no_data_found THEN
-
-      utl_file.fclose(v_file_handle);
-      --    utl_file.fclose(v_exc_file_handle);
-
-
-      dbms_output.put_line('  Error at statement no.  = ' ||
-                           v_statement_no ||
-                           ' in app_util.send_email_attachment ');
-
-      dbms_output.put_line(SQLCODE || ' :' || SQLERRM);
-
-  END send_email_attachment;
 
 END app_util;</pre>
 </div>

@@ -56,7 +56,6 @@
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#log">log</A></B>( p_app_key CHAR , p_run_id IN CHAR , p_log_seq IN OUT NUMBER , p_event_period CHAR , p_event_type CHAR , p_event_level CHAR , p_event_summary CHAR , p_event_detail CHAR ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; note that inserts in an autonomous transaction</TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#next_log_number">next_log_number</A></B>( p_appkey IN application_log . application_key % TYPE , p_runid IN application_log . run_id % TYPE ) RETURN application_log . log_sequence % TYPE ; </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function to get next number is sequence for application_log table</TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#send_email">send_email</A></B>( p_host IN VARCHAR2 , p_send IN VARCHAR2 , p_recp IN VARCHAR2 , p_subject IN VARCHAR2 , p_message IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purpose : General application utilities for sending email</TD></TR>
-<TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#send_email_attachment">send_email_attachment</A></B>( p_appkey IN application_registry . application_key % TYPE , p_paramkey IN application_registry . parameter_key % TYPE , p_fileloc IN VARCHAR2 , p_filenm IN VARCHAR2 , p_host IN VARCHAR2 DEFAULT 'slo-dwstdby' , p_sender IN VARCHAR2 , p_subject IN VARCHAR2 DEFAULT ' E mail Subject is missing ' ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purpose : General application utilities for sending email with attachment</TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#send_header">send_header</A></B>( NAME IN VARCHAR2 , header IN VARCHAR2 ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#set_registry_property">set_registry_property</A></B>( p_application_key application_registry . application_key % TYPE , p_application_mode application_registry . application_mode % TYPE , p_user_key application_registry . user_key % TYPE , p_parameter_key application_registry . parameter_key % TYPE , p_parameter_type application_registry . parameter_type % TYPE , p_parameter_value application_registry . parameter_value % TYPE ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; author : Jyoti Renganathan<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Created : 01/07/2004<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Purpose : Pl/sql version of above to set items in the application registry table<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </TD></TR>
 <TR CLASS="TableRowColor"><TD WIDTH="1%" VALIGN="top" ALIGN="right"><FONT SIZE="-1"><CODE>&nbsp;</CODE></FONT></TD><TD><CODE><B><A HREF="#setup_logging">setup_logging</A></B>( p_application_key CHAR , p_run_mode CHAR , p_in_user CHAR ) </CODE><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  set up global variables for logging (to file or console)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  according to settings in application_registry table</TD></TR>
@@ -73,8 +72,7 @@
 <H3>is_number</H3><PRE>          <B>is_number</B>( p_in_string CHAR ) RETURN BOOLEAN ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; returns true if string passed contains valid number (number can be of any type)<DD><DL></DL></DD></DL><HR><A NAME="log"></A>
 <H3>log</H3><PRE>          <B>log</B>( p_app_key CHAR , p_run_id IN CHAR , p_log_seq IN OUT NUMBER , p_event_period CHAR , p_event_type CHAR , p_event_level CHAR , p_event_summary CHAR , p_event_detail CHAR ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; note that inserts in an autonomous transaction<DD><DL></DL></DD></DL><HR><A NAME="next_log_number"></A>
 <H3>next_log_number</H3><PRE>          <B>next_log_number</B>( p_appkey IN application_log . application_key % TYPE , p_runid IN application_log . run_id % TYPE ) RETURN application_log . log_sequence % TYPE ; </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Function to get next number is sequence for application_log table<DD><DL></DL></DD></DL><HR><A NAME="send_email"></A>
-<H3>send_email</H3><PRE>          <B>send_email</B>( p_host IN VARCHAR2 , p_send IN VARCHAR2 , p_recp IN VARCHAR2 , p_subject IN VARCHAR2 , p_message IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purpose : General application utilities for sending email<DD><DL></DL></DD></DL><HR><A NAME="send_email_attachment"></A>
-<H3>send_email_attachment</H3><PRE>          <B>send_email_attachment</B>( p_appkey IN application_registry . application_key % TYPE , p_paramkey IN application_registry . parameter_key % TYPE , p_fileloc IN VARCHAR2 , p_filenm IN VARCHAR2 , p_host IN VARCHAR2 DEFAULT 'slo-dwstdby' , p_sender IN VARCHAR2 , p_subject IN VARCHAR2 DEFAULT ' E mail Subject is missing ' ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purpose : General application utilities for sending email with attachment<DD><DL></DL></DD></DL><HR><A NAME="send_header"></A>
+<H3>send_email</H3><PRE>          <B>send_email</B>( p_host IN VARCHAR2 , p_send IN VARCHAR2 , p_recp IN VARCHAR2 , p_subject IN VARCHAR2 , p_message IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Purpose : General application utilities for sending email<DD><DL></DL></DD></DL><HR><A NAME="send_header"></A>
 <H3>send_header</H3><PRE>          <B>send_header</B>( NAME IN VARCHAR2 , header IN VARCHAR2 ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<DD><DL></DL></DD></DL><HR><A NAME="set_registry_property"></A>
 <H3>set_registry_property</H3><PRE>          <B>set_registry_property</B>( p_application_key application_registry . application_key % TYPE , p_application_mode application_registry . application_mode % TYPE , p_user_key application_registry . user_key % TYPE , p_parameter_key application_registry . parameter_key % TYPE , p_parameter_type application_registry . parameter_type % TYPE , p_parameter_value application_registry . parameter_value % TYPE ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; author : Jyoti Renganathan<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Created : 01/07/2004<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     Purpose : Pl/sql version of above to set items in the application registry table<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <DD><DL></DL></DD></DL><HR><A NAME="setup_logging"></A>
 <H3>setup_logging</H3><PRE>          <B>setup_logging</B>( p_application_key CHAR , p_run_mode CHAR , p_in_user CHAR ) </PRE><DL>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  set up global variables for logging (to file or console)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  according to settings in application_registry table<DD><DL></DL></DD></DL><HR><A NAME="store_end_time"></A>
@@ -118,11 +116,11 @@
 </tr>
 <tr>
 <td>LAST_DDL_TIME</td>
-<td>09-JAN-20</td>
+<td>15-JAN-20</td>
 </tr>
 <tr>
 <td>TIMESTAMP</td>
-<td>2020-01-09:10:44:34</td>
+<td>2020-01-13:12:51:25</td>
 </tr>
 <tr>
 <td>STATUS</td>
@@ -329,21 +327,6 @@ PACKAGE          "APP_UTIL" IS
   FUNCTION get_parameter_value(p_appkey   IN application_registry.application_key%TYPE,
                                p_paramkey IN application_registry.parameter_key%TYPE)
     RETURN application_registry.parameter_value%TYPE;
-
-
-  --  Author  : Jyoti
-  -- Created : 24-Jan-2008
-  -- Purpose : General application utilities for sending email with attachment
-  PROCEDURE send_email_attachment(p_appkey   IN application_registry.application_key%TYPE,
-                                  p_paramkey IN application_registry.parameter_key%TYPE,
-                                  p_fileloc  IN VARCHAR2,
-                                  p_filenm   IN VARCHAR2,
-                                  p_host     IN VARCHAR2 DEFAULT 'slo-dwstdby',
-                                  p_sender   IN VARCHAR2,
-                                  p_subject  IN VARCHAR2 DEFAULT ' E mail Subject is missing ');
-
-
-
 
 END app_util;</pre>
 </div>
