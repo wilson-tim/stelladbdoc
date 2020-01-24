@@ -88,11 +88,11 @@
 </tr>
 <tr>
 <td>LAST_DDL_TIME</td>
-<td>15-JAN-20</td>
+<td>22-JAN-20</td>
 </tr>
 <tr>
 <td>TIMESTAMP</td>
-<td>2020-01-15:12:22:47</td>
+<td>2020-01-22:08:03:39</td>
 </tr>
 <tr>
 <td>STATUS</td>
@@ -187,6 +187,7 @@ PROCEDURE        sp_l_air_tickets (fileToProcess VARCHAR2, testflag VARCHAR2) AU
 -- 20-Dec-19     1.9 TWilson  Processing for reissued tickets 
 -- 30-Dec-19     2.0 TWilson  Processing for reissued tickets, second attempt
 -- 15-Jan-20     2.1 TWilson  Assign sp_errors() p_abbrev parameter value dependent upon filename
+-- 21-Jan-20     2.2 TWilson  Bug fixes
 --
 -- @"I:\MI\Data Warehouse\Tim\MI-2672\SP_L_AIR_TICKETS_1.1.prc";
 --
@@ -207,6 +208,7 @@ PRAGMA EXCEPTION_INIT(foreign_key_error, -02291);
 missing_eof       EXCEPTION;
 already_loaded    EXCEPTION;
 ticket_error      EXCEPTION;
+ticket_warning    EXCEPTION;
 emd_error         EXCEPTION;
 --
 --
@@ -957,20 +959,24 @@ dbms_output.put_line(TO_CHAR(SYSDATE, 'DD-MON-YYYY HH:MM:SS') || ' Start Of File
                 e_ticket_no := SUBSTR(c1_rec.data_text, v_pos1 + 1, v_pos2 - v_pos1 - 1);
 
                 v_pos1 := INSTR(c1_rec.data_text, ';', 1, 2);
-                e_doc_id := SUBSTR(c1_rec.data_text, v_pos1 + 1);
-
-                BEGIN
-                    UPDATE L_AIR_EMD
-                        SET
-                            AIRLINE_NUM = e_airline_num,
-                            TICKET_NO = e_ticket_no
-                    WHERE DOC_ID = e_doc_id;
-                EXCEPTION
-                    WHEN OTHERS THEN
-                        v_error_message := 'error updating EMD airline and ticket data in table L_AIR_EMD';
-                        RAISE emd_error;
-                END;
-                COMMIT;
+                IF v_pos1 > 0 THEN
+                    e_doc_id := SUBSTR(c1_rec.data_text, v_pos1 + 1);
+                    BEGIN
+                        UPDATE L_AIR_EMD
+                            SET
+                                AIRLINE_NUM = e_airline_num,
+                                TICKET_NO = e_ticket_no
+                        WHERE DOC_ID = e_doc_id;
+                    EXCEPTION
+                        WHEN OTHERS THEN
+                            v_error_message := 'error updating EMD airline and ticket data in table L_AIR_EMD';
+                            RAISE emd_error;
+                    END;
+                    COMMIT;
+                ELSE
+                    v_error_message := 'EMD document ID is missing in TMCD line';
+                    RAISE emd_error;
+                END IF;
 
             END IF;
 
@@ -1154,8 +1160,9 @@ dbms_output.put_line('Complete processing passenger ' || v_passenger_no || ' dat
 
                 IF v_fpo_found > 0 AND (v_collection_amt = 0 OR v_collection_amt IS NULL) THEN
                     -- Reissue with zero collection amount, ignore this file, reassign v_num_pax to skip insert validation
-                    dbms_output.put_line('INFO File ' || fileToProcess || ' Section ' || v_locator || ' PNR ' || TO_CHAR(v_pnr_no) || ' Tkt ' || TO_CHAR(v_ticket_no) || ' - Reissue with zero collection amount');
-                    core_dataw.sp_errors(v_err_abbrev,'AIR_TICKET',0,'INFO File ' || fileToProcess || ' Section ' || v_locator || ' PNR ' || TO_CHAR(v_pnr_no) || ' Tkt ' || TO_CHAR(v_ticket_no) || ' - Reissue with zero collection amount');
+                    -- Bash script greps "^INFO " and not "^INFO2" messages
+                    dbms_output.put_line('INFO2 File ' || fileToProcess || ' Section ' || v_locator || ' PNR ' || TO_CHAR(v_pnr_no) || ' Tkt ' || TO_CHAR(v_ticket_no) || ' - Reissue with zero collection amount, file not processed');
+                    core_dataw.sp_errors(v_err_abbrev,'AIR_TICKET',0,'INFO2 File ' || fileToProcess || ' Section ' || v_locator || ' PNR ' || TO_CHAR(v_pnr_no) || ' Tkt ' || TO_CHAR(v_ticket_no) || ' - Reissue with zero collection amount, file not processed');
                     v_num_pax := 0;
                     v_num_tkts := 0;
                 ELSIF v_exchange_found = 1 THEN
@@ -1296,10 +1303,10 @@ dbms_output.put_line('Complete processing passenger ' || v_passenger_no || ' dat
 
                     IF v_result IS NOT NULL THEN
                         IF SUBSTR(v_result, 1, 11) = 'Error, (fk)' THEN
-                            v_error_message := v_result || ', retry next run';
-                            RAISE ticket_error;
+                            v_error_message := v_result || ', please correct and retry next run';
+                            RAISE ticket_warning;
                         ELSIF SUBSTR(v_result, 1, 6) = 'Error ' OR SUBSTR(v_result, 1, 6) = 'Error,' THEN
-                            v_error_message := 'insert_ticket() failed, file moved to error area';
+                            v_error_message := v_result || ', insert_ticket() failed, file moved to error area';
                             RAISE ticket_error;
                         END IF;
                     ELSE
@@ -1423,10 +1430,10 @@ dbms_output.put_line('Complete processing passenger ' || v_passenger_no || ' dat
 
                                     IF v_result IS NOT NULL THEN
                                         IF SUBSTR(v_result, 1, 11) = 'Error, (fk)' THEN
-                                            v_error_message := v_result || ', retry next run';
-                                            RAISE ticket_error;
+                                            v_error_message := v_result || ', please correct and retry next run';
+                                            RAISE ticket_warning;
                                         ELSIF SUBSTR(v_result, 1, 6) = 'Error ' OR SUBSTR(v_result, 1, 6) = 'Error,' THEN
-                                            v_error_message := 'insert_ticket() failed, file moved to error area';
+                                            v_error_message := v_result || ', insert_ticket() failed, file moved to error area';
                                             RAISE ticket_error;
                                         END IF;
                                     ELSE
@@ -1719,6 +1726,9 @@ EXCEPTION
     WHEN ticket_error THEN
         dbms_output.put_line('ERROR File ' || fileToProcess || ' Section ' || v_locator || ' PNR ' || TO_CHAR(v_pnr_no) || ' Tkt ' || TO_CHAR(v_ticket_no) || ' ' || v_error_message || ' - ' || SQLERRM);
         core_dataw.sp_errors(v_err_abbrev,'AIR_TICKET',SQLCODE,'ERROR File ' || fileToProcess || ' Section ' || v_locator || ' PNR ' || TO_CHAR(v_pnr_no) || ' Tkt ' || TO_CHAR(v_ticket_no) || ' ' || v_error_message || ' - ' || SQLERRM);
+    WHEN ticket_warning THEN
+        dbms_output.put_line('WARNING File ' || fileToProcess || ' Section ' || v_locator || ' PNR ' || TO_CHAR(v_pnr_no) || ' Tkt ' || TO_CHAR(v_ticket_no) || ' ' || v_error_message || ' - ' || SQLERRM);
+        core_dataw.sp_errors(v_err_abbrev,'AIR_TICKET',SQLCODE,'WARNING File ' || fileToProcess || ' Section ' || v_locator || ' PNR ' || TO_CHAR(v_pnr_no) || ' Tkt ' || TO_CHAR(v_ticket_no) || ' ' || v_error_message || ' - ' || SQLERRM);
     WHEN emd_error THEN
         dbms_output.put_line('ERROR File ' || fileToProcess || ' Section ' || v_locator || ' PNR ' || TO_CHAR(v_pnr_no) || ' Tkt ' || TO_CHAR(v_ticket_no) || ' ' || v_error_message || ' - ' || SQLERRM);
         core_dataw.sp_errors(v_err_abbrev,'EMD',SQLCODE,'ERROR File ' || fileToProcess || ' Section ' || v_locator || ' PNR ' || TO_CHAR(v_pnr_no) || ' Tkt ' || TO_CHAR(v_ticket_no) || ' ' || v_error_message || ' - ' || SQLERRM);

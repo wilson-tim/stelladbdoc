@@ -85,11 +85,11 @@
 </tr>
 <tr>
 <td>LAST_DDL_TIME</td>
-<td>15-JAN-20</td>
+<td>21-JAN-20</td>
 </tr>
 <tr>
 <td>TIMESTAMP</td>
-<td>2020-01-08:13:33:26</td>
+<td>2020-01-20:13:16:04</td>
 </tr>
 <tr>
 <td>STATUS</td>
@@ -236,12 +236,12 @@ PACKAGE BODY          "P_ERROR" IS
       FROM error_text
       WHERE error_msg = p_in_err_id;
 
-
       IF p_in_update_type = 'D' THEN
         v_return := v_child_record_text;
       ELSE
         v_return := v_update_text;
       END IF;
+
       p_common.debug_message('Text to be displayed is:'||nvl(v_return,'NULL'));
       -- User friendly message found. Now substitute parameters.
       IF v_return IS NOT NULL THEN
@@ -274,7 +274,8 @@ PACKAGE BODY          "P_ERROR" IS
     END;
 
     v_code_loc := '005';
-    RETURN substr(v_return,1,g_msg_len);
+--    RETURN substr(v_return,1,g_msg_len);
+    RETURN substr(v_return,1,200);
 
 
   EXCEPTION
@@ -377,7 +378,6 @@ PACKAGE BODY          "P_ERROR" IS
     v_return              error_text.user_text%TYPE;
 
   BEGIN
-
     v_code_loc := '001';
     p_common.debug_message('Add Error Parameter: '||v_parameters);
     IF p_in_out_param_tab IS NULL THEN
@@ -413,19 +413,17 @@ PACKAGE BODY          "P_ERROR" IS
     RETURN 'Package: '||g_package_name||'; Version: '||g_version;
   END Version;
 
-  BEGIN
+--  BEGIN
     /*
       Get maximmum length allowed for error message to be returned.
     */
-    SELECT data_length
-    INTO g_msg_len
-    FROM all_tab_columns
-    WHERE table_name = 'ERROR_TEXT'
-    AND   column_name = 'USER_TEXT';
+--    SELECT data_length
+--    INTO g_msg_len
+--    FROM all_tab_columns
+--    WHERE table_name = 'ERROR_TEXT'
+--    AND   column_name = 'USER_TEXT';
 
-END P_Error;
-
-</pre>
+END P_Error;</pre>
 </div>
 </div>
 </div>
